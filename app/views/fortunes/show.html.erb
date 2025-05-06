@@ -1,9 +1,13 @@
-<p>今日のゴリラ運勢：</p>
 
-<div style="font-size: 24px; margin-top: 1em;">
-  <strong><%= @message %></strong>
+
+<h1 class="text-2xl font-bold text-neutral-800">🦍 今日のゴリラ運勢 🦍</h1>
+
+<p class="text-lg text-neutral-700">ゴリラからのありがたい一言：</p>
+
+<div class="text-xl font-semibold text-green-900">
+  <%= @message %>
 </div>
 
-<div class="mt-6 text-center block">
-  <%= link_to "🔁 もう一度占う", root_path, class: "inline-block text-yellow-800 underline underline-offset-4 hover:text-yellow-600 transition duration-150 font-semibold" %>
+<div>
+  <%= link_to "🔁 もう一度占う", root_path, class: "inline-block mt-4 px-6 py-2 rounded-md bg-yellow-400 text-white font-bold shadow hover:bg-yellow-500 transition" %>
 </div>

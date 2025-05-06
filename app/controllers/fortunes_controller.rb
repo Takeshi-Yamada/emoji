@@ -1,5 +1,6 @@
 class FortunesController < ApplicationController
   def index
+    @message = ""
   end
 
   def show
