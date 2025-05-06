@@ -30,7 +30,7 @@ class FortunesController < ApplicationController
     ].sample
     @rank = fortune[:rank]
     @result = fortune[:result]
-    @bananas = "🍌" * fortune[:bananas]
+    @bananas = fortune[:bananas]
   end
 
   private
