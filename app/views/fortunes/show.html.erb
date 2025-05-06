@@ -1,13 +1,26 @@
+<div class="space-y-6">
+  <!-- ゴリラ運勢タイトルとバナナ評価 -->
+  <div class="bg-neutral-50 p-4 rounded-lg text-base leading-relaxed">
+    <div class="text-center">
+      <h1 class="text-2xl font-extrabold text-neutral-900">🦍 ゴリラ運勢：<%= @rank %></h1>
+      <p class="text-3xl text-yellow-500 mt-1"><%= @bananas %></p>
+    </div>
+  <!-- 占い結果 -->
+    <div class="mt-6 text-lg text-neutral-700 font-medium">
+      <%= simple_format(@result) %>
+    </div>
+  </div>
 
+  <!-- 一言アドバイス -->
+  <div class="bg-green-50 p-4 rounded-lg">
+    <p class="text-sm font-semibold text-green-700 mb-1">ゴリラからの一言アドバイス：</p>
+    <p class="text-lg font-semibold text-green-900 leading-snug">
+      <%= simple_format(@message) %>
+    </p>
+  </div>
 
-<h1 class="text-2xl font-bold text-neutral-800">🦍 今日のゴリラ運勢 🦍</h1>
-
-<p class="text-lg text-neutral-700">ゴリラからのありがたい一言：</p>
-
-<div class="text-xl font-semibold text-green-900">
-  <%= @message %>
-</div>
-
-<div>
-  <%= link_to "🔁 もう一度占う", root_path, class: "inline-block mt-4 px-6 py-2 rounded-md bg-yellow-400 text-white font-bold shadow hover:bg-yellow-500 transition" %>
+  <!-- 再占いボタン -->
+  <div class="text-center">
+    <%= link_to "🔁 もう一度占う", root_path, class: "inline-block mt-4 px-6 py-2 rounded-md bg-yellow-400 text-white font-bold shadow hover:bg-yellow-500 transition" %>
+  </div>
 </div>
