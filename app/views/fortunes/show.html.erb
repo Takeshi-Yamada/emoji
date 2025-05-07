@@ -21,6 +21,9 @@
 
   <!-- 再占いボタン -->
   <div class="text-center">
-    <%= link_to "🔁 もう一度占う", root_path, class: "inline-block mt-4 px-6 py-2 rounded-md bg-yellow-400 text-white font-bold shadow hover:bg-yellow-500 transition" %>
+    <%= link_to "🔁 もう一度占う", root_path, class: "inline-block mt-4 px-6 py-2 rounded-md bg-yellow-500 text-white font-bold shadow hover:bg-yellow-400 transition" %>
+    <% toukou = "🦍＜今日の運勢は#{@rank}！🍌#{@bananas}本！#{@result_share}" %>
+    <% share_url = "https://twitter.com/share?url=#{CGI.escape('https://banana-fortune.onrender.com')}&text=#{CGI.escape(toukou)}&hashtags=BananaFortune" %>
+    <%= link_to "Xへ投稿する", share_url, class: "inline-block mt-4 px-10 py-2 rounded-md bg-gray-900 text-white font-bold shadow hover:bg-gray-500 transition", target: "_blank", rel: "noopener" %>
   </div>
 </div>
