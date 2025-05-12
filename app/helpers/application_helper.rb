@@ -11,7 +11,7 @@ module ApplicationHelper
       site_name: :site,
       title: :title,
       description: :description,
-      type: 'website',
+      type: "website",
       url: root_url,
       image: image_url("banana_fortune.jpg"),
       locale: "ja-JP"
