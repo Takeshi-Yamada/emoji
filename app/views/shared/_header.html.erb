@@ -1,1 +1,22 @@
-<h1>🧩Emoji Riddle🔍</h1>
+<div class="site-header header-inner">
+  <div class="header-top">
+    <a href="/" class="header-logo">Emoji Riddle</a>
+
+    <!-- ハンバーガー -->
+    <label for="menu-toggle" class="hamburger">☰</label>
+  </div>
+
+  <!-- チェックボックス（開閉用） -->
+  <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+
+  <!-- ナビメニュー -->
+  <nav class="header-nav">
+    <% if user_signed_in? %>
+      <span class="user-email"><%= current_user.email %></span>
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_confirm: "ログアウトしてもよろしいですか？" }, class: "header-btn logout" %>
+    <% else %>
+      <%= link_to 'ログイン', new_user_session_path, class: "header-btn" %>
+      <%= link_to 'ユーザー登録', new_user_registration_path, class: "header-btn" %>
+    <% end %>
+  </nav>
+</div>

@@ -1,12 +1,21 @@
 module ApplicationHelper
+  def flash_background_color(type)
+    case type.to_sym
+      when :notice then "bg-green-500"
+      when :alert  then "bg-red-500"
+      when :error  then "bg-yellow-500"
+      else "bg-gray-500"
+    end
+  end
+
   def default_meta_tags
   {
-    site: "🍌Banana Fortune",
-    title: "本日のウホ報！",
+    site: "🧩Emoji Riddle",
+    title: "🧩Emoji Riddle",
     reverse: true,
     charset: "utf-8",
-    description: "バナナで今日の運勢を占おう！",
-    keywords: "占い, ゴリラ, バナナ, Banana, Fortune, ウホ",
+    description: "",
+    keywords: "絵文字, クイズ, Emoji Riddle",
     og: {
       site_name: :site,
       title: :title,

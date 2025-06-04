@@ -1,4 +1,19 @@
-<div>
-  <h1 class="font-bold text-4xl">Questions#index</h1>
-  <p>Find me in app/views/questions/index.html.erb</p>
+<h2>🧩 絵文字クイズ一覧 </h2>
+
+<div style="text-align: center; margin-bottom: 2rem;">
+  <%= link_to '✏️ 絵文字クイズを作る', new_question_path, class: 'btn-create' %>
 </div>
+
+<% if @questions.any? %>
+  <div class="quiz-list">
+    <% @questions.each do |question| %>
+      <div class="quiz-card">
+        <h2><%= question.emoji %></h2>
+        <p><strong><%= question.title %></strong></p>
+        <%= link_to '答える ▶️', question_path(question), class: 'btn' %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p>まだクイズがありません！</p>
+<% end %>

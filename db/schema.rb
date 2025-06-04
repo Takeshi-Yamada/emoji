@@ -16,6 +16,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_30_064733) do
 
   create_table "questions", force: :cascade do |t|
     t.string "content", null: false
+    t.string "answer", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

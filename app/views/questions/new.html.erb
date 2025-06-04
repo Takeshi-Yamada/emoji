@@ -1,4 +1,17 @@
-<div>
-  <h1 class="font-bold text-4xl">Questions#new</h1>
-  <p>Find me in app/views/questions/new.html.erb</p>
-</div>
+<h2>✏️ 絵文字クイズを作る</h2>
+
+<%= form_with model: @question, local: true do |form| %>
+  <div class="form-group">
+    <%= form.label :content, "クイズの絵文字（例: 📓🍎👿）" %><br>
+    <%= form.text_field :content, placeholder: "例: 📓🍎👿", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :answer, "正解" %><br>
+    <%= form.text_field :answer, placeholder: "例: DEATH NOTE", class: "form-control" %>
+  </div>
+
+  <div class="form-group" style="margin-top: 1rem;">
+    <%= form.submit "クイズを作成する 🚀", class: "btn-create" %>
+  </div>
+<% end %>
