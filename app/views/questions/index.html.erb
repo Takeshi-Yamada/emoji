@@ -8,8 +8,7 @@
   <div class="quiz-list">
     <% @questions.each do |question| %>
       <div class="quiz-card">
-        <h2><%= question.emoji %></h2>
-        <p><strong><%= question.title %></strong></p>
+        <h2><%= question.content %></h2>
         <%= link_to '答える ▶️', question_path(question), class: 'btn' %>
       </div>
     <% end %>
