@@ -1,8 +1,9 @@
 <h1>この絵文字から何を連想する？</h1>
 
-<div class="emoji-quiz">
-  <p style="font-size: 2rem;"><%= @question.content %></p>
+<div class="quiz-detail-card">
+  <h1><%= @question.content %></h1>
 </div>
+<br>
 
 <% if flash[:notice] %>
   <p class="flash flash-success"><%= flash[:notice] %></p>
@@ -10,15 +11,22 @@
   <p class="flash flash-error"><%= flash[:alert] %></p>
 <% end %>
 
-<%= form_with(model: [@question, Answer.new], local: true, data: { turbo: false }) do |f|%>
+<% if current_user == @question.user %>
   <div class="form-group">
-    <%= f.label :body, "あなたの答え" %><br>
-    <%= f.text_field :body, class: "form-control" %>
+    答え：<%= @question.correct %><br><br>
+    <%= link_to "編集する ✏️", edit_question_path(@question), class: "btn-create" %>
   </div>
+<% else %>
+  <%= form_with(model: [@question, Answer.new], local: true, data: { turbo: false }) do |f|%>
+    <div class="form-group">
+      <%= f.label :body, "あなたの答え" %><br>
+      <%= f.text_field :body, class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.submit "答え合わせ 🔍", class: "btn btn-primary" %>
-  </div>
+    <div class="form-group">
+      <%= f.submit "答え合わせ 🔍", class: "btn-create" %>
+    </div>
+  <% end %>
 <% end %>
 
-<%= link_to "← 他のクイズを見る", questions_path, class: "btn btn-secondary" %>
+<%= link_to "← 他のクイズを見る", questions_path, class: "btn" %>
