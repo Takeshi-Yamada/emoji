@@ -8,15 +8,6 @@
   box-sizing: border-box;
 }
 
-/*
-
-@layer components {
-  .btn-primary {
-    @apply py-2 px-4 bg-blue-200;
-  }
-}
-
-*/
 .alert {
   width: 100%;
   max-width: 48rem; /* Tailwindの max-w-xl 相当 */
@@ -98,6 +89,27 @@ h1 {
   margin-bottom: 1rem;
   color: #555;
 }
+
+/*詳細画面用*/
+.quiz-detail-card {
+  background-color: #fffef8; /* やさしいオフホワイト */
+  border: 2px solid #ffd43b; /* quiz-card と色味は似せる */
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  padding: 2rem;
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: left;
+  font-family: "Helvetica Neue", sans-serif;
+}
+.quiz-detail-card h1 {
+  font-size: 3rem;
+  color: #333;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
 
 /* ボタン類 */
 .btn,

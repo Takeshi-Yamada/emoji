@@ -1,4 +1,5 @@
-<div>
-  <h1 class="font-bold text-4xl">Questions#edit</h1>
-  <p>Find me in app/views/questions/edit.html.erb</p>
-</div>
+<h1>問題を編集する ✏️</h1>
+
+<%= render "form", question: @question %>
+
+<%= link_to "戻る", question_path(@question), class: "btn mt-3" %>
