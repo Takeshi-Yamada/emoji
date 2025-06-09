@@ -6,8 +6,8 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @quetion = Question.find(params[:question_id])
-    @answer = current_user.answers.build(question: @question, body: answer_params, result: normalize(@question.answer) == normalize(answer_params))
+    @question = Question.find(params[:question_id])
+    @answer = current_user.answers.build(question: @question, body: answer_params, result: normalize(@question.correct) == normalize(answer_params[:body]))
     if @answer.save
       redirect_to @question, notice: @answer.result ? "🎉 正解！" : "😢 不正解でした"
     else
@@ -23,6 +23,6 @@ class AnswersController < ApplicationController
   end
 
   def normalize(text)
-    text.to_s.gsub(/[\s　]+/, "").downcase.tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z')
+    text.to_s.gsub(/[\s　]+/, "").downcase.tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z').tr('ァ-ン', 'ぁ-ん')
   end
 end
