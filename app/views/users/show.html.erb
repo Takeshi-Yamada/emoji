@@ -1,0 +1,66 @@
+<h2 class="text-3xl font-bold mb-6 flex justify-between items-center">
+  <span><%= @user.name %>さんのマイページ</span>
+  <% if current_user == @user %>
+    <%= link_to "プロフィールを編集", edit_user_path(@user), class: "text-sm bg-yellow-300 text-gray-800 px-4 py-2 rounded hover:bg-yellow-400 transition" %>
+  <% end %>
+</h2>
+
+<section class="mb-10">
+  <h3 class="text-2xl font-semibold mb-4 border-b border-yellow-300 pb-2">自分が作成したクイズ</h3>
+
+  <% if @questions.any? %>
+    <div class="space-y-6">
+      <% @questions.each do |question| %>
+        <div class="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4 shadow-sm">
+          <div class="flex justify-between items-center">
+            <div>
+              <%= link_to question.content, question_path(question), class: "text-xl font-semibold hover:underline" %><br>
+              <span class="text-gray-600">答え: <%= question.correct %></span>
+            </div>
+            <div class="text-right text-sm text-gray-700">
+              <% total_answers = question.answers.count %>
+              <% correct_answers = question.answers.where(result: true).count %>
+              <p>解答数: <%= total_answers %></p>
+              <p>正答率: 
+                <% if total_answers > 0 %>
+                  <%= number_to_percentage(correct_answers.to_f / total_answers * 100, precision: 1) %>
+                <% else %>
+                  0%
+                <% end %>
+              </p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500">まだ作成したクイズがありません。</p>
+  <% end %>
+</section>
+
+<section>
+  <h3 class="text-2xl font-semibold mb-4 border-b border-yellow-300 pb-2">自分が回答したクイズ</h3>
+
+  <% if @answers.any? %>
+    <div class="space-y-6">
+      <% @answers.each do |answer| %>
+        <div class="bg-white border border-gray-300 rounded-lg p-4 shadow-sm">
+          <p class="text-lg font-semibold">
+            クイズ: <%= link_to answer.question.content, question_path(answer.question), class: "hover:underline" %>
+          </p>
+          <p>あなたの答え: <span class="text-blue-600 font-medium"><%= answer.body %></span></p>
+          <p>
+            結果：
+            <% if answer.result %>
+              <span class="text-green-600 font-bold">🎉 正解！</span>
+            <% else %>
+              <span class="text-red-600 font-bold">😢 不正解</span>
+            <% end %>
+          </p>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="text-gray-500">まだ回答したクイズがありません。</p>
+  <% end %>
+</section>

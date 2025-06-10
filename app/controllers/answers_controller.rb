@@ -7,7 +7,7 @@ class AnswersController < ApplicationController
 
   def create
     @question = Question.find(params[:question_id])
-    @answer = current_user.answers.build(question: @question, body: answer_params, result: normalize(@question.correct) == normalize(answer_params[:body]))
+    @answer = current_user.answers.build(question: @question, body: answer_params[:body], result: normalize(@question.correct) == normalize(answer_params[:body]))
     if @answer.save
       redirect_to @question, notice: @answer.result ? "🎉 正解！" : "😢 不正解でした"
     else
