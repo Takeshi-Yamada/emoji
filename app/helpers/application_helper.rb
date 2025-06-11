@@ -10,12 +10,12 @@ module ApplicationHelper
 
   def default_meta_tags
   {
-    site: "🧩Emoji Riddle",
-    title: "🧩Emoji Riddle",
+    site: "🧩Emoji Link",
+    title: "🧩Emoji Link",
     reverse: true,
     charset: "utf-8",
     description: "",
-    keywords: "絵文字, クイズ, Emoji Riddle",
+    keywords: "絵文字, クイズ, Emoji Link",
     og: {
       site_name: :site,
       title: :title,

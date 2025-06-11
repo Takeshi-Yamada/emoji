@@ -17,6 +17,8 @@ module Myapp
     config.autoload_lib(ignore: %w[assets tasks])
     config.assets.css_compressor = nil
     config.generators.system_tests = nil
+    config.i18n.default_locale = :ja
+
     config.generators do |g|
       g.assets false
       g.skip_routes true

@@ -1,21 +1,18 @@
 <h2>🧩 絵文字クイズ一覧 </h2>
 
-<div style="text-align: center; margin-bottom: 2rem;">
-  <%= link_to '✏️ 絵文字クイズを作る', new_question_path, class: 'btn-create' %>
-</div>
-
 <% if @questions.any? %>
   <div class="quiz-list">
     <% @questions.each do |question| %>
       <div class="quiz-card">
         <h2><%= question.content %></h2>
-        <% if current_user == question.user %>
-          <div class="form-group">
-            <%= link_to "編集する ✏️", edit_question_path(question), class: "btn-create" %>
-          </div>
-        <% else %>
-          <%= link_to '答える ▶️', question_path(question), class: 'btn' %>
-        <% end %>
+        <div class="form-group">
+          <% if current_user == question.user %>
+              <%= link_to "編集する ✏️", edit_question_path(question), class: "btn-create" %>
+          <% else %>
+            <%= link_to '答える ▶️', question_path(question), class: 'btn' %>
+          <% end %>
+        </div>
+        <p>作者：<%= question.user.name%></p>
       </div>
     <% end %>
   </div>
