@@ -1,21 +1,16 @@
 <h2>🧩 絵文字クイズ一覧 </h2>
 
 <% if @questions.any? %>
-  <div class="quiz-list">
-    <% @questions.each do |question| %>
+<div class="quiz-list">
+  <% @questions.each do |question| %>
+    <%= link_to question_path(question), class: "quiz-card-link" do %>
       <div class="quiz-card">
         <h2><%= question.content %></h2>
-        <div class="form-group">
-          <% if current_user == question.user %>
-              <%= link_to "編集する ✏️", edit_question_path(question), class: "btn-create" %>
-          <% else %>
-            <%= link_to '答える ▶️', question_path(question), class: 'btn' %>
-          <% end %>
-        </div>
-        <p>作者：<%= question.user.name%></p>
+        <p>作者：<%= question.user.name %></p>
       </div>
     <% end %>
-  </div>
+  <% end %>
+</div>
 <% else %>
   <p>まだクイズがありません！</p>
 <% end %>

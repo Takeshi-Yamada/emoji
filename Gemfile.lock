@@ -108,6 +108,7 @@ GEM
       responders
       warden (~> 1.2.3)
     drb (2.2.1)
+    emoji_regex (15.0.0)
     erubi (1.13.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
@@ -337,6 +338,7 @@ DEPENDENCIES
   capybara
   debug
   devise
+  emoji_regex
   jbuilder
   jsbundling-rails
   meta-tags
