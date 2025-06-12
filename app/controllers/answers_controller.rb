@@ -23,6 +23,6 @@ class AnswersController < ApplicationController
   end
 
   def normalize(text)
-    text.to_s.gsub(/[\s　]+/, "").downcase.tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z').tr('ァ-ン', 'ぁ-ん')
+    text.to_s.gsub(/[\s　]+/, "").gsub(/[[:punct:]\p{Punct}ー―〜…・！？!?,。、．「」『』（）()【】［］｛｝]/, "").tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z').downcase.tr('ァ-ン', 'ぁ-ん')
   end
 end

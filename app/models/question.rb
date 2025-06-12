@@ -1,7 +1,9 @@
 require "emoji_regex"
 
 class Question < ApplicationRecord
-  validates :content, presence: true
+  validates :content, presence: true, length: {maximum: 6}
+  validates :correct, presence: true, length: {maximum: 50}
+
   validate :content_must_be_emoji_only
 
   belongs_to :user

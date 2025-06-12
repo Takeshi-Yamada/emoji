@@ -1,0 +1,6 @@
+ja:
+  activerecord:
+    attributes:
+      question:
+        content: クイズ
+        correct: 答え
