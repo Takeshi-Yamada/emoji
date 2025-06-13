@@ -61,3 +61,5 @@ gem "tailwindcss-ruby", "3.4.17"
 
 gem "meta-tags"
 gem 'devise'
+gem 'rails-i18n'
+gem 'emoji_regex'

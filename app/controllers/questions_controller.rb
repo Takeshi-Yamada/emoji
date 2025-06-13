@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  before_action :authenticate_user!, only: [:new, :edit, :update]
 
   def index
     @questions = Question.all
@@ -21,6 +22,9 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+    if user_signed_in?
+      @answer = current_user.answers.find_by(question_id: params[:id])
+    end
   end
 
   def edit

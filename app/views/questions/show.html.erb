@@ -17,15 +17,26 @@
     <%= link_to "編集する ✏️", edit_question_path(@question), class: "btn-create" %>
   </div>
 <% else %>
-  <%= form_with(model: [@question, Answer.new], local: true, data: { turbo: false }) do |f|%>
-    <div class="form-group">
-      <%= f.label :body, "あなたの答え" %><br>
-      <%= f.text_field :body, class: "form-control" %>
-    </div>
+  <% if @answer&.result.blank?%>
+    <%= form_with(model: [@question, Answer.new], local: true, data: { turbo: false }) do |f|%>
+      <div class="form-group">
+        <%= f.label :body, "あなたの答え" %><br>
+        <%= f.text_field :body, class: "form-control" %>
+      </div>
 
-    <div class="form-group">
-      <%= f.submit "答え合わせ 🔍", class: "btn-create" %>
-    </div>
+      <div class="form-group">
+        <%= f.submit "答え合わせ 🔍", class: "btn-create" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p>あなたの答え：<%= @answer.body %></p>
+    <p>結果：
+      <% if @answer.result %>
+        <span class="correct">⭕</span>
+      <% else %>
+        <span class="incorrect">❌</span>
+      <% end %>
+    </p>
   <% end %>
 <% end %>
 
