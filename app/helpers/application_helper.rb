@@ -22,12 +22,12 @@ module ApplicationHelper
       description: :description,
       type: "website",
       url: root_url,
-      image: image_url("banana_fortune.jpg"),
+      image: image_url("icon-emoji1.png"),
       locale: "ja-JP"
     },
     twitter: {
       card: "summary_large_image",
-      image: image_url("banana_fortune.jpg")
+      image: image_url("icon-emoji1.png")
     }
   }
   end

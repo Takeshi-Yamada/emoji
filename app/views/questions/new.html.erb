@@ -2,7 +2,7 @@
 
 <%= form_with model: @question, local: true, data: { turbo: false } do |form| %>
   <div class="form-group">
-    <%= form.label :content, "クイズの絵文字（例: 📓🍎👿）" %><br>
+    <%= form.label :content, "クイズ：絵文字のみ、6個まで" %><br>
     <%= form.text_field :content, placeholder: "例: 📓🍎👿", class: "form-control" %>
   </div>
 
