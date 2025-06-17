@@ -3,12 +3,16 @@ require "emoji_regex"
 class Question < ApplicationRecord
   validates :content, presence: true
   validates :correct, presence: true, length: {maximum: 50}
+  validates :hint_1, :hint_2, :hint_3, length: { maximum: 255 }, allow_blank: true
 
   validate :content_must_be_emoji_only
   validate :content_max
+  validate :hints_order_validation
+
+  enum :answer_type, { undefined: 0, japanese: 1, english: 2, both: 3 }
+  before_save :set_answer_type
 
   belongs_to :user
-
   has_many :answers
 
   private
@@ -25,8 +29,37 @@ class Question < ApplicationRecord
   end
 
   def content_max
-    if self.content.each_grapheme_cluster.count > 7
+    if self.content.each_grapheme_cluster.count > 6
       errors.add(:content, "絵文字は6個以内で入力してください")
+    end
+    p self.content.each_grapheme_cluster.count
+  end
+
+  def set_answer_type
+    text = self.correct.to_s
+
+    has_japanese = text.match?(/[\p{Hiragana}\p{Katakana}\p{Han}ー]/)
+    has_english  = text.match?(/[a-zA-Z]/)
+
+    self.answer_type =
+      if has_japanese && has_english
+        :both
+      elsif has_japanese
+        :japanese
+      elsif has_english
+        :english
+      else
+        :undefined
+      end
+  end
+
+  def hints_order_validation
+    if hint_2.present? && hint_1.blank?
+      errors.add(:hint_2, "を入力するには、先にヒント1を入力してください")
+    end
+
+    if hint_3.present? && hint_2.blank?
+      errors.add(:hint_3, "を入力するには、先にヒント2を入力してください")
     end
   end
 end

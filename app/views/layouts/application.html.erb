@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Emoji Riddle" %></title>
+    <title><%= content_for(:title) || "Emoji Link" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
@@ -16,12 +16,15 @@
     <link rel="apple-touch-icon" href="/icon-emoji1.png">
     <%= stylesheet_link_tag "application.tailwind", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
   </head>
 
   <body>
     <%= render 'shared/message' %>
     <%= render 'shared/header' %>
     <%= yield %>
-    <%= render 'shared/footer' %>
   </body>
+  <footer class="footer">
+    <%= render 'shared/footer' %>
+  </footer>
 </html>

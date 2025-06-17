@@ -364,6 +364,36 @@ h3.section-title {
   font-size: 1rem;
 }
 
+/* ヒント機能 */
+.hint-container {
+  margin: 1em 0;
+}
+
+.hint-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  margin: 0.5em 0;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: inline-block;
+}
+
+.hint-button:hover {
+  background-color: #357ABD;
+}
+
+.hint-box {
+  background-color: #f0f0f0;
+  padding: 0.75em 1em;
+  margin-bottom: 1em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
 /* ハンバーガーメニュー */
 .hamburger {
   display: none;
@@ -408,7 +438,6 @@ h3.section-title {
   }
 
   .header-btn {
-    width: 100%;
     text-align: left;
   }
 

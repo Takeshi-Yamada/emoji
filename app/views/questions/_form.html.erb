@@ -15,8 +15,23 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :correct, "答え（日本語）" %><br>
+    <%= f.label :correct, "答え" %><br>
     <%= f.text_field :correct, class: "form-control", placeholder: "例: デスノート" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :hint_1, "第1ヒント(任意)" %><br>
+    <%= f.text_field :hint_1, class: "form-control", placeholder: "例: ジャンプ作品です/頭脳戦で有名な漫画です" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :hint_2, "第2ヒント(任意)" %><br>
+    <%= f.text_field :hint_2, class: "form-control", placeholder: "例: ノートに名前を書くと◯ぬ…/主人公の近くにはリンゴが好きな「彼」がそばにいる" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :hint_3, "第3ヒント(任意)" %><br>
+    <%= f.text_field :hint_3, class: "form-control", placeholder: "例: 「計画通り」/「新世界の神になる」" %>
   </div>
 
   <%= f.submit question.new_record? ? "クイズを作成する 🚀" : "保存する 💾", class: "btn-create" %><br><br>
