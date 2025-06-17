@@ -22,36 +22,37 @@
   </div>
 <% else %>
   <% if @answer&.result.blank?%>
-      <div class="form-group">
-        <p> 解答形式 ：<%= I18n.t("activerecord.attributes.question.answer_type.#{@question.answer_type}") %></p>
-        <div x-data="{ show1: false, show2: false, show3: false }" class="hint-container">
+    <div class="form-group">
+      <p> 解答形式 ：<%= I18n.t("activerecord.attributes.question.answer_type.#{@question.answer_type}") %></p>
+      <div x-data="{ show1: false, show2: false, show3: false }" class="hint-container">
+        <% if @question.hint_1.present? %>
           <button type="button" class="hint-button" @click="show1 = !show1">
             <span x-text="show1 ? 'ヒント1を隠す' : 'ヒント1を表示'"></span>
           </button>
           <div x-show="show1" x-transition class="hint-box">
-            <% if @question.hint_1.present? %>
-              <p>ヒント1: <%= @question.hint_1 %></p>
-            <% end %>
+            <p>ヒント1: <%= @question.hint_1 %></p>
           </div>
+        <% end %>
 
+        <% if @question.hint_2.present? %>
           <button type="button" class="hint-button" @click="show2 = !show2">
             <span x-text="show2 ? 'ヒント2を隠す' : 'ヒント2を表示'"></span>
           </button>
           <div x-show="show2" x-transition class="hint-box">
-            <% if @question.hint_2.present? %>
-              <p>ヒント2: <%= @question.hint_2 %></p>
-            <% end %>
+            <p>ヒント2: <%= @question.hint_2 %></p>
           </div>
+        <% end %>
 
+        <% if @question.hint_3.present? %>
           <button type="button" class="hint-button" @click="show3 = !show3">
             <span x-text="show3 ? 'ヒント3を隠す' : 'ヒント3を表示'"></span>
           </button>
           <div x-show="show3" x-transition class="hint-box">
-            <% if @question.hint_3.present? %>
-              <p>ヒント3: <%= @question.hint_3 %></p>
-            <% end %>
+            <p>ヒント3: <%= @question.hint_3 %></p>
           </div>
-        </div>
+        <% end %>
+      </div>
+
     <%= form_with(model: [@question, Answer.new], local: true, data: { turbo: false }) do |f|%>
       <div class="form-group">
         <%= f.label :body, "あなたの答え" %><br>
