@@ -12,6 +12,7 @@
 <% end %>
 
 <% if current_user == @question.user %>
+  <!-- 作問者画面　-->
   <div class="form-group">
     <p>答え：<%= @question.correct %></p>
     <p>解答形式 ：<%= I18n.t("activerecord.attributes.question.answer_type.#{@question.answer_type}") %></p>
@@ -21,58 +22,42 @@
     <%= link_to "編集する ✏️", edit_question_path(@question), class: "btn-create" %>
   </div>
 <% else %>
-  <% if @answer&.result.blank?%>
-    <div class="form-group">
-      <p> 解答形式 ：<%= I18n.t("activerecord.attributes.question.answer_type.#{@question.answer_type}") %></p>
-      <div x-data="{ show1: false, show2: false, show3: false }" class="hint-container">
-        <% if @question.hint_1.present? %>
-          <button type="button" class="hint-button" @click="show1 = !show1">
-            <span x-text="show1 ? 'ヒント1を隠す' : 'ヒント1を表示'"></span>
-          </button>
-          <div x-show="show1" x-transition class="hint-box">
-            <p>ヒント1: <%= @question.hint_1 %></p>
-          </div>
-        <% end %>
-
-        <% if @question.hint_2.present? %>
-          <button type="button" class="hint-button" @click="show2 = !show2">
-            <span x-text="show2 ? 'ヒント2を隠す' : 'ヒント2を表示'"></span>
-          </button>
-          <div x-show="show2" x-transition class="hint-box">
-            <p>ヒント2: <%= @question.hint_2 %></p>
-          </div>
-        <% end %>
-
-        <% if @question.hint_3.present? %>
-          <button type="button" class="hint-button" @click="show3 = !show3">
-            <span x-text="show3 ? 'ヒント3を隠す' : 'ヒント3を表示'"></span>
-          </button>
-          <div x-show="show3" x-transition class="hint-box">
-            <p>ヒント3: <%= @question.hint_3 %></p>
-          </div>
-        <% end %>
-      </div>
-
-    <%= form_with(model: [@question, Answer.new], local: true, data: { turbo: false }) do |f|%>
-      <div class="form-group">
-        <%= f.label :body, "あなたの答え" %><br>
-        <%= f.text_field :body, class: "form-control" %>
-      </div>
-      </div>
-      <div class="form-group">
-        <%= f.submit "答え合わせ 🔍", class: "btn-create" %>
-      </div>
-    <% end %>
-  <% else %>
-    <p>あなたの答え：<%= @answer.body %></p>
+  <!-- 解答者画面　-->
+  <% if @already_correct&.result? %>
+    <!-- 正解結果　-->
+    <p>あなたの答え：<%= @already_correct.body %></p>
     <p>   正   解  ：<%= @question.correct %></p>
-    <p>   結   果  ：
-      <% if @answer.result %>
-        <span class="correct">⭕</span>
-      <% else %>
-        <span class="incorrect">❌</span>
-      <% end %>
-    </p>
+    <p>   結   果  ： <span class="correct">⭕</span> </p>
+  <% else %>
+    <%= render "answer_form", question: @question %>
+  <% end %>
+
+  <!-- 履歴表示 -->
+  <% if @answers.any? %>
+    <table class="quiz-table">
+      <thead>
+        <tr>
+          <th>あなたの答え</th>
+          <th>結果</th>
+          <th>解答日時</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @answers.each do |answer| %>
+          <tr>
+            <td><%= answer.body %></td>
+            <td>
+              <% if answer.result %>
+                <span class="correct">⭕</span>
+              <% else %>
+                <span class="incorrect">❌</span>
+              <% end %>
+            </td>
+            <td><%= answer.created_at.strftime("%Y/%m/%d %H:%M") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table><br>
   <% end %>
 <% end %>
 

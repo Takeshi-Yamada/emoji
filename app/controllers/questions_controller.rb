@@ -23,7 +23,9 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     if user_signed_in?
-      @answer = current_user.answers.find_by(question_id: params[:id])
+      @answers = current_user.answers.where(question_id: params[:id])
+      @already_correct = @answers.find { |a| a.result? }
+      p @already_correct
     end
   end
 
