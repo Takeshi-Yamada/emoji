@@ -63,3 +63,5 @@ gem "meta-tags"
 gem 'devise'
 gem 'rails-i18n'
 gem 'emoji_regex'
+gem 'dotenv-rails'
+

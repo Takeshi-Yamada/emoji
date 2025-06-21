@@ -5,12 +5,6 @@
 </div>
 <br>
 
-<% if flash[:notice] %>
-  <p class="flash flash-success"><%= flash[:notice] %></p>
-<% elsif flash[:alert] %>
-  <p class="flash flash-error"><%= flash[:alert] %></p>
-<% end %>
-
 <% if current_user == @question.user %>
   <!-- 作問者画面　-->
   <div class="form-group">
@@ -29,11 +23,11 @@
     <p>   正   解  ：<%= @question.correct %></p>
     <p>   結   果  ： <span class="correct">⭕</span> </p>
   <% else %>
-    <%= render "answer_form", question: @question %>
+    <%= render "questions/answer_form", question: @question %>
   <% end %>
 
   <!-- 履歴表示 -->
-  <% if @answers.any? %>
+  <% if @answers&.any? %>
     <table class="quiz-table">
       <thead>
         <tr>

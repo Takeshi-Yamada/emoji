@@ -18,6 +18,8 @@ module Myapp
     config.assets.css_compressor = nil
     config.generators.system_tests = nil
     config.i18n.default_locale = :ja
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
 
     config.generators do |g|
       g.assets false
