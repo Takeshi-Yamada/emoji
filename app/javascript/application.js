@@ -1,6 +1,7 @@
 // Entry point for the build script in your package.json
 import "@hotwired/turbo-rails"
 import "./controllers"
+import "./tagify_setup"
 
 import emojiRegex from 'emoji-regex';
 

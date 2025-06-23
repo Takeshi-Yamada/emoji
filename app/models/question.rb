@@ -12,6 +12,7 @@ class Question < ApplicationRecord
   enum :answer_type, { undefined: 0, japanese: 1, english: 2, both: 3 }
   before_save :set_answer_type
 
+  acts_as_taggable_on :tags
   belongs_to :user
   has_many :answers
 

@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update]
 
   def index
-    @questions = Question.includes(:user).order(created_at: :desc).page(params[:page])
+    @questions = Question.includes(:user).order(created_at: :desc).page(params[:page]).per(5)
   end
 
   def new
@@ -52,7 +52,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:content, :correct, :hint_1, :hint_2, :hint_3)
+    params.require(:question).permit(:content, :correct, :tag_list, :hint_1, :hint_2, :hint_3)
   end
 
   def not_found
