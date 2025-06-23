@@ -21,7 +21,7 @@
 
   <div class="form-group">
     <%= f.label :tag_list, "タグ" %><br>
-    <%= f.text_field :tag_list, id: "tag-input", class: "form-control", value: @question.tag_list.join(", ") %>
+    <%= f.text_field :tag_list, id: "tag-input", class: "form-control", value: @question.tag_list.join(",") %>
   </div>
 
   <div class="form-group">

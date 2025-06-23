@@ -1,19 +1,22 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const input = document.querySelector("#tag-input");
   if (!input) return;
 
-  // Tagifyを適用
+  // 二重初期化防止
+  if (input.tagify) input.tagify.destroy();
+
+  // Tagifyの初期化
   const tagify = new Tagify(input, {
-    whitelist: [],  // 補完候補（あとでAjaxで追加）
+    originalInputValueFormat: values =>
+      values.map(item => item.value).join(","),
     dropdown: {
-      enabled: 0,        // <= 入力0文字でも候補を表示
+      enabled: 0,
       closeOnSelect: false,
-      maxItems: 10,
-      classname: "tagify-dropdown",
-    },
+      maxItems: 10
+    }
   });
 
-  // Ajaxで補完候補を取得
+  // 必要なら候補（whitelist）をAjaxで取得
   fetch("/tags/autocomplete")
     .then(res => res.json())
     .then(data => {
