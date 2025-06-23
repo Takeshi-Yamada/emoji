@@ -74,6 +74,7 @@ h1 {
   color: inherit;
   display: block;
 }
+
 /* クイズカード */
 .quiz-card {
   background-color: #fff;
@@ -103,7 +104,7 @@ h1 {
   margin: 0;
 }
 
-/*詳細画面用*/
+/* 詳細画面用 */
 .quiz-detail-card {
   background-color: #fffef8; /* やさしいオフホワイト */
   border: 2px solid #ffd43b; /* quiz-card と色味は似せる */
@@ -123,6 +124,47 @@ h1 {
   padding-bottom: 0.5rem;
 }
 
+/* ページネーション */
+.pagination{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  column-gap: 10px;
+  margin: 10px;
+}
+
+/* ページネーションのspan */
+.pagination span{
+  text-align: center;
+  font-size: 20px;
+}
+
+/* ページネーションのリンク文字（a） */
+.pagination a{
+  color: #818181;
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-weight: bold;
+  padding: 10px;
+}
+
+/* ページネーションの文字にカーソルを載せた時 */
+.pagination a:hover{
+  height: 50px;
+  background-color: #84b8eb;
+  color: #FFF;
+  border-radius: 10%;
+  padding: 10px;
+}
+
+/* 現在のページの数字についての表記 */
+.current{
+  background-color: #fffef8; /* やさしいオフホワイト */
+  font-weight: bold;
+  color: #84b8eb;
+  padding: 10px;
+}
 
 /* ボタン類 */
 .btn,

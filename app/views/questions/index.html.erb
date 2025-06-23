@@ -2,16 +2,18 @@
 
 <p>※答えのジャンルは映画・アニメ・漫画・小説でお願いします。</p>
 <% if @questions.any? %>
-<div class="quiz-list">
-  <% @questions.each do |question| %>
-    <%= link_to question_path(question), class: "quiz-card-link" do %>
-      <div class="quiz-card">
-        <h2><%= question.content %></h2>
-        <p>作者：<%= question.user.name %></p>
-      </div>
+  <%= paginate @questions %>
+  <div class="quiz-list">
+    <% @questions.each do |question| %>
+      <%= link_to question_path(question), class: "quiz-card-link" do %>
+        <div class="quiz-card">
+          <h2><%= question.content %></h2>
+          <p>作者：<%= question.user.name %></p>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
-</div>
+  </div>
+  <%= paginate @questions %>
 <% else %>
   <p>まだクイズがありません！</p>
 <% end %>

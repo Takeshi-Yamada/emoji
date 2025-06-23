@@ -12,3 +12,10 @@ ja:
         hint_1: ヒント1
         hint_2: ヒント2
         hint_3: ヒント3
+  views:
+    pagination:
+      first: "&laquo; 最初"
+      last: "最後 &raquo;"
+      previous: "&lsaquo; 前"
+      next: "次 &rsaquo;"
+      truncate: "..."
