@@ -155,12 +155,11 @@ h1 {
   background-color: #2f9e44;
 }
 
-.auth-btn,
 .header-btn {
   background-color: #ffd43b;
   color: #333;
 }
-.auth-btn:hover,
+
 .header-btn:hover {
   background-color: #fab005;
 }
@@ -202,12 +201,14 @@ h1 {
   top: 0;
   z-index: 100;
 }
+
 .header-inner {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
+
 .header-logo {
   font-size: 1.5rem;
   font-weight: bold;
@@ -218,12 +219,16 @@ h1 {
   background-color: #c9c9c9;
   border-radius: 4px;
 }
+
 .header-nav {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 0.5rem;
-  flex-wrap: wrap;
+  margin-left: auto;
+  flex-wrap: nowrap;
 }
+
 .user-email {
   font-size: 0.9rem;
   color: #555;
@@ -394,14 +399,8 @@ h3.section-title {
   border: 1px solid #ccc;
 }
 
-/* ハンバーガーメニュー */
-.hamburger {
-  display: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-}
-.menu-toggle {
-  display: none;
+.bottom-nav {
+  display: none; /* デフォルトは非表示（PCなど） */
 }
 
 /* ---------- スマホ対応 ---------- */
@@ -411,34 +410,8 @@ h3.section-title {
     align-items: stretch;
   }
 
-  .header-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-
-  .hamburger {
-    display: block;
-    font-size: 1.8rem;
-    cursor: pointer;
-  }
-
   .header-nav {
     display: none;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-  }
-
-  .menu-toggle:checked ~ .header-nav {
-    display: flex;
-  }
-
-  .header-btn {
-    text-align: left;
   }
 
   .user-email {
@@ -462,5 +435,33 @@ h3.section-title {
 
   .quiz-card p {
     font-size: 0.8rem;
+  }
+
+  .bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid #cccccc;
+    justify-content: space-around;
+    padding: 10px 0;
+    z-index: 1000;
+    font-size: 0.9em;
+  }
+
+  .bottom-nav a {
+    text-align: center;
+    color: #333;
+    text-decoration: none;
+  }
+
+  .bottom-nav a:hover {
+    color: #007bff;
+  }
+
+  body {
+    padding-bottom: 60px; /* ナビ分の余白を下につける */
   }
 }
