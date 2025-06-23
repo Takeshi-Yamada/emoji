@@ -5,7 +5,7 @@ import "./tagify_setup"
 
 import emojiRegex from 'emoji-regex';
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("turbo:load", () => {
   const input = document.querySelector('input[name="question[content]"]');
 
   if (!input) return;
