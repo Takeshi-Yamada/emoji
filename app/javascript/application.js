@@ -43,3 +43,4 @@ document.addEventListener("turbo:load", () => {
     }
   });
 });
+
