@@ -526,4 +526,8 @@ h3.section-title {
   .search-form {
   width: 70%;
   }
+
+  .quiz-detail-card h1 {
+    font-size: 2.5rem;
+  }
 }

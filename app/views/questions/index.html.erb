@@ -8,7 +8,7 @@
     <% @questions.each do |question| %>
       <%= link_to question_path(question), class: "quiz-card-link" do %>
         <div class="quiz-card">
-          <%= render 'tag', question: question, url: questions_path %>
+          <%= render 'tag', question: question %>
           <h2><%= question.content %></h2>
           <p>作者：<%= question.user.name %></p>
         </div>
