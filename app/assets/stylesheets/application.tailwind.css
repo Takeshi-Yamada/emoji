@@ -92,11 +92,12 @@ h1 {
 }
 .quiz-card h2 {
   font-size: clamp(1.2rem, 5vw, 2rem); /* 絵文字や短文に最適 */
+  margin-top: 0;
   margin-bottom: 0.5rem;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: clip; /* はみ出し省略なしで小さく調整 */
   max-width: 100%;
+  box-sizing: border-box;
 }
 .quiz-card p {
   font-size: 0.9rem;
@@ -232,6 +233,7 @@ h1 {
 .form-group {
   margin-bottom: 1.5rem;
 }
+.search-form,
 .form-control {
   width: 100%;
   max-width: 500px;
@@ -502,9 +504,9 @@ h3.section-title {
     background-color: #ffffff;
     border-top: 1px solid #cccccc;
     justify-content: space-around;
-    padding: 10px 0;
+    padding: 15px 0;
     z-index: 1000;
-    font-size: 0.9em;
+    font-size: 1em;
   }
 
   .bottom-nav a {
@@ -519,5 +521,9 @@ h3.section-title {
 
   body {
     padding-bottom: 60px; /* ナビ分の余白を下につける */
+  }
+
+  .search-form {
+  width: 70%;
   }
 }

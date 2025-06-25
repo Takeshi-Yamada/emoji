@@ -1,0 +1,6 @@
+<%= search_form_for @q, url: url, method: :get do |f| %>
+  <div class="form-group">
+    <%= f.search_field :content_cont, class: "search-form", placeholder: '絵文字検索' %>
+    <%= f.submit "検索", class: "btn" %>
+  </div>
+<% end %>

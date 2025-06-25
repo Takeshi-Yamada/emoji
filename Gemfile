@@ -60,9 +60,10 @@ gem "tailwindcss-rails"
 gem "tailwindcss-ruby", "3.4.17"
 
 gem "meta-tags"
-gem 'devise'
-gem 'rails-i18n'
-gem 'emoji_regex'
-gem 'dotenv-rails'
-gem 'kaminari'
-gem 'acts-as-taggable-on'
+gem "devise"
+gem "rails-i18n"
+gem "emoji_regex"
+gem "dotenv-rails"
+gem "kaminari"
+gem "acts-as-taggable-on"
+gem "ransack"

@@ -16,6 +16,16 @@ class Question < ApplicationRecord
   belongs_to :user
   has_many :answers
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[
+      content
+    ]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["tags", "taggings"]
+  end
+
   private
 
   def content_must_be_emoji_only

@@ -3,7 +3,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :edit, :update]
 
   def index
-    @questions = Question.includes(:user).order(created_at: :desc).page(params[:page])
+    @q = Question.ransack(params[:q])
+    @questions = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def new

@@ -1,12 +1,14 @@
-<h1>🧩 絵文字クイズ一覧 </h1>
+<h1>❓絵文字クイズ一覧</h1>
+<%= render 'search', q: @q, url: questions_path %>
 
-<p>※答えのジャンルは映画・アニメ・漫画・小説でお願いします。</p>
+<p>※答えのジャンルは<b>映画・アニメ・漫画・小説</b>でお願いします。</p>
 <% if @questions.any? %>
   <%= paginate @questions %>
   <div class="quiz-list">
     <% @questions.each do |question| %>
       <%= link_to question_path(question), class: "quiz-card-link" do %>
         <div class="quiz-card">
+          <%= render 'tag', question: question, url: questions_path %>
           <h2><%= question.content %></h2>
           <p>作者：<%= question.user.name %></p>
         </div>

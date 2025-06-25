@@ -1,0 +1,7 @@
+<% if question.tags.any? %>
+  <% question.tags.each do |tag| %>
+    <span class="tag-badge"><%= tag.name %></span>
+  <% end %>
+<% else %>
+    <span class="tag-badge"> 未設定 </span>
+<% end %>
