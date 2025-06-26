@@ -22,5 +22,11 @@
   </div>
     <%= paginate @questions %>
 <% else %>
-  <p>まだクイズがありません！</p>
+  <p>該当のクイズはありません！</p>
+<% end %>
+
+<h1>👑人気のタグ</h1>
+
+<% ActsAsTaggableOn::Tag.most_used(10).each do |tag| %>
+  <%= link_to tag.name, questions_path(tag_name: tag.name), class: "tag-badge" %>
 <% end %>
