@@ -1,6 +1,6 @@
 <% if question.tags.any? %>
   <% question.tags.each do |tag| %>
-    <span class="tag-badge"><%= tag.name %></span>
+    <%= link_to tag.name, questions_path(tag_name: tag.name), class: "tag-badge" %>
   <% end %>
 <% else %>
     <span class="tag-badge"> 未設定 </span>

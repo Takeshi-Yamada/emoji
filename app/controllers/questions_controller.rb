@@ -4,7 +4,12 @@ class QuestionsController < ApplicationController
 
   def index
     @q = Question.ransack(params[:q])
-    @questions = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+    if params[:tag_name].present?
+      @questions = Question.tagged_with(params[:tag_name])
+    else
+      @questions = @q.result(distinct: true).includes(:user).order(created_at: :desc)
+    end
+    @questions = @questions.page(params[:page])
   end
 
   def new

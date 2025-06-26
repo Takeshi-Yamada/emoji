@@ -6,16 +6,21 @@
   <%= paginate @questions %>
   <div class="quiz-list">
     <% @questions.each do |question| %>
-      <%= link_to question_path(question), class: "quiz-card-link" do %>
-        <div class="quiz-card">
+      <div class="quiz-card-wrapper">
+        <div class="tag-area">
           <%= render 'tag', question: question %>
-          <h2><%= question.content %></h2>
-          <p>作者：<%= question.user.name %></p>
         </div>
-      <% end %>
+
+        <%= link_to question_path(question), class: "quiz-card-link" do %>
+          <div class="quiz-card">
+            <h2><%= question.content %></h2>
+            <p>作者：<%= question.user.name %></p>
+          </div>
+        <% end %>
+      </div>
     <% end %>
   </div>
-  <%= paginate @questions %>
+    <%= paginate @questions %>
 <% else %>
   <p>まだクイズがありません！</p>
 <% end %>
