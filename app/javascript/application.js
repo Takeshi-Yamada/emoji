@@ -44,3 +44,25 @@ document.addEventListener("turbo:load", () => {
   });
 });
 
+document.addEventListener("turbo:load", () => {
+  const toggleBtn = document.getElementById("toggle-emoji-tooltip");
+  const tooltip = document.getElementById("emoji-tooltip");
+
+  toggleBtn.addEventListener("click", () => {
+    if (tooltip.classList.contains("hidden")) {
+      tooltip.classList.remove("hidden");
+      tooltip.setAttribute("aria-hidden", "false");
+    } else {
+      tooltip.classList.add("hidden");
+      tooltip.setAttribute("aria-hidden", "true");
+    }
+  });
+
+  // 画面のどこかクリックで閉じる処理（任意）
+  document.addEventListener("click", (e) => {
+    if (!toggleBtn.contains(e.target) && !tooltip.contains(e.target)) {
+      tooltip.classList.add("hidden");
+      tooltip.setAttribute("aria-hidden", "true");
+    }
+  });
+});

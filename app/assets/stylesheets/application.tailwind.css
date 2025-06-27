@@ -254,6 +254,73 @@ h1 {
   border: 1px solid #ccc;
 }
 
+/* 入力サポート用モーダル */
+.emoji-hint-toggle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 1.5px solid #bbb;
+  background-color: transparent;
+  color: #555;
+  font-size: 15px;
+  line-height: 32px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  box-shadow: none;
+  padding: 0;
+}
+
+.emoji-hint-toggle:hover {
+  background-color: #f0f0f0;
+  color: #222;
+  border-color: #888;
+}
+
+.emoji-hint-toggle:active {
+  background-color: #e0e0e0;
+  color: #000;
+  border-color: #666;
+}
+
+.hidden {
+  display: none;
+}
+
+.emoji-tooltip {
+  position: absolute;
+  top: 110%; /* ボタンの下に表示 */
+  left: 50%;
+  transform: translateX(-50%);
+  background: #444;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #fffbe6;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  width: max-content;
+  z-index: 100;
+  white-space: normal;
+  text-align: left;
+  user-select: none;
+}
+
+.emoji-tooltip-arrow {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: #444;
+  transform-origin: center;
+  clip-path: polygon(0 100%, 100% 100%, 50% 0);
+}
+
 /* 認証リンク */
 .auth-links {
   text-align: right;
