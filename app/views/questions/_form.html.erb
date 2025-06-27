@@ -10,14 +10,14 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :content, "クイズ：絵文字のみ、6個まで　" %>
+    <%= f.label :content, "クイズ：絵文字のみ/6個まで" %>
     <div style="position: relative; display: inline-block;">
-      <button id="toggle-emoji-tooltip" type="button" class="emoji-hint-toggle" title="絵文字入力ヒント">？</button>
+      <button id="toggle-emoji-tooltip" type="button" class="emoji-hint-toggle" title="絵文字入力ヒント" style="  font-size: 15px;">ℹ️</button>
 
       <div id="emoji-tooltip" class="emoji-tooltip hidden" role="tooltip" aria-hidden="true">
-        絵文字ショートカットキー💡：<br>
+        絵文字ショートカットキー：<br>
         　「⌃」+「⌘」+「スペース」（Mac）<br>
-          「Windowsキー」+「.」（Windows）
+        　「Windowsキー」+「.」（Windows）
         <div class="emoji-tooltip-arrow"></div>
       </div>
     </div><br>
