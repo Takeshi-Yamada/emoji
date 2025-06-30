@@ -240,6 +240,9 @@ h1 {
   background-color: #e03131;
 }
 
+.btn-share {
+  background-color: #111827;
+}
 /* フォーム */
 .form-group {
   margin-bottom: 1.5rem;

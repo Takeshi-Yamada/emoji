@@ -91,3 +91,10 @@ RUNTEQでのコミュニケーションについて、ゲームを通して活�
 * `gem "meta-tags"`：SNSシェア
 * `tagify`：タグ入力（オートコンプリート）
 * `Alpine.js`：ヒントの表示/非表示
+
+### 使用技術
+Ruby: 3.3.6
+Rails: 8.0.3
+DB: PostgreSQL
+開発環境：Docker
+インフラ：Fly.io
