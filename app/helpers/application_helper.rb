@@ -14,20 +14,20 @@ module ApplicationHelper
     title: "🧩Emoji Link",
     reverse: true,
     charset: "utf-8",
-    description: "",
+    description: "Emoji Linkは、絵文字だけで出題されたクイズに挑戦できるWebアプリです。あなたの推し作品、絵文字で伝わる？クイズ投稿機能もあり！",
     keywords: "絵文字, クイズ, Emoji Link",
     og: {
       site_name: :site,
       title: :title,
       description: :description,
       type: "website",
-      url: root_url,
-      image: image_url("icon-emoji1.png"),
+      url: request.original_url	,
+      image: image_url('emojilink.jpg'),
       locale: "ja-JP"
     },
     twitter: {
       card: "summary_large_image",
-      image: image_url("icon-emoji1.png")
+      image: image_url('emojilink.jpg')
     }
   }
   end

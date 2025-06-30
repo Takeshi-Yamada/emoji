@@ -1,7 +1,7 @@
 <h1>❓絵文字クイズ一覧</h1>
 <%= render 'search', q: @q, url: questions_path %>
 
-<p>※答えのジャンルは<b>映画・アニメ・漫画・小説</b>でお願いします。</p>
+<p><b>※答えのジャンル（漫画等）はタグに入れるようにお願いします。</b></p>
 <% if @questions.any? %>
   <%= paginate @questions %>
   <div class="quiz-list">
