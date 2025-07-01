@@ -195,13 +195,13 @@ h1 {
 /* ボタン類 */
 .btn,
 .btn-create,
+.btn-ai,
 .header-btn {
   display: inline-block;
   padding: 0.5rem 1rem;
   border-radius: 8px;
   font-weight: bold;
   text-decoration: none;
-  transition: background-color 0.2s ease;
   font-size: 0.95rem;
   border: none;
 }
@@ -243,6 +243,16 @@ h1 {
 .btn-share {
   background-color: #111827;
 }
+
+.btn-ai {
+  background-color: #0551f7c4;
+  color: white;
+}
+
+.btn-ai:hover {
+  background-color: #4781ffc4;
+}
+
 /* フォーム */
 .form-group {
   margin-bottom: 1.5rem;

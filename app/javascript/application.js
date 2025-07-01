@@ -2,9 +2,11 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./tagify_setup"
+import { setupGenerateHint } from "./question_support";
 
 import emojiRegex from 'emoji-regex';
 
+//絵文字入力
 document.addEventListener("turbo:load", () => {
   const input = document.querySelector('input[name="question[content]"]');
 
@@ -44,6 +46,7 @@ document.addEventListener("turbo:load", () => {
   });
 });
 
+//ツールチップ
 document.addEventListener("turbo:load", () => {
   const toggleBtn = document.getElementById("toggle-emoji-tooltip");
   const tooltip = document.getElementById("emoji-tooltip");
@@ -65,4 +68,9 @@ document.addEventListener("turbo:load", () => {
       tooltip.setAttribute("aria-hidden", "true");
     }
   });
+});
+
+//AIサポート機能
+document.addEventListener("turbo:load", () => {
+  setupGenerateHint();
 });

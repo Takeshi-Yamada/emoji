@@ -49,10 +49,10 @@ class QuestionsController < ApplicationController
     end
   end
 
-  def destroy
-    question = current_user.questions.find(params[:id])
-    question.destroy!
-    redirect_to questions_path, success: '削除に成功しました'
+  def generate_hint
+    answer = params[:answer]
+    result = QuizSupport.call(answer)
+    render json: result
   end
 
   private
