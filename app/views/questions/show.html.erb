@@ -14,7 +14,7 @@
     <p> ヒント2 ：<%= @question.hint_2 %></p>
     <p> ヒント3 ：<%= @question.hint_3 %></p>
     <%= link_to "編集する ✏️", edit_question_path(@question), class: "btn-create" %>
-    <% toukou = "🧩「#{@question.content}」絵文字クイズを作ったよ！これが解けるかな？🧩" %>
+    <% toukou = "「#{@question.content}」絵文字クイズを作ったよ！これが解けるかな？🧩" %>
     <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
     <%= link_to "Xへ投稿する📢", share_url, class: "btn btn-share", target: "_blank", rel: "noopener" %><br>
 
@@ -26,7 +26,7 @@
     <p>あなたの答え：<%= @already_correct.body %></p>
     <p>   正   解  ：<%= @question.correct %></p>
     <p>   結   果  ： <span class="correct">⭕</span> </p>
-    <% toukou = "🎉「#{@question.content}」に正解したよ！🎉" %>
+    <% toukou = "「#{@question.content}」に正解したよ！🎉皆は解けるかな？🧩" %>
     <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
     <%= link_to "Xへ投稿する📢", share_url, class: "btn btn-share", target: "_blank", rel: "noopener" %><br><br>
   <% else %>

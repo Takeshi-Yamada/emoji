@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   get 'tags/autocomplete', to: 'tags#autocomplete'
   # Defines the root path route ("/")
   root "questions#index"
-  resources :questions, only: %i[index new create show edit update destroy] do
+  resources :questions, only: %i[index new create show edit update] do
     resources :answers, only: %i[index create]
+    get :generate_hint, on: :collection
   end
   resources :users, only: %i[show edit update]
 end

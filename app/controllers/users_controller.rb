@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   def show
     @questions = @user.questions
-    @answers = @user.answers.includes(:question)
+    @answers = @user.answers.includes(:question).order(created_at: :desc)
   end
 
   def edit; end
