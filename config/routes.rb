@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :questions, only: %i[index new create show edit update] do
     resources :answers, only: %i[index create]
     get :generate_hint, on: :collection
+    post :give_up, on: :member
   end
   resources :users, only: %i[show edit update]
 end
