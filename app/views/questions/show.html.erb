@@ -2,7 +2,7 @@
 
 <div class="quiz-detail-card">
   <h1><%= @question.content %></h1>
-  <%= render 'tag', question: @question %>
+  <%= render 'questions/tag', question: @question %>
 </div>
 
 <% if current_user == @question.user %>
@@ -16,7 +16,7 @@
     <%= link_to "編集する ✏️", edit_question_path(@question), class: "btn-create" %>
     <% toukou = "「#{@question.content}」絵文字クイズを作ったよ！これが解けるかな？🧩" %>
     <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
-    <%= link_to "Xへ投稿する📢", share_url, class: "btn btn-share", target: "_blank", rel: "noopener" %><br>
+    <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br>
 
   </div>
 <% else %>
@@ -28,7 +28,7 @@
     <p>   結   果  ： <span class="correct">⭕</span> </p>
     <% toukou = "「#{@question.content}」に正解したよ！🎉皆は解けるかな？🧩" %>
     <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
-    <%= link_to "Xへ投稿する📢", share_url, class: "btn btn-share", target: "_blank", rel: "noopener" %><br><br>
+    <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
   <% else %>
     <!-- 回答フォーム -->
     <%= render "questions/answer_form", question: @question %>

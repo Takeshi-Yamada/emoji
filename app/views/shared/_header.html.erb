@@ -12,4 +12,13 @@
       <%= link_to 'ユーザー登録', new_user_registration_path, class: "header-btn" %>
     <% end %>
   </nav>
+
+  <!-- モバイルでも常に表示するログアウトボタン -->
+  <% if user_signed_in? %>
+    <div class="logout-mobile">
+      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete,
+                  data: { turbo_confirm: "ログアウトしてもよろしいですか？" },
+                  class: "header-btn logout" %>
+    </div>
+  <% end %>
 </div>

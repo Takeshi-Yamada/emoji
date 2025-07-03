@@ -196,6 +196,7 @@ h1 {
 .btn,
 .btn-create,
 .btn-ai,
+.btn-share,
 .header-btn {
   display: inline-block;
   padding: 0.5rem 1rem;
@@ -242,6 +243,11 @@ h1 {
 
 .btn-share {
   background-color: #111827;
+  color: white;
+}
+
+.btn-share:hover {
+  background-color: #3e4149;
 }
 
 .btn-ai {
@@ -359,6 +365,10 @@ h1 {
   gap: 0.5rem;
   margin-left: auto;
   flex-wrap: nowrap;
+}
+
+.logout-mobile {
+  display: none;
 }
 
 .user-email {
@@ -538,12 +548,21 @@ h3.section-title {
 /* ---------- スマホ対応 ---------- */
 @media (max-width: 660px) {
   .header-inner {
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
   }
 
   .header-nav {
     display: none;
+  }
+
+  .logout-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-left: auto;
+    flex-wrap: nowrap;
   }
 
   .user-email {
