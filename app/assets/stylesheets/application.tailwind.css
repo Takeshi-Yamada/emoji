@@ -367,6 +367,10 @@ h1 {
   flex-wrap: nowrap;
 }
 
+.logout-mobile {
+  display: none;
+}
+
 .user-email {
   font-size: 0.9rem;
   color: #555;
@@ -544,12 +548,21 @@ h3.section-title {
 /* ---------- スマホ対応 ---------- */
 @media (max-width: 660px) {
   .header-inner {
-    flex-direction: column;
+    flex-direction: row;
     align-items: stretch;
   }
 
   .header-nav {
     display: none;
+  }
+
+  .logout-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-left: auto;
+    flex-wrap: nowrap;
   }
 
   .user-email {

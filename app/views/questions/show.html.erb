@@ -2,7 +2,7 @@
 
 <div class="quiz-detail-card">
   <h1><%= @question.content %></h1>
-  <%= render 'tag', question: @question %>
+  <%= render 'questions/tag', question: @question %>
 </div>
 
 <% if current_user == @question.user %>
