@@ -47,8 +47,18 @@
         <%= render "questions/answer_form", question: @question %>
     <% end %>
   <% else %>
-    <!-- 非ログイン者用回答者画面　-->
-    <%= render "questions/answer_form", question: @question %>
+    <%= session[:gave_up] %>
+    <% if session[:gave_up]&.dig(@question.id.to_s) %>
+      <!-- 非ログイン者のギブアップ結果表示 -->
+      <p>正   解  ：<%= @question.correct %><br>
+        結   果  ： <span class="correct">ギブアップ🏳️</span> </p>
+      <% toukou = "「#{@question.content}」にギブアップ🏳️！皆はわかる？🧩" %>
+      <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
+      <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
+    <% else %>
+      <!-- 非ログイン者用回答者画面　-->
+      <%= render "questions/answer_form", question: @question %>
+    <% end %>
   <% end %>
 <% end %>
 

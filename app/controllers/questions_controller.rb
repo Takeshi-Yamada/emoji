@@ -54,7 +54,9 @@ class QuestionsController < ApplicationController
     if user_signed_in?
       current_user.give_ups.create(question: @question)
     else
-      
+      session[:gave_up] ||= {}
+      session[:gave_up][@question.id] = true
+      p session[:gave_up]
     end
     redirect_to question_path(@question), notice: "ギブアップしました！答えを確認しましょう。"
   end
