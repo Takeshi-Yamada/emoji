@@ -49,6 +49,16 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def give_up
+    @question = Question.find(params[:id])
+    if user_signed_in?
+      current_user.give_ups.create(question: @question)
+    else
+      
+    end
+    redirect_to question_path(@question), notice: "ギブアップしました！答えを確認しましょう。"
+  end
+
   def generate_hint
     answer = params[:answer]
     result = QuizSupport.call(answer)

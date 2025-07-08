@@ -15,6 +15,8 @@ class Question < ApplicationRecord
   acts_as_taggable_on :tags
   belongs_to :user
   has_many :answers
+  has_many :give_ups
+  has_many :users_gave_up, through: :give_ups, source: :user
 
   def self.ransackable_attributes(auth_object = nil)
     %w[

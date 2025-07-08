@@ -36,6 +36,13 @@
     <%= f.text_field :body, class: "form-control" %>
   </div>
   <div class="form-group">
-    <%= f.submit "答え合わせ 🔍", class: "btn-create" %>
+    <%= f.submit "お題を当てる 🎯", class: "btn-create" %>
+    <% if current_user %>
+      <%= link_to "ギブアップ 🏳️", give_up_question_path(@question),
+        method: :post,
+        data: { turbo: false, confirm: "本当にギブアップしますか？" },
+        class: "btn logout",
+        style: "margin-left: 3px;" %>
+    <% end %>
   </div>
 <% end %>

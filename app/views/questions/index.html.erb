@@ -1,26 +1,31 @@
 <h1>❓絵文字クイズ一覧</h1>
-<%= render 'search', q: @q, url: questions_path %>
-
 <% if @questions.any? %>
-  <%= paginate @questions %>
+  <div class="search-and-pagination">
+    <%= render 'search', q: @q, url: questions_path %>
+    <div class="pagination-container">
+      <%= paginate @questions %>
+    </div>
+  </div>
   <div class="quiz-list">
     <% @questions.each do |question| %>
       <div class="quiz-card-wrapper">
-        <div class="tag-area">
-          <%= render 'tag', question: question %>
-        </div>
-
         <%= link_to question_path(question), class: "quiz-card-link" do %>
           <div class="quiz-card">
             <h2><%= question.content %></h2>
             <p>作者：<%= question.user.name %></p>
           </div>
         <% end %>
+        <div class="tag-area">
+          <%= render 'tag', question: question %>
+        </div>
       </div>
     <% end %>
   </div>
-    <%= paginate @questions %>
+    <div class="pagination-container-under">
+      <%= paginate @questions %>
+    </div>
 <% else %>
+  <%= render 'search', q: @q, url: questions_path %>
   <p>該当のクイズはありません！</p>
 <% end %>
 
