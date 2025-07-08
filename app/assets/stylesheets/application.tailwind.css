@@ -263,7 +263,6 @@ h1 {
 .form-group {
   margin-bottom: 1.5rem;
 }
-.search-form,
 .form-control {
   width: 100%;
   max-width: 500px;
@@ -271,6 +270,31 @@ h1 {
   font-size: 1rem;
   border-radius: 8px;
   border: 1px solid #ccc;
+}
+
+.search-form-wrapper {
+  display: flex;
+  gap: 8px; /* ボタンとの隙間 */
+}
+
+.search-form {
+  max-width: 500px;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.search-and-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* スマホ対応 */
+  margin-bottom: 1em;
+}
+
+.pagination-container-under {
+  display: none;
 }
 
 /* ツールチップ */
@@ -546,7 +570,14 @@ h3.section-title {
 }
 
 /* ---------- スマホ対応 ---------- */
-@media (max-width: 660px) {
+@media (max-width: 750px) {
+  h1 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    color: #444;
+  }
+
   .header-inner {
     flex-direction: row;
     align-items: stretch;
@@ -567,6 +598,25 @@ h3.section-title {
 
   .user-email {
     margin-bottom: 0.3rem;
+  }
+
+  .search-and-pagination {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .search-and-pagination{
+    display: flex;
+    margin:0 0 0 auto
+  }
+
+  .search-form-wrapper,
+  .pagination-container,
+  .pagination-container-under {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5em;
   }
 
   .quiz-list {
