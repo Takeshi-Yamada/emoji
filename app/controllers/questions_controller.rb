@@ -30,7 +30,7 @@ class QuestionsController < ApplicationController
     @question = Question.find(params[:id])
     if user_signed_in?
       @answers = current_user.answers.where(question_id: params[:id])
-      @already_correct = @answers.find { |a| a.result? }
+      @already_correct = @answers.find { |a| a.is_result? }
       p @already_correct
     end
   end
@@ -56,7 +56,6 @@ class QuestionsController < ApplicationController
     else
       session[:gave_up] ||= {}
       session[:gave_up][@question.id] = true
-      p session[:gave_up]
     end
     redirect_to question_path(@question), notice: "ギブアップしました！答えを確認しましょう。"
   end

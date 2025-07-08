@@ -21,7 +21,7 @@
       <tbody>
         <% @questions.each do |question| %>
           <% total_answers = question.answers.count %>
-          <% correct_answers = question.answers.where(result: true).count %>
+          <% correct_answers = question.answers.where(is_result: true).count %>
           <tr>
             <td>
               <%= link_to question.content, question_path(question), class: "question-link" %>
@@ -64,7 +64,7 @@
             </td>
             <td><%= answer.body %></td>
             <td>
-              <% if answer.result %>
+              <% if answer.is_result %>
                 <span class="correct">⭕</span>
               <% else %>
                 <span class="incorrect">❌</span>

@@ -9,7 +9,7 @@
   <!-- 作問者画面　-->
   <div class="form-group">
     <p>答え：<%= @question.correct %></p>
-    <p>解答形式 ：<%= I18n.t("activerecord.attributes.question.answer_type.#{@question.answer_type}") %></p>
+    <p>解答形式 ：<%= I18n.t("activerecord.attributes.question.answer_category.#{@question.answer_category}") %></p>
     <p> ヒント1 ：<%= @question.hint_1 %></p>
     <p> ヒント2 ：<%= @question.hint_2 %></p>
     <p> ヒント3 ：<%= @question.hint_3 %></p>
@@ -21,7 +21,7 @@
 <% else %>
 <!-- ログイン者用解答画面　-->
   <% if current_user %>
-    <% if @already_correct&.result? %>
+    <% if @already_correct&.is_result? %>
       <!-- 既に正解　-->
       <p>あなたの答え：<%= @already_correct.body %><br>
         正   解  ：<%= @question.correct %><br>
@@ -77,7 +77,7 @@
         <tr>
           <td><%= answer.body %></td>
           <td>
-            <% if answer.result %>
+            <% if answer.is_result %>
               <span class="correct">⭕</span>
             <% else %>
               <span class="incorrect">❌</span>
