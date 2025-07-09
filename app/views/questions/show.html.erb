@@ -34,11 +34,15 @@
       <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
     <% elsif current_user.given_up_questions.include?(@question) %>
     <!-- ギブアップ済み -->
-      <p>正   解  ：<%= @question.correct %><br>
-        結   果  ： <span class="correct">ギブアップ🏳️</span> </p>
-      <p>  ヒント1  ：<%= @question.hint_1 %><br>
+      <p>
+        正   解  ：<%= @question.correct %><br>
+        結   果  ： <span class="correct">ギブアップ🏳️</span>
+      </p>
+      <p>
+        ヒント1  ：<%= @question.hint_1 %><br>
         ヒント2  ：<%= @question.hint_2 %><br>
-        ヒント3  ：<%= @question.hint_3 %></p>
+        ヒント3  ：<%= @question.hint_3 %>
+      </p>
       <% toukou = "「#{@question.content}」にギブアップ🏳️！皆はわかる？🧩" %>
       <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
       <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
@@ -47,11 +51,17 @@
         <%= render "questions/answer_form", question: @question %>
     <% end %>
   <% else %>
-    <%= session[:gave_up] %>
     <% if session[:gave_up]&.dig(@question.id.to_s) %>
       <!-- 非ログイン者のギブアップ結果表示 -->
-      <p>正   解  ：<%= @question.correct %><br>
-        結   果  ： <span class="correct">ギブアップ🏳️</span> </p>
+      <p>
+        正   解  ：<%= @question.correct %><br>
+        結   果  ： <span class="correct">ギブアップ🏳️</span>
+      </p>
+      <p>
+        ヒント1  ：<%= @question.hint_1 %><br>
+        ヒント2  ：<%= @question.hint_2 %><br>
+        ヒント3  ：<%= @question.hint_3 %>
+      </p>
       <% toukou = "「#{@question.content}」にギブアップ🏳️！皆はわかる？🧩" %>
       <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
       <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
