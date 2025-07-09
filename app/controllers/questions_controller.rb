@@ -31,7 +31,6 @@ class QuestionsController < ApplicationController
     if user_signed_in?
       @answers = current_user.answers.where(question_id: params[:id])
       @already_correct = @answers.find { |a| a.is_result? }
-      p @already_correct
     end
   end
 
