@@ -31,8 +31,10 @@ class QuestionsController < ApplicationController
     if user_signed_in?
       @answers = current_user.answers.where(question_id: params[:id])
       @already_correct = @answers.find { |a| a.is_result? }
-      p @already_correct
     end
+    #初正解or不正解のフラグ（answer#createからredirect時に発生）
+    @first_correct = session.delete(:first_correct)
+    @incorrect = session.delete(:incorrect)
   end
 
   def edit

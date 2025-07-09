@@ -10,16 +10,27 @@ class AnswersController < ApplicationController
     if user_signed_in?
       @answer = current_user.answers.build(question: @question, body: answer_params[:body], is_result: normalize(@question.correct) == normalize(answer_params[:body]))
       if @answer.save
-        redirect_to @question, notice: @answer.is_result ? "🎉 正解！" : "😢 不正解でした"
+        if @answer.is_result
+          session[:first_correct] = true
+        else
+          session[:incorrect] = true
+        end
       else
         flash.now[:alert] = "回答にエラーがあります"
         render "questions/show"
       end
     else
       @answer = Answer.new(question: @question, body: answer_params[:body], is_result: normalize(@question.correct) == normalize(answer_params[:body]))
-      flash.now[:notice] = @answer.is_result ? "🎉 正解！" : "😢 不正解でした"
-      render "questions/show"
+      if @answer.is_result
+        session[:answered] ||= {}
+        session[:answered][@question.id] = true
+        session[:first_correct] = true
+      else
+        #不正解のメッセージ
+        session[:incorrect] = true
+      end
     end
+    redirect_to @question
   end
 
   private
