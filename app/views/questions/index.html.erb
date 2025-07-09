@@ -30,7 +30,20 @@
   <p>該当のクイズはありません！</p>
 <% end %>
 
-<h1>👑人気のタグ</h1>
-<% ActsAsTaggableOn::Tag.most_used(10).each do |tag| %>
-  <%= link_to tag.name, questions_path(tag_name: tag.name), class: "tag-badge" %>
-<% end %>
+<h1 class="popular-tags-title">👑人気のタグ TOP10</h1>
+
+<div class="popular-tags-wrapper">
+  <% ActsAsTaggableOn::Tag.most_used(10).each_with_index do |tag, index| %>
+    <% rank_class = case index
+      when 0 then "gold"
+      when 1 then "silver"
+      when 2 then "bronze"
+      else "normal"
+    end %>
+
+    <div class="tag-badge-with-rank <%= rank_class %>">
+      <span class="tag-rank"><%= index + 1 %>位</span>
+      <%= link_to tag.name, questions_path(tag_name: tag.name), class: "tag-badge" %>
+    </div>
+  <% end %>
+</div>
