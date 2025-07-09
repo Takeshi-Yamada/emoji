@@ -74,3 +74,37 @@ document.addEventListener("turbo:load", () => {
 document.addEventListener("turbo:load", () => {
   setupGenerateHint();
 });
+
+//初正解演出
+document.addEventListener("turbo:load", () => {
+  const modal = document.getElementById("first-correct-modal");
+
+  if (modal) {
+    // モーダル自動非表示
+    setTimeout(() => {
+      modal.style.display = "none";
+    }, 3000);
+
+    // 閉じる処理
+    const closeModal = () => {
+      modal.style.display = "none";
+      document.getElementById("emoji-confetti")?.remove();
+    };
+    modal.addEventListener("click", closeModal);
+    document.addEventListener("keydown", closeModal);
+
+    // 🎉 絵文字を舞わせる
+    const confetti = document.getElementById("emoji-confetti");
+    const emojis = ["🎉", "✨", "🎊", "💫", "🌟"];
+    for (let i = 0; i < 30; i++) {
+      const emoji = document.createElement("div");
+      emoji.className = "emoji-float";
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = `${Math.random() * 100}%`;
+      emoji.style.animationDelay = `${Math.random() * 1.5}s`;
+      confetti.appendChild(emoji);
+    }
+    // 自動削除
+    setTimeout(() => confetti.remove(), 4000);
+  }
+});
