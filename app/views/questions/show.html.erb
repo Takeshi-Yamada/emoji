@@ -19,7 +19,7 @@
     <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br>
   </div>
 <% else %>
-<!-- ログイン者用解答画面　-->
+<!-- ログイン者用回答画面　-->
   <% if current_user %>
     <% if @already_correct&.is_result? %>
       <!-- 既に正解　-->
@@ -34,39 +34,18 @@
       <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
     <% elsif current_user.given_up_questions.include?(@question) %>
     <!-- ギブアップ済み -->
-      <p>
-        正   解  ：<%= @question.correct %><br>
-        結   果  ： <span class="correct">ギブアップ🏳️</span>
-      </p>
-      <p>
-        ヒント1  ：<%= @question.hint_1 %><br>
-        ヒント2  ：<%= @question.hint_2 %><br>
-        ヒント3  ：<%= @question.hint_3 %>
-      </p>
-      <% toukou = "「#{@question.content}」にギブアップ🏳️！皆はわかる？🧩" %>
-      <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
-      <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
+        <%= render "questions/give_up", question: @question %>
     <% else %>
       <!-- ギブアップしていない場合は回答フォーム -->
         <%= render "questions/answer_form", question: @question %>
     <% end %>
   <% else %>
+  <!-- 非ログイン者用 -->
     <% if session[:gave_up]&.dig(@question.id.to_s) %>
-      <!-- 非ログイン者のギブアップ結果表示 -->
-      <p>
-        正   解  ：<%= @question.correct %><br>
-        結   果  ： <span class="correct">ギブアップ🏳️</span>
-      </p>
-      <p>
-        ヒント1  ：<%= @question.hint_1 %><br>
-        ヒント2  ：<%= @question.hint_2 %><br>
-        ヒント3  ：<%= @question.hint_3 %>
-      </p>
-      <% toukou = "「#{@question.content}」にギブアップ🏳️！皆はわかる？🧩" %>
-      <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
-      <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
+      <!-- ギブアップ済み -->
+        <%= render "questions/give_up", question: @question %>
     <% else %>
-      <!-- 非ログイン者用回答者画面　-->
+      <!-- 回答フォーム　-->
       <%= render "questions/answer_form", question: @question %>
     <% end %>
   <% end %>
