@@ -9,8 +9,8 @@ class Question < ApplicationRecord
   validate :content_max
   validate :hints_order_validation
 
-  enum :answer_type, { undefined: 0, japanese: 1, english: 2, both: 3 }
-  before_save :set_answer_type
+  enum :answer_category, { undefined: 0, japanese: 1, english: 2, both: 3 }
+  before_save :set_answer_category
 
   acts_as_taggable_on :tags
   belongs_to :user
@@ -48,13 +48,13 @@ class Question < ApplicationRecord
     p self.content.each_grapheme_cluster.count
   end
 
-  def set_answer_type
+  def set_answer_category
     text = self.correct.to_s
 
     has_japanese = text.match?(/[\p{Hiragana}\p{Katakana}\p{Han}ー]/)
     has_english  = text.match?(/[a-zA-Z]/)
 
-    self.answer_type =
+    self.answer_category =
       if has_japanese && has_english
         :both
       elsif has_japanese

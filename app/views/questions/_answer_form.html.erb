@@ -1,6 +1,6 @@
 <!-- 入力フォーム　-->
 <div class="form-group">
-  <p> 解答形式 ：<%= I18n.t("activerecord.attributes.question.answer_type.#{question.answer_type}") %></p>
+  <p> 解答形式 ：<%= I18n.t("activerecord.attributes.question.answer_category.#{question.answer_category}") %></p>
   <div x-data="{ show1: false, show2: false, show3: false }" class="hint-container">
     <% if question.hint_1.present? %>
       <button type="button" class="hint-button" @click="show1 = !show1">
