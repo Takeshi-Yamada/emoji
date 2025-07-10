@@ -13,7 +13,14 @@
         <%= link_to question_path(question), class: "quiz-card-link" do %>
           <div class="quiz-card">
             <h2><%= question.content %></h2>
-            <p>作者：<%= question.user.name %></p>
+            <p>
+              <% if @correct_question_ids.include?(question.id) %>
+                <span class="badge badge-success">✅ 正解済み</span>
+              <% elsif @gave_up_question_ids.include?(question.id) %>
+                <span class="badge badge-warning">🏳️ ギブアップ</span>
+              <% end %>
+              作者：<%= question.user.name %>
+            </p>
           </div>
         <% end %>
         <div class="tag-area">

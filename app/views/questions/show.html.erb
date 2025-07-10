@@ -60,7 +60,7 @@
       <% end %>
     <% else %>
     <!-- 非ログイン者用 -->
-      <% if session[:answered]&.dig(@question.id.to_s) %>
+      <% if session[:correct]&.dig(@question.id.to_s) %>
         <!-- 既に正解　-->
         <p>
           正   解  ：<%= @question.correct %><br>

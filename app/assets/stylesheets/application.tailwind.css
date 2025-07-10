@@ -63,7 +63,7 @@ h1 {
 .quiz-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 0 1rem;
   justify-content: center; /* 追加: 中央寄せ */
   margin: 0 auto;           /* 追加: 中央寄せ */
@@ -109,6 +109,26 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+
+.badge-success {
+  display: inline-block;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 9999px;
+  padding: 0.3em 0.8em;
+  font-size: 0.8rem;
+  margin: 0em 2em;
+}
+
+.badge-warning {
+  display: inline-block;
+  background-color: #fff3cd;
+  color: #856404;
+  border-radius: 9999px;
+  padding: 0.3em 0.8em;
+  font-size: 0.8rem;
+  margin: 0em 2em;
 }
 
 /* 初正解時のアニメーション関係 */
@@ -418,7 +438,7 @@ h1 {
 }
 
 .search-form {
-  max-width: 500px;
+  max-width: 700px;
   padding: 0.6rem;
   font-size: 1rem;
   border-radius: 8px;
@@ -431,6 +451,7 @@ h1 {
   align-items: center;
   flex-wrap: wrap; /* スマホ対応 */
   margin-bottom: 1em;
+  padding: 0 1rem;
 }
 
 .pagination-container-under {
@@ -547,7 +568,7 @@ h1 {
   padding: 20px 10px;
   font-size: 14px;
   color: #333;
-  margin-top: 40px;
+  margin: 20px;
 }
 
 .footer-container {

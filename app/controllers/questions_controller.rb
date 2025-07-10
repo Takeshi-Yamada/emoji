@@ -10,6 +10,14 @@ class QuestionsController < ApplicationController
       @questions = @q.result(distinct: true).includes(:user).order(created_at: :desc)
     end
     @questions = @questions.page(params[:page])
+
+    if user_signed_in?
+      @correct_question_ids = current_user.answers.where(is_result: true).pluck(:question_id).uniq
+      @gave_up_question_ids = current_user.give_ups.pluck(:question_id).uniq
+    else
+      @correct_question_ids = session[:correct]&.keys&.uniq&.map(&:to_i) || []
+      @gave_up_question_ids = session[:gave_up]&.keys&.uniq&.map(&:to_i) || []
+    end
   end
 
   def new
