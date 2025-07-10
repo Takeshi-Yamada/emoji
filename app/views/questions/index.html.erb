@@ -13,7 +13,14 @@
         <%= link_to question_path(question), class: "quiz-card-link" do %>
           <div class="quiz-card">
             <h2><%= question.content %></h2>
-            <p>作者：<%= question.user.name %></p>
+            <p>
+              <% if @correct_question_ids.include?(question.id) %>
+                <span class="badge badge-success">✅ 正解済み</span>
+              <% elsif @gave_up_question_ids.include?(question.id) %>
+                <span class="badge badge-warning">🏳️ ギブアップ</span>
+              <% end %>
+              作者：<%= question.user.name %>
+            </p>
           </div>
         <% end %>
         <div class="tag-area">
@@ -30,7 +37,20 @@
   <p>該当のクイズはありません！</p>
 <% end %>
 
-<h1>👑人気のタグ</h1>
-<% ActsAsTaggableOn::Tag.most_used(10).each do |tag| %>
-  <%= link_to tag.name, questions_path(tag_name: tag.name), class: "tag-badge" %>
-<% end %>
+<h1 class="popular-tags-title">👑人気のタグ TOP10</h1>
+
+<div class="popular-tags-wrapper">
+  <% ActsAsTaggableOn::Tag.most_used(10).each_with_index do |tag, index| %>
+    <% rank_class = case index
+      when 0 then "gold"
+      when 1 then "silver"
+      when 2 then "bronze"
+      else "normal"
+    end %>
+
+    <div class="tag-badge-with-rank <%= rank_class %>">
+      <span class="tag-rank"><%= index + 1 %>位</span>
+      <%= link_to tag.name, questions_path(tag_name: tag.name), class: "tag-badge" %>
+    </div>
+  <% end %>
+</div>

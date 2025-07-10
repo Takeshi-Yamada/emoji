@@ -22,8 +22,8 @@ class AnswersController < ApplicationController
     else
       @answer = Answer.new(question: @question, body: answer_params[:body], is_result: normalize(@question.correct) == normalize(answer_params[:body]))
       if @answer.is_result
-        session[:answered] ||= {}
-        session[:answered][@question.id] = true
+        session[:correct] ||= {}
+        session[:correct][@question.id] = true
         session[:first_correct] = true
       else
         #不正解のメッセージ

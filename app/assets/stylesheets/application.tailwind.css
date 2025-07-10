@@ -63,7 +63,7 @@ h1 {
 .quiz-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 0 1rem;
   justify-content: center; /* 追加: 中央寄せ */
   margin: 0 auto;           /* 追加: 中央寄せ */
@@ -111,9 +111,24 @@ h1 {
   gap: 0.25rem;
 }
 
-.tag-area {
-  padding: 0 0.5rem;
-  text-align: left;
+.badge-success {
+  display: inline-block;
+  background-color: #d4edda;
+  color: #155724;
+  border-radius: 9999px;
+  padding: 0.3em 0.8em;
+  font-size: 0.8rem;
+  margin: 0em 2em;
+}
+
+.badge-warning {
+  display: inline-block;
+  background-color: #fff3cd;
+  color: #856404;
+  border-radius: 9999px;
+  padding: 0.3em 0.8em;
+  font-size: 0.8rem;
+  margin: 0em 2em;
 }
 
 /* 初正解時のアニメーション関係 */
@@ -188,7 +203,27 @@ h1 {
   margin: 1rem auto;
 }
 
+.give-up-alert {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+  max-width: 600px;
+  padding: 1rem;
+  border-radius: 8px;
+  font-weight: bold;
+  text-align: center;
+  margin: 1em 0;
+  font-size: 1.1rem;
+  margin: 1rem auto;
+}
+
+
 /* タグ */
+.tag-area {
+  padding: 0 0.5rem;
+  text-align: left;
+}
+
 .tag-badge {
   display: inline-block;
   background-color: #e0f0ff;
@@ -203,11 +238,64 @@ h1 {
   white-space: nowrap;
 }
 
+.tag-badge:hover {
+  background-color: #cce5ff;
+  transform: scale(1.05);
+}
+
 .tagify__tag__removeBtn {
   color: white;
 }
 
+.popular-tags-title {
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.popular-tags-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5em;
+  margin-top: 1em;
+}
+
+.tag-badge-with-rank {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ランク表示 */
+.tag-rank {
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+/* 上位3位に色付け */
+.tag-badge-with-rank.gold .tag-rank {
+  background-color: #ffd700; /* gold */
+  color: #000;
+}
+
+.tag-badge-with-rank.silver .tag-rank {
+  background-color: #c0c0c0; /* silver */
+  color: #000;
+}
+
+.tag-badge-with-rank.bronze .tag-rank {
+  background-color: #cd7f32; /* bronze */
+  color: #fff;
+}
+
 /* 詳細画面用 */
+.quiz-show {
+  max-width: 600px;
+  margin: auto;
+}
+
 .quiz-detail-card {
   background-color: #fffef8;
   border: 2px solid #ffd43b;
@@ -350,7 +438,7 @@ h1 {
 }
 
 .search-form {
-  max-width: 500px;
+  max-width: 700px;
   padding: 0.6rem;
   font-size: 1rem;
   border-radius: 8px;
@@ -363,6 +451,7 @@ h1 {
   align-items: center;
   flex-wrap: wrap; /* スマホ対応 */
   margin-bottom: 1em;
+  padding: 0 1rem;
 }
 
 .pagination-container-under {
@@ -479,7 +568,7 @@ h1 {
   padding: 20px 10px;
   font-size: 14px;
   color: #333;
-  margin-top: 40px;
+  margin: 20px;
 }
 
 .footer-container {

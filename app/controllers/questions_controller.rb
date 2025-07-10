@@ -10,6 +10,14 @@ class QuestionsController < ApplicationController
       @questions = @q.result(distinct: true).includes(:user).order(created_at: :desc)
     end
     @questions = @questions.page(params[:page])
+
+    if user_signed_in?
+      @correct_question_ids = current_user.answers.where(is_result: true).pluck(:question_id).uniq
+      @gave_up_question_ids = current_user.give_ups.pluck(:question_id).uniq
+    else
+      @correct_question_ids = session[:correct]&.keys&.uniq&.map(&:to_i) || []
+      @gave_up_question_ids = session[:gave_up]&.keys&.uniq&.map(&:to_i) || []
+    end
   end
 
   def new
@@ -32,9 +40,10 @@ class QuestionsController < ApplicationController
       @answers = current_user.answers.where(question_id: params[:id])
       @already_correct = @answers.find { |a| a.is_result? }
     end
-    #初正解or不正解のフラグ（answer#createからredirect時に発生）
+    #初正解or不正解orギブアップのフラグ（answer#createからredirect時に発生）
     @first_correct = session.delete(:first_correct)
     @incorrect = session.delete(:incorrect)
+    @just_give_up = session.delete(:just_give_up)
   end
 
   def edit
@@ -59,7 +68,8 @@ class QuestionsController < ApplicationController
       session[:gave_up] ||= {}
       session[:gave_up][@question.id] = true
     end
-    redirect_to question_path(@question), notice: "ギブアップしました！答えを確認しましょう。"
+    session[:just_give_up] = true
+    redirect_to @question
   end
 
   def generate_hint
