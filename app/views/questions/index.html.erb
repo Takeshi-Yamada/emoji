@@ -7,6 +7,7 @@
       <%= paginate @questions %>
     </div>
   </div>
+
   <div class="quiz-list">
     <% @questions.each do |question| %>
       <div class="quiz-card-wrapper">
@@ -29,9 +30,10 @@
       </div>
     <% end %>
   </div>
-    <div class="pagination-container-under">
+
+  <div class="pagination-container">
       <%= paginate @questions %>
-    </div>
+  </div>
 <% else %>
   <%= render 'search', q: @q, url: questions_path %>
   <p>該当のクイズはありません！</p>

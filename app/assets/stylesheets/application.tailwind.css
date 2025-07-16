@@ -143,6 +143,10 @@ h1 {
   z-index: 9999;
   animation: fadeIn 0.5s ease-out;
 }
+.modal-overlay.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
 
 .modal-content {
   background: white;
@@ -435,6 +439,7 @@ h1 {
 .search-form-wrapper {
   display: flex;
   gap: 8px; /* ボタンとの隙間 */
+  padding: 0 1rem;
 }
 
 .search-form {
@@ -451,11 +456,12 @@ h1 {
   align-items: center;
   flex-wrap: wrap; /* スマホ対応 */
   margin-bottom: 1em;
-  padding: 0 1rem;
 }
 
-.pagination-container-under {
-  display: none;
+.pagination-container {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 1rem;
 }
 
 /* ツールチップ */
@@ -568,7 +574,7 @@ h1 {
   padding: 20px 10px;
   font-size: 14px;
   color: #333;
-  margin: 20px;
+  margin-bottom: 20px;
 }
 
 .footer-container {
@@ -772,8 +778,7 @@ h3.section-title {
   }
 
   .search-form-wrapper,
-  .pagination-container,
-  .pagination-container-under {
+  .pagination-container {
     width: 100%;
     display: flex;
     justify-content: center;

@@ -15,20 +15,30 @@ module ApplicationHelper
     reverse: true,
     charset: "utf-8",
     description: "Emoji Linkは、絵文字だけで出題されたクイズに挑戦できるWebアプリです。あなたの推し作品、絵文字で伝わる？クイズ投稿機能もあり！",
-    keywords: "絵文字, クイズ, Emoji Link",
+    keywords: "Emoji, 絵文字, クイズ, Emoji Link",
     og: {
       site_name: :site,
       title: :title,
       description: :description,
       type: "website",
       url: request.original_url	,
-      image: image_url('emojilink.jpg'),
+      image: ogp_image_url,
       locale: "ja-JP"
     },
     twitter: {
       card: "summary_large_image",
-      image: image_url('emojilink.jpg')
+      image: ogp_image_url
     }
   }
+  end
+
+  def ogp_image_url
+    if @question&.id
+      filename = "question_#{@question.id}.png"
+      path = Rails.root.join("public/ogp_images/#{filename}")
+      return url_for("/ogp_images/#{filename}") if File.exist?(path)
+    end
+    # デフォルトOGP画像
+    image_url("emojilink.jpg")
   end
 end

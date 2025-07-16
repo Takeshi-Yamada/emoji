@@ -82,8 +82,11 @@ document.addEventListener("turbo:load", () => {
   if (modal) {
     // モーダル自動非表示
     setTimeout(() => {
-      modal.style.display = "none";
-    }, 3000);
+      modal.classList.add("fade-out");
+      setTimeout(() => {
+        modal.style.display = "none";
+      }, 500);
+    }, 5000);
 
     // 閉じる処理
     const closeModal = () => {

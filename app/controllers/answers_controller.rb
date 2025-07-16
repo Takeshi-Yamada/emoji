@@ -26,7 +26,6 @@ class AnswersController < ApplicationController
         session[:correct][@question.id] = true
         session[:first_correct] = true
       else
-        #不正解のメッセージ
         session[:incorrect] = true
       end
     end
