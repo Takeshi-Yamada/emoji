@@ -26,9 +26,14 @@ ENV RAILS_ENV="production" \
 FROM base AS build
 
 # Install packages needed to build gems and node modules
+
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git libpq-dev node-gyp pkg-config python-is-python3 && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
+    apt-get install --no-install-recommends -y build-essential git libpq-dev node-gyp pkg-config python-is-python3 \
+    fonts-noto-color-emoji libglib2.0-dev libcairo2-dev libpango1.0-dev \
+    libatk1.0-dev libgdk-pixbuf2.0-dev \
+    libffi-dev libgirepository1.0-dev && \
+    rm -rf /var/lib/apt/lists /var/cache/apt/archives && \
+    fc-cache -f -v
 
 # Install JavaScript dependencies
 ARG NODE_VERSION=20.19.1
@@ -65,6 +70,12 @@ RUN rm -rf node_modules
 # Final stage for app image
 FROM base
 
+RUN apt-get update -qq && \
+    apt-get install --no-install-recommends -y libcairo2 libpango-1.0-0 gir1.2-pango-1.0 \
+    fonts-noto-color-emoji libffi-dev libgirepository-1.0-1 && \
+    ldconfig && \
+    rm -rf /var/lib/apt/lists/*
+
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails
@@ -72,7 +83,8 @@ COPY --from=build /rails /rails
 # Run and own only the runtime files as a non-root user for security
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
-    chown -R rails:rails db log storage tmp
+    mkdir -p db log storage tmp public/ogp_images && \
+    chown -R rails:rails db log storage tmp public/ogp_images
 USER 1000:1000
 
 # Entrypoint prepares the database.
@@ -80,4 +92,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
-CMD ["./bin/rails", "server"]
+CMD ["./bin/rails", "server", "-b", "0.0.0.0"]
