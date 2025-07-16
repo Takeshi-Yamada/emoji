@@ -70,4 +70,4 @@ gem "ransack"
 gem "ruby-openai"
 gem "cairo"
 gem "pango"
-
+gem "cloudinary"
