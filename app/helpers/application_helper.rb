@@ -34,9 +34,9 @@ module ApplicationHelper
 
   def ogp_image_url
     if @question&.id
-      filename = "question_#{@question.id}.png"
-      path = Rails.root.join("public/ogp_images/#{filename}")
-      return url_for("/ogp_images/#{filename}") if File.exist?(path)
+      public_id = "ogp_images/question_#{@question.id}"
+      cloud_name = ENV["CLOUDINARY_CLOUD_NAME"]
+      return "https://res.cloudinary.com/#{cloud_name}/image/upload/#{public_id}.png"
     end
     # デフォルトOGP画像
     image_url("emojilink.jpg")

@@ -1,6 +1,7 @@
 class OgpCreator
   require "cairo"
   require "pango"
+  require "cloudinary"
 
   WIDTH = 1200
   HEIGHT = 630
@@ -21,6 +22,7 @@ class OgpCreator
 
     layout = context.create_pango_layout
     layout.text = question.content
+    layout.alignment = Pango::Alignment::CENTER
 
     font_desc = Pango::FontDescription.new("Noto Color Emoji")
     font_desc.set_size(90 * Pango::SCALE)
@@ -34,10 +36,13 @@ class OgpCreator
     context.set_source_rgb(0, 0, 0)
     context.show_pango_layout(layout)
 
-    # PNG保存（tmp）
+    # PNG保存（tmp→cloudinary）
     surface.write_to_png(tmp_path.to_s)
-
-    # public にコピーしてブラウザから参照可能にする
-    FileUtils.cp(tmp_path, public_path)
+    upload_result = Cloudinary::Uploader.upload(
+      tmp_path.to_s,
+      public_id: "ogp_images/question_#{question.id}",
+      overwrite: true,
+      resource_type: "image"
+    )
   end
 end

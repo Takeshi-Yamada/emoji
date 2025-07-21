@@ -568,6 +568,46 @@ h1 {
   margin-right: 0.3rem;
 }
 
+.terms-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  line-height: 1.8;
+  font-size: 16px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.terms-container h2{
+  color: #fc8f00
+}
+
+.terms-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.terms-updated {
+  font-size: 0.9rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.terms-list {
+  padding-left: 1.5rem;
+  list-style: disc;
+}
+
+.terms-footer {
+  text-align: right;
+  margin-top: 3rem;
+  font-weight: bold;
+}
+
 /* フッター */
 .footer {
   background-color: #f5f5f5;

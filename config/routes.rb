@@ -18,4 +18,7 @@ Rails.application.routes.draw do
     get :give_up, on: :member
   end
   resources :users, only: %i[show edit update]
+
+  get "terms", to: "static#terms"
+  get "privacy", to: "static#privacy"
 end
