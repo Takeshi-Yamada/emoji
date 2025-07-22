@@ -583,6 +583,12 @@ h1 {
   color: #fc8f00
 }
 
+.line {
+  border-bottom: 1px solid #ccc; /* 薄いグレーの線 */
+  padding-bottom: 0.5em;
+  margin-bottom: 1em;
+}
+
 .terms-title {
   font-size: 2rem;
   font-weight: bold;
