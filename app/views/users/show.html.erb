@@ -46,8 +46,10 @@
 
 <section>
   <h3 class="section-title">自分が回答したクイズ</h3>
-
   <% if @answers.any? %>
+    <div class="pagination-container">
+        <%= paginate @answers %>
+    </div>
     <table class="quiz-table">
       <thead>
         <tr>
@@ -74,6 +76,9 @@
         <% end %>
       </tbody>
     </table>
+    <div class="pagination-container">
+        <%= paginate @answers %>
+    </div>
   <% else %>
     <p class="empty-message">まだ回答したクイズがありません。</p>
   <% end %>
