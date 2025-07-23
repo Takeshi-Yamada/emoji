@@ -58,7 +58,8 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client
+        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libjemalloc2 libvips postgresql-client/
+        libcairo2-dev libpango1.0-dev libgdk-pixbuf2.0-dev libffi-dev
 
       - name: Checkout code
         uses: actions/checkout@v4
