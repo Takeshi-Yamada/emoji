@@ -2,7 +2,7 @@ require "emoji_regex"
 
 class Question < ApplicationRecord
   validates :content, presence: true
-  validates :correct, presence: true, length: {maximum: 50}
+  validates :correct, presence: true, length: { maximum: 50 }
   validates :hint_1, :hint_2, :hint_3, length: { maximum: 255 }, allow_blank: true
 
   validate :content_must_be_emoji_only
@@ -25,7 +25,7 @@ class Question < ApplicationRecord
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["tags", "taggings"]
+    [ "tags", "taggings" ]
   end
 
   private

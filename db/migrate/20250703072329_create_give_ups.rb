@@ -6,6 +6,6 @@ class CreateGiveUps < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    add_index :give_ups, [:user_id, :question_id], unique: true
+    add_index :give_ups, [ :user_id, :question_id ], unique: true
   end
 end

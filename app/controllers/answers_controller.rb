@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [ :index ]
 
   def index
     @answers = current_user.answers.find(params[:id])
@@ -39,6 +39,6 @@ class AnswersController < ApplicationController
   end
 
   def normalize(text)
-    text.to_s.gsub(/[\s　]+/, "").gsub(/[[:punct:]\p{Punct}ー―〜…・！？!?,。、．「」『』（）()【】［］｛｝]/, "").tr('０-９ａ-ｚＡ-Ｚ', '0-9a-zA-Z').downcase.tr('ァ-ン', 'ぁ-ん')
+    text.to_s.gsub(/[\s　]+/, "").gsub(/[[:punct:]\p{Punct}ー―〜…・！？!?,。、．「」『』（）()【】［］｛｝]/, "").tr("０-９ａ-ｚＡ-Ｚ", "0-9a-zA-Z").downcase.tr("ァ-ン", "ぁ-ん")
   end
 end

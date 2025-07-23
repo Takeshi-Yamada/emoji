@@ -6,15 +6,12 @@ class ApplicationController < ActionController::Base
   after_action :store_location
 
   def store_location
-      if (request.fullpath != "/users/sign_in" && \
-          request.fullpath != "/users/sign_up" && \
-          request.fullpath != "/users/password" && \
-          !request.xhr?) # don't store ajax calls
+      if request.fullpath != "/users/sign_in" && request.fullpath != "/users/sign_up" && request.fullpath != "/users/password" && !request.xhr?
         session[:previous_url] = request.fullpath
       end
   end
 
-  #ログイン後のリダイレクトをログイン前のページにする
+  # ログイン後のリダイレクトをログイン前のページにする
   def after_sign_in_path_for(resource)
     session[:previous_url] || root_path
   end
@@ -22,6 +19,6 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [ :name ])
   end
 end

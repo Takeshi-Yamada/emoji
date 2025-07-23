@@ -1,10 +1,10 @@
 module ApplicationHelper
   def flash_background_color(type)
     case type.to_sym
-      when :notice then "bg-green-500"
-      when :alert  then "bg-red-500"
-      when :error  then "bg-yellow-500"
-      else "bg-gray-500"
+    when :notice then "bg-green-500"
+    when :alert  then "bg-red-500"
+    when :error  then "bg-yellow-500"
+    else "bg-gray-500"
     end
   end
 
@@ -21,7 +21,7 @@ module ApplicationHelper
       title: :title,
       description: :description,
       type: "website",
-      url: request.original_url	,
+      url: request.original_url,
       image: ogp_image_url,
       locale: "ja-JP"
     },
