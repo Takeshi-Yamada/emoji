@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [:show, :edit, :update]
+  before_action :set_user, only: [ :show, :edit, :update ]
 
   def show
     @questions = @user.questions
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to @user, notice: "プロフィールを更新しました"
     else
-      flash.now[:danger] = '更新に失敗しました'
+      flash.now[:danger] = "更新に失敗しました"
       render :edit, status: :unprocessable_entity
     end
   end

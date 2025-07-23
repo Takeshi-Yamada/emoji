@@ -1,4 +1,4 @@
-require 'openai'
+require "openai"
 
 class QuizSupport
   def self.call(answer)

@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  before_action :authenticate_user!, only: [:new, :edit, :update]
+  before_action :authenticate_user!, only: [ :new, :edit, :update ]
 
   def index
     @q = Question.ransack(params[:q])
@@ -28,9 +28,9 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.build(question_params)
     if @question.save
       OgpCreator.generate(@question)
-      redirect_to question_path(@question), success: '登録ができました'
+      redirect_to question_path(@question), success: "登録ができました"
     else
-      flash.now[:error] = '登録に失敗しました'
+      flash.now[:error] = "登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
   end
@@ -41,7 +41,7 @@ class QuestionsController < ApplicationController
       @answers = current_user.answers.where(question_id: params[:id])
       @already_correct = @answers.find { |a| a.is_result? }
     end
-    #初正解or不正解orギブアップのフラグ（answer#createからredirect時に発生）
+    # 初正解or不正解orギブアップのフラグ（answer#createからredirect時に発生）
     @first_correct = session.delete(:first_correct)
     @incorrect = session.delete(:incorrect)
     @just_give_up = session.delete(:just_give_up)
@@ -55,9 +55,9 @@ class QuestionsController < ApplicationController
     @question = current_user.questions.find(params[:id])
     if @question.update(question_params)
       OgpCreator.generate(@question)
-      redirect_to question_path(@question), success: '編集が成功しました'
+      redirect_to question_path(@question), success: "編集が成功しました"
     else
-      flash.now[:danger] = '更新に失敗しました'
+      flash.now[:danger] = "更新に失敗しました"
       render :edit, status: :unprocessable_entity
     end
   end
