@@ -7,7 +7,7 @@
     <%= link_to new_question_path do %>
       ✏️<br>クイズを作る
     <% end %>
-    <%= link_to user_path(current_user) do %>
+    <%= link_to profile_path(current_user) do %>
       👤<br>マイページ
     <% end %>
   <% else %>

@@ -5,7 +5,7 @@
   <nav class="header-nav">
     <% if user_signed_in? %>
       <%= link_to '✏️ クイズを作る', new_question_path, class: 'btn-create' %>
-      <%= link_to 'マイページ', user_path(current_user), class: "header-btn" %>
+      <%= link_to 'マイページ', profile_path(current_user), class: "header-btn" %>
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_confirm: "ログアウトしてもよろしいですか？" }, class: "header-btn logout" %>
     <% else %>
       <%= link_to 'ログイン', new_user_session_path, class: "header-btn" %>

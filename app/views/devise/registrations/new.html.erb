@@ -1,6 +1,6 @@
 <h1>📝 ユーザー登録</h1>
-
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
   <div class="form-group">
     <%= f.label :name, "名前" %><br>
     <%= f.text_field :name, autofocus: true, class: "form-control" %>
