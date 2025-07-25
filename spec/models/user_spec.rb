@@ -13,5 +13,4 @@ RSpec.describe User, type: :model do
     user2.valid?
     expect(user2.errors[:email]).to include('はすでに存在します')
   end
-
 end
