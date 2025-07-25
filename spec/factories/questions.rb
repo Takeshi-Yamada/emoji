@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :question do
-    #絵文字はモノによっては文字数がブレるので変更しないこと
+    # 絵文字はモノによっては文字数がブレるので変更しないこと
     content { '🧠🚀🎯🐱🍙' }
     correct { 'デスノート' }
     hint_1 { '死神はリンゴが好き' }
