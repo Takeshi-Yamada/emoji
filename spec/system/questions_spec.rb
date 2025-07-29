@@ -4,7 +4,7 @@ RSpec.describe "Questions", type: :system do
   let!(:user) { create(:user) }
   let!(:question) { build(:question) }
   before do
-    driven_by(:rack_test)
+    driven_by(:selenium_chrome_headless)
     visit new_user_session_path
     fill_in 'メールアドレス', with: user.email
     fill_in 'パスワード', with: user.password
@@ -15,7 +15,10 @@ RSpec.describe "Questions", type: :system do
     visit new_question_path
     fill_in 'question[content]', with: question.content
     fill_in 'question[correct]', with: question.correct
-    fill_in 'question[tag_list]', with: '漫画'
+    # JSで非表示になってる場合があるので `visible: false` をつけている
+    tag_input = find('#tag-input', visible: false)
+    tag_input_id = tag_input[:id]
+    page.execute_script("document.getElementById('#{tag_input_id}').value = '漫画'")
     fill_in 'question[hint_1]', with: question.hint_1
     fill_in 'question[hint_2]', with: question.hint_2
     fill_in 'question[hint_3]', with: question.hint_3
@@ -26,7 +29,9 @@ RSpec.describe "Questions", type: :system do
   it 'クイズが空欄の場合エラーが出る' do
     visit new_question_path
     fill_in 'question[correct]', with: question.correct
-    fill_in 'question[tag_list]', with: '漫画'
+    tag_input = find('#tag-input', visible: false)
+    tag_input_id = tag_input[:id]
+    page.execute_script("document.getElementById('#{tag_input_id}').value = '漫画'")
     fill_in 'question[hint_1]', with: question.hint_1
     fill_in 'question[hint_2]', with: question.hint_2
     fill_in 'question[hint_3]', with: question.hint_3
@@ -38,7 +43,9 @@ RSpec.describe "Questions", type: :system do
   it '正解が空欄の場合エラーが出る' do
     visit new_question_path
     fill_in 'question[content]', with: question.content
-    fill_in 'question[tag_list]', with: '漫画'
+    tag_input = find('#tag-input', visible: false)
+    tag_input_id = tag_input[:id]
+    page.execute_script("document.getElementById('#{tag_input_id}').value = '漫画'")
     fill_in 'question[hint_1]', with: question.hint_1
     fill_in 'question[hint_2]', with: question.hint_2
     fill_in 'question[hint_3]', with: question.hint_3
