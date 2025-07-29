@@ -7,10 +7,17 @@ RSpec.describe Question, type: :model do
     expect(question.errors).to be_empty
   end
 
-  it '絵文字以外は登録できない' do
+  it 'クイズに絵文字以外は登録できない' do
     question = build(:question)
     question.content = 'aaa'
     question.valid?
     expect(question.errors[:content]).to include('は絵文字のみで入力してください')
+  end
+
+  it '答えが空欄は登録できない' do
+    question = build(:question)
+    question.correct = nil
+    question.valid?
+    expect(question.errors[:correct]).to include('を入力してください')
   end
 end
