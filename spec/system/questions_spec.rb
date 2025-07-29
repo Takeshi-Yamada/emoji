@@ -77,6 +77,7 @@ RSpec.describe "Questions", type: :system do
     it '回答ができる（正解）' do
       visit question_path(question)
       expect(page).to have_content(question.content)
+      expect(page).to have_field('answer[body]', disabled: false)
       fill_in 'answer[body]', with: question.correct
       click_button 'お題を当てる🎯'
       expect(page).to have_content('正　解　🎉')
