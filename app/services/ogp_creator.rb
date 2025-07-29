@@ -2,6 +2,8 @@ class OgpCreator
   require "cairo"
   require "pango"
   require "cloudinary"
+  # テストなら実行しない
+  return if Rails.env.test?
 
   WIDTH = 1200
   HEIGHT = 630
