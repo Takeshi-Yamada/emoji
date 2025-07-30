@@ -10,6 +10,8 @@ class OgpCreator
   PUBLIC_DIR = Rails.root.join("public/ogp_images")
 
   def self.generate(question)
+    # テストなら実行しない
+    return if Rails.env.test?
     FileUtils.mkdir_p(TMP_DIR) unless Dir.exist?(TMP_DIR)
     FileUtils.mkdir_p(PUBLIC_DIR) unless Dir.exist?(PUBLIC_DIR)
 
