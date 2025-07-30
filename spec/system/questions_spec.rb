@@ -1,10 +1,11 @@
 require 'rails_helper'
+require 'selenium-webdriver'
 
 RSpec.describe "Questions", type: :system do
   let!(:user) { create(:user) }
   let!(:question) { build(:question) }
   before do
-    driven_by(:selenium_chrome_headless)
+    driven_by(:rack_test)
     visit new_user_session_path
     fill_in 'メールアドレス', with: user.email
     fill_in 'パスワード', with: user.password
@@ -15,10 +16,6 @@ RSpec.describe "Questions", type: :system do
     visit new_question_path
     fill_in 'question[content]', with: question.content
     fill_in 'question[correct]', with: question.correct
-    # JSで非表示になってる場合があるので `visible: false` をつけている
-    tag_input = find('#tag-input', visible: false)
-    tag_input_id = tag_input[:id]
-    page.execute_script("document.getElementById('#{tag_input_id}').value = '漫画'")
     fill_in 'question[hint_1]', with: question.hint_1
     fill_in 'question[hint_2]', with: question.hint_2
     fill_in 'question[hint_3]', with: question.hint_3
@@ -29,9 +26,6 @@ RSpec.describe "Questions", type: :system do
   it 'クイズが空欄の場合エラーが出る' do
     visit new_question_path
     fill_in 'question[correct]', with: question.correct
-    tag_input = find('#tag-input', visible: false)
-    tag_input_id = tag_input[:id]
-    page.execute_script("document.getElementById('#{tag_input_id}').value = '漫画'")
     fill_in 'question[hint_1]', with: question.hint_1
     fill_in 'question[hint_2]', with: question.hint_2
     fill_in 'question[hint_3]', with: question.hint_3
@@ -43,9 +37,6 @@ RSpec.describe "Questions", type: :system do
   it '正解が空欄の場合エラーが出る' do
     visit new_question_path
     fill_in 'question[content]', with: question.content
-    tag_input = find('#tag-input', visible: false)
-    tag_input_id = tag_input[:id]
-    page.execute_script("document.getElementById('#{tag_input_id}').value = '漫画'")
     fill_in 'question[hint_1]', with: question.hint_1
     fill_in 'question[hint_2]', with: question.hint_2
     fill_in 'question[hint_3]', with: question.hint_3
@@ -77,8 +68,8 @@ RSpec.describe "Questions", type: :system do
     it '回答ができる（正解）' do
       visit question_path(question)
       expect(page).to have_content(question.content)
-      expect(page).to have_field('answer[body]', disabled: false)
-      fill_in 'answer[body]', with: question.correct
+      expect(page).to have_field('あなたの答え', disabled: false)
+      fill_in 'あなたの答え', with: question.correct
       click_button 'お題を当てる🎯'
       expect(page).to have_content('正　解　🎉')
     end
