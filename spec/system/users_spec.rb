@@ -21,6 +21,7 @@ RSpec.describe "Users", type: :system do
 
   it 'ログイン処理' do
     visit new_user_session_path
+    expect(page).to have_field('メールアドレス')
     fill_in 'メールアドレス', with: user.email
     fill_in 'パスワード', with: user.password
     click_button 'ログインする🚪'
@@ -37,6 +38,7 @@ RSpec.describe "Users", type: :system do
 
     it 'マイページ遷移' do
       visit root_path
+      expect(page).to have_field('マイページ')
       click_link 'マイページ'
       expect(page).to have_content("#{user.name}さんのマイページ")
     end
