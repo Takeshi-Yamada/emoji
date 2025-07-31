@@ -261,6 +261,7 @@ h1 {
 }
 
 .popular-wrapper {
+  min-width: 300px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -886,6 +887,10 @@ h3.section-title {
   }
   .container {
     display: block; /* display:flex を解除し、ランキングを縦並びに戻す */
+  }
+
+  .popular-wrapper {
+    min-width: none;
   }
 
   .search-form {
