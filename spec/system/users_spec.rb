@@ -1,8 +1,9 @@
 require 'rails_helper'
+require 'selenium-webdriver'
 
 RSpec.describe "Users", type: :system do
   before do
-    driven_by(:rack_test)
+    driven_by(:selenium_chrome_headless)
   end
 
   it 'ユーザー登録' do
@@ -27,7 +28,7 @@ RSpec.describe "Users", type: :system do
     expect(page).to have_content('ログインしました。')
   end
 
-  describe 'ログイン済み' do
+  describe 'ログイン済み', js: true do
     before do
       visit new_user_session_path
       fill_in 'メールアドレス', with: user.email
