@@ -4,6 +4,7 @@ require 'selenium-webdriver'
 RSpec.describe "Questions", type: :system do
   let!(:user) { create(:user) }
   let!(:question) { build(:question) }
+
   before do
     driven_by(:rack_test)
     visit new_user_session_path

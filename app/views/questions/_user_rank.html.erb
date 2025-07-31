@@ -1,0 +1,26 @@
+<div class="popular-wrapper">
+  <table class="ranking-table">
+    <thead>
+      <tr>
+        <th>順位</th>
+        <th>名前</th>
+        <th>正解数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.each_with_index do |user, index| %>
+        <% rank_class = case index
+          when 0 then "gold"
+          when 1 then "silver"
+          when 2 then "bronze"
+          else "normal"
+        end %>
+        <tr class="<%= rank_class %>">
+          <td><span class="rank"><%= index + 1 %>位</span></td>
+          <td><%= user.name %></td>
+          <td><%= user.correct_answers_count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

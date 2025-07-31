@@ -10,7 +10,8 @@ class QuestionsController < ApplicationController
       @questions = @q.result(distinct: true).includes(:user).order(created_at: :desc)
     end
     @questions = @questions.page(params[:page])
-
+    @question_ranking = Question.q_ranking
+    @user_ranking = User.u_ranking
     if user_signed_in?
       @correct_question_ids = current_user.answers.where(is_result: true).pluck(:question_id).uniq
       @gave_up_question_ids = current_user.give_ups.pluck(:question_id).uniq
