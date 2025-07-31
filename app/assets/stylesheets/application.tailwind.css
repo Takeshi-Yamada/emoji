@@ -59,6 +59,10 @@ h1 {
   color: #444;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+}
 /* クイズ一覧グリッド */
 .quiz-list {
   display: grid;
@@ -251,27 +255,21 @@ h1 {
   color: white;
 }
 
-.popular-tags-title {
+.popular-title {
   text-align: center;
   margin-bottom: 1em;
 }
 
-.popular-tags-wrapper {
+.popular-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.5em;
-  margin-top: 1em;
-}
-
-.tag-badge-with-rank {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  margin: 1em;
 }
 
 /* ランク表示 */
-.tag-rank {
+.rank {
   font-weight: bold;
   font-size: 0.8rem;
   padding: 2px 6px;
@@ -279,19 +277,29 @@ h1 {
 }
 
 /* 上位3位に色付け */
-.tag-badge-with-rank.gold .tag-rank {
-  background-color: #ffd700; /* gold */
-  color: #000;
+.ranking-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
 }
 
-.tag-badge-with-rank.silver .tag-rank {
-  background-color: #c0c0c0; /* silver */
-  color: #000;
+.ranking-table th, .ranking-table td {
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  text-align: center;
+  text-decoration: none;
 }
 
-.tag-badge-with-rank.bronze .tag-rank {
-  background-color: #cd7f32; /* bronze */
-  color: #fff;
+.ranking-table .gold {
+  background-color: #ffd70033;
+}
+
+.ranking-table .silver {
+  background-color: #c0c0c033;
+}
+
+.ranking-table .bronze {
+  background-color: #cd7f3233;
 }
 
 /* 詳細画面用 */
@@ -875,6 +883,9 @@ h3.section-title {
 
   body {
     padding-bottom: 60px; /* ナビ分の余白を下につける */
+  }
+  .container {
+    display: block; /* display:flex を解除し、ランキングを縦並びに戻す */
   }
 
   .search-form {

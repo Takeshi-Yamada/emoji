@@ -28,6 +28,10 @@ class Question < ApplicationRecord
     [ "tags", "taggings" ]
   end
 
+  def self.q_ranking
+    QuestionRankingQuery.new.call
+  end
+
   private
 
   def content_must_be_emoji_only
