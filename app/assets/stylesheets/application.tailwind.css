@@ -303,6 +303,9 @@ h1 {
   background-color: #cd7f3233;
 }
 
+.underline-none {
+  text-decoration: none;
+}
 /* 詳細画面用 */
 .quiz-show {
   max-width: 600px;
