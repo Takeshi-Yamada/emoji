@@ -38,7 +38,7 @@ RSpec.describe "Users", type: :system do
 
     it 'マイページ遷移' do
       visit profile_path(user)
-      expect(page).to have_content("さんのマイページ")
+      expect(page).to have_content('さんのマイページ')
     end
 
     it 'ログアウト処理' do
