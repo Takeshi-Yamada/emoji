@@ -1,0 +1,13 @@
+<div class="daily-container">
+  <div class="quiz-card-wrapper">
+    <%= link_to question_path(today_question), class: "quiz-card-link" do %>
+      <div class="quiz-card">
+        <h2><%= today_question.content %></h2>
+        <p>作者：<%= today_question.user.name %></p>
+      </div>
+    <% end %>
+    <div class="tag-area">
+      <%= render 'tag', question: today_question %>
+    </div>
+  </div>
+</div>

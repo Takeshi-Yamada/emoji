@@ -69,18 +69,20 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 1.5rem;
   padding: 0 1rem;
-  justify-content: center; /* 追加: 中央寄せ */
-  margin: 0 auto;           /* 追加: 中央寄せ */
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .quiz-card-link {
   text-decoration: none;
   color: inherit;
   display: block;
+  margin: 0 auto;
 }
 
 /* クイズカード */
 .quiz-card {
+  max-width: 600px;
   background-color: #fff;
   border: 2px solid #ffe066;
   border-radius: 16px;
@@ -97,6 +99,7 @@ h1 {
 .quiz-card h2 {
   font-size: clamp(1.2rem, 5vw, 2rem); /* 絵文字や短文に最適 */
   margin-top: 0;
+  min-width: 300px;
   margin-bottom: 0.5rem;
   white-space: nowrap;
   text-overflow: clip; /* はみ出し省略なしで小さく調整 */
@@ -112,6 +115,8 @@ h1 {
 .quiz-card-wrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
   gap: 0.25rem;
 }
 
@@ -133,6 +138,14 @@ h1 {
   padding: 0.3em 0.8em;
   font-size: 0.8rem;
   margin: 0em 2em;
+}
+
+/* 今日の1問 */
+.daily-container {
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 /* 初正解時のアニメーション関係 */
@@ -303,6 +316,9 @@ h1 {
   background-color: #cd7f3233;
 }
 
+.underline-none {
+  text-decoration: none;
+}
 /* 詳細画面用 */
 .quiz-show {
   max-width: 600px;
@@ -894,7 +910,7 @@ h3.section-title {
   }
 
   .search-form {
-  width: 70%;
+  width: 50%;
   }
 
   .quiz-detail-card h1 {

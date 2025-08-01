@@ -17,7 +17,7 @@
         end %>
         <tr class="<%= rank_class %>">
           <td><span class="rank"><%= index + 1 %>位</span></td>
-          <td><%= link_to question.content, questions_path(question) %></td>
+          <td class="underline-none"><%= link_to question.content, question_path(question) %></td>
           <td><%= question.correct_answers_count %></td>
         </tr>
       <% end %>
