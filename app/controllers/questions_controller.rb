@@ -5,13 +5,15 @@ class QuestionsController < ApplicationController
   def index
     @q = Question.ransack(params[:q])
     if params[:tag_name].present?
-      @questions = Question.tagged_with(params[:tag_name])
+      @questions = Question.tagged_with(params[:tag_name]).page(params[:page])
     else
-      @questions = @q.result(distinct: true).includes(:user).order(created_at: :desc)
+      @questions = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
     end
-    @questions = @questions.page(params[:page])
+
     @question_ranking = Question.q_ranking
     @user_ranking = User.u_ranking
+    @today_question = DailyQuestion.today_question
+
     if user_signed_in?
       @correct_question_ids = current_user.answers.where(is_result: true).pluck(:question_id).uniq
       @gave_up_question_ids = current_user.give_ups.pluck(:question_id).uniq

@@ -1,3 +1,9 @@
+<h1>📅今日の一問</h1>
+<% if @today_question %>
+  <%= render 'today_question', today_question: @today_question %>
+<% end %>
+
+
 <h1>❓絵文字クイズ一覧</h1>
 
 <% if @questions.any? %>
