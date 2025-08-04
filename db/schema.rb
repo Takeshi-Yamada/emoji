@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_08_090856) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_04_103705) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -33,6 +33,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_08_090856) do
     t.index ["question_id"], name: "index_give_ups_on_question_id"
     t.index ["user_id", "question_id"], name: "index_give_ups_on_user_id_and_question_id", unique: true
     t.index ["user_id"], name: "index_give_ups_on_user_id"
+  end
+
+  create_table "login_histories", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.date "logged_in_on", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "logged_in_on"], name: "index_login_histories_on_user_id_and_logged_in_on", unique: true
+    t.index ["user_id"], name: "index_login_histories_on_user_id"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -96,6 +105,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_08_090856) do
   add_foreign_key "answers", "users"
   add_foreign_key "give_ups", "questions"
   add_foreign_key "give_ups", "users"
+  add_foreign_key "login_histories", "users"
   add_foreign_key "questions", "users"
   add_foreign_key "taggings", "tags"
 end
