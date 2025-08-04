@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :answers
   has_many :give_ups
   has_many :given_up_questions, through: :give_ups, source: :question
+  has_many :login_histories
 
   def self.u_ranking
     UserRankingQuery.new.call
