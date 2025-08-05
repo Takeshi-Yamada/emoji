@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
 
   has_many :questions
   has_many :answers
