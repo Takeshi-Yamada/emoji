@@ -1,86 +1,92 @@
-<h1 class="page-header">
-  <%= @user.name %>さんのマイページ
-</h1>
 <% if current_user == @user %>
-  <%= link_to "プロフィールを編集", edit_profile_path(@user), class: "edit-profile-btn" %>
-  <%= link_to "ログインカレンダー", calendar_path, class: "edit-profile-btn" %>
+  <h1 class="page-header">
+    <%= @user.name %>さんのマイページ
+  </h1>
+  <section>
+    <h3 class="section-title">マイページアクション</h3>
+    <div class="container">
+      <%= link_to "プロフィールを編集", edit_profile_path(@user), class: "edit-profile-btn" %>
+      <%= link_to "ログインカレンダー", calendar_path, class: "calendar-btn" %>
+    </div>
+  </section>
+
+  <section>
+    <h3 class="section-title">自分が作成したクイズ</h3>
+
+    <% if @questions.any? %>
+      <table class="quiz-table">
+        <thead>
+          <tr>
+            <th>問題文</th>
+            <th>答え</th>
+            <th>解答数</th>
+            <th>正答率</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @questions.each do |question| %>
+            <% total_answers = question.answers.count %>
+            <% correct_answers = question.answers.where(is_result: true).count %>
+            <tr>
+              <td>
+                <%= link_to question.content, question_path(question), class: "question-link" %>
+              </td>
+              <td><%= question.correct %></td>
+              <td><%= total_answers %></td>
+              <td>
+                <% if total_answers > 0 %>
+                  <%= number_to_percentage(correct_answers.to_f / total_answers * 100, precision: 1) %>
+                <% else %>
+                  0%
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p class="empty-message">まだ作成したクイズがありません。</p>
+    <% end %>
+  </section>
+
+  <section>
+    <h3 class="section-title">自分が回答したクイズ</h3>
+    <% if @answers.any? %>
+      <div class="pagination-container">
+          <%= paginate @answers %>
+      </div>
+      <table class="quiz-table">
+        <thead>
+          <tr>
+            <th>クイズ</th>
+            <th>あなたの答え</th>
+            <th>結果</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @answers.each do |answer| %>
+            <tr>
+              <td>
+                <%= link_to answer.question.content, question_path(answer.question), class: "question-link" %>
+              </td>
+              <td><%= answer.body %></td>
+              <td>
+                <% if answer.is_result %>
+                  <span class="correct">⭕</span>
+                <% else %>
+                  <span class="incorrect">❌</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="pagination-container">
+          <%= paginate @answers %>
+      </div>
+    <% else %>
+      <p class="empty-message">まだ回答したクイズがありません。</p>
+    <% end %>
+  </section>
+
 <% end %>
-
-<section>
-  <h3 class="section-title">自分が作成したクイズ</h3>
-
-  <% if @questions.any? %>
-    <table class="quiz-table">
-      <thead>
-        <tr>
-          <th>問題文</th>
-          <th>答え</th>
-          <th>解答数</th>
-          <th>正答率</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @questions.each do |question| %>
-          <% total_answers = question.answers.count %>
-          <% correct_answers = question.answers.where(is_result: true).count %>
-          <tr>
-            <td>
-              <%= link_to question.content, question_path(question), class: "question-link" %>
-            </td>
-            <td><%= question.correct %></td>
-            <td><%= total_answers %></td>
-            <td>
-              <% if total_answers > 0 %>
-                <%= number_to_percentage(correct_answers.to_f / total_answers * 100, precision: 1) %>
-              <% else %>
-                0%
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <p class="empty-message">まだ作成したクイズがありません。</p>
-  <% end %>
-</section>
-
-<section>
-  <h3 class="section-title">自分が回答したクイズ</h3>
-  <% if @answers.any? %>
-    <div class="pagination-container">
-        <%= paginate @answers %>
-    </div>
-    <table class="quiz-table">
-      <thead>
-        <tr>
-          <th>クイズ</th>
-          <th>あなたの答え</th>
-          <th>結果</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @answers.each do |answer| %>
-          <tr>
-            <td>
-              <%= link_to answer.question.content, question_path(answer.question), class: "question-link" %>
-            </td>
-            <td><%= answer.body %></td>
-            <td>
-              <% if answer.is_result %>
-                <span class="correct">⭕</span>
-              <% else %>
-                <span class="incorrect">❌</span>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-    <div class="pagination-container">
-        <%= paginate @answers %>
-    </div>
-  <% else %>
-    <p class="empty-message">まだ回答したクイズがありません。</p>
-  <% end %>
-</section>
