@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
   allow_browser versions: :modern
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :record_login_history_if_needed
+  before_action :record_login_history
   helper ApplicationHelper
   after_action :store_location
 
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   private
 
   # 今日初のアクションならログインレコードを作成する
-  def record_login_history_if_needed
+  def record_login_history
     if user_signed_in? && session[:last_login_check_date] != Date.today.to_s
       LoginHistory.find_or_create_by(user: current_user, logged_in_on: Date.today)
       session[:last_login_check_date] = Date.today.to_s

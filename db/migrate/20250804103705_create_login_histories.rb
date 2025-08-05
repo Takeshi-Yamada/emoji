@@ -6,6 +6,6 @@ class CreateLoginHistories < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    add_index :login_histories, [:user_id, :logged_in_on], unique: true
+    add_index :login_histories, [ :user_id, :logged_in_on ], unique: true
   end
 end
