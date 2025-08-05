@@ -5,12 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable
   validates :name, presence: true, length: { maximum: 50 }
   validates :email, presence: true, uniqueness: true
-  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, presence: true, length: { minimum: 6 }, on: :create
 
   has_many :questions
   has_many :answers
   has_many :give_ups
   has_many :given_up_questions, through: :give_ups, source: :question
+  has_many :login_histories
 
   def self.u_ranking
     UserRankingQuery.new.call

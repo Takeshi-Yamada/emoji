@@ -1,0 +1,32 @@
+<h1 class="page-header">
+  📆ログインカレンダー
+</h1>
+<div class="fade-in-container">
+  <table class="calendar">
+    <caption><%= Date.today.year %>年 <%= Date.today.month %>月</caption>
+    <thead>
+      <tr>
+        <% %w[日 月 火 水 木 金 土].each do |day| %>
+          <th><%= day %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @range.each_slice(7) do |week| %>
+        <tr>
+          <% week.each do |day| %>
+            <% logged_in = @login_days.include?(day) %>
+            <td class="<%= 'today' if day == Date.current %> <%= 'not-this-month' if day.month != Date.current.month %>">
+              <div class="date"><%= day.day %></div>
+              <% if logged_in %>
+                <div class="emoji"><%= login_emoji_by_wday(day.wday) %></div>
+              <% else %>
+                <div class="emoji empty"></div>
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
