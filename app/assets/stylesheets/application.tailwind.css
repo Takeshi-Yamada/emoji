@@ -772,6 +772,38 @@ h3.section-title {
   font-size: 1rem;
 }
 
+/* カレンダー */
+.calendar {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+.calendar th, .calendar td {
+  border: 1px solid #ccc;
+  width: 14.2%;
+  height: 80px;
+  vertical-align: top;
+  padding: 4px;
+  position: relative;
+}
+.date {
+  font-size: 12px;
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.emoji {
+  font-size: 28px;
+  margin-top: 20px;
+}
+.today {
+  background-color: #fdf6e3;
+}
+td.not-this-month {
+  background-color: #f0f0f0;
+  color: #aaa;
+}
+
 /* ヒント機能 */
 .hint-container {
   margin: 1em 0;

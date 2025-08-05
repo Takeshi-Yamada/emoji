@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_user, only: [ :show, :edit, :update ]
+  before_action :set_user, only: [ :show, :edit, :update, :calendar ]
 
   def show
     @questions = @user.questions
@@ -17,6 +17,21 @@ class UsersController < ApplicationController
       flash.now[:danger] = "更新に失敗しました"
       render :edit, status: :unprocessable_entity
     end
+  end
+
+  def calendar
+    first_day = Date.current.beginning_of_month
+    last_day = Date.current.end_of_month
+
+    # 日曜日始まり（wday: 0）で整列させている
+    beginning_of_calendar = first_day.beginning_of_week(:sunday)
+    end_of_calendar = last_day.end_of_week(:sunday)
+
+    @range = beginning_of_calendar..end_of_calendar
+    @login_days = current_user.login_histories
+                              .where(logged_in_on: @range)
+                              .pluck(:logged_in_on)
+                              .map(&:to_date)
   end
 
   private
