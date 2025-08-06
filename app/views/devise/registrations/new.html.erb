@@ -1,27 +1,30 @@
 <h1>📝 ユーザー登録</h1>
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <div class="form-group">
-    <%= f.label :name, "名前" %><br>
-    <%= f.text_field :name, autofocus: true, class: "form-control" %>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :email, "メールアドレス" %><br>
-    <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
-  </div>
+<div class="login-container">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: false }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="form-group">
+      <%= f.label :name, "名前" %><br>
+      <%= f.text_field :name, autofocus: true, class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :password, "パスワード" %><br>
-    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-  </div>
+    <div class="form-group">
+      <%= f.label :email, "メールアドレス" %><br>
+      <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :password_confirmation, "パスワード（確認）" %><br>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-  </div>
+    <div class="form-group">
+      <%= f.label :password, "パスワード" %><br>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.submit "登録する", class: "btn btn-create" %>
-  </div>
-<% end %>
+    <div class="form-group">
+      <%= f.label :password_confirmation, "パスワード（確認）" %><br>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit "登録する", class: "btn-login" %>
+    </div>
+  <% end %>
+</div>
