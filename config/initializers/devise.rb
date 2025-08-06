@@ -271,6 +271,15 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
+  config.omniauth :google_oauth2,
+  ENV['GOOGLE_CLIENT_ID'],
+  ENV['GOOGLE_CLIENT_SECRET'], {
+  # ログイン後に auth.info.email や auth.info.name が取得できない可能性があるため
+  scope: 'email,profile',
+  # 毎回ログイン時に「Googleアカウント選択画面」を出す
+  # 複数アカウントを持つユーザーが「アカウントを選び直したい」ときに重要
+  prompt: 'select_account'
+  }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
