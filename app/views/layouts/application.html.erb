@@ -35,13 +35,16 @@
   </script>
 
   <body>
-    <%= render 'shared/message' %>
-    <%= render 'shared/header' %>
-    <%= yield %><br>
-
-    <%= render "shared/bottom_nav" %>
+    <div class="wrapper">
+      <%= render 'shared/message' %>
+      <%= render 'shared/header' %>
+      <div class="main-contents">
+        <%= yield %><br>
+      </div>
+      <%= render "shared/bottom_nav" %>
+      <footer class="footer">
+        <%= render 'shared/footer' %>
+      </footer>
+    </div>
   </body>
-  <footer class="footer">
-    <%= render 'shared/footer' %>
-  </footer>
 </html>

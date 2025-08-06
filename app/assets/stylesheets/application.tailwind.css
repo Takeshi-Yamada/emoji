@@ -47,7 +47,6 @@ body {
   font-family: 'Helvetica Neue', sans-serif;
   background-color: #fffef9;
   margin: 0;
-  padding: 2rem;
   color: #333;
 }
 
@@ -59,9 +58,29 @@ h1 {
   color: #444;
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.main-contents {
+  flex-grow: 1;
+}
+
 .container {
   display: flex;
   justify-content: center;
+}
+
+.login-container {
+  max-width: 600px;
+  margin: 0 auto 10px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
 }
 /* クイズ一覧グリッド */
 .quiz-list {
@@ -384,6 +403,7 @@ h1 {
 /* ボタン類 */
 .btn,
 .btn-create,
+.btn-login,
 .btn-ai,
 .btn-share,
 .header-btn {
@@ -410,6 +430,15 @@ h1 {
   color: white;
 }
 .btn-create:hover {
+  background-color: #2f9e44;
+}
+
+.btn-login {
+  background-color: #40c057;
+  color: white;
+  width: 100%;
+}
+.btn-login:hover {
   background-color: #2f9e44;
 }
 
@@ -454,7 +483,7 @@ h1 {
 }
 .form-control {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   padding: 0.6rem;
   font-size: 1rem;
   border-radius: 8px;
@@ -644,7 +673,6 @@ h1 {
   padding: 20px 10px;
   font-size: 14px;
   color: #333;
-  margin-bottom: 20px;
 }
 
 .footer-container {
@@ -992,5 +1020,9 @@ td.not-this-month {
 
   .quiz-detail-card h1 {
     font-size: 2.5rem;
+  }
+
+  .footer {
+    margin-bottom: 20px;
   }
 }
