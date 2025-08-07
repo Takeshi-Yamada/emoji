@@ -26,6 +26,7 @@ services:
       - bundle_data:/usr/local/bundle:cached
       - node_modules:/myapp/node_modules
       - ./tmp:/tmp
+    env_file: .env
     environment:
       TZ: Asia/Tokyo
     ports:

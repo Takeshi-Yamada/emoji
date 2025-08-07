@@ -21,6 +21,10 @@ module Myapp
     config.time_zone = "Tokyo"
     config.active_record.default_timezone = :local
     config.active_support.to_time_preserves_timezone = :zone
+    config.middleware.use OmniAuth::Builder do
+      provider :google_oauth2, ENV['GOOGLE_CLIENT_ID'], ENV['GOOGLE_CLIENT_SECRET'],
+               scope: 'email,profile', prompt: 'select_account'
+    end
 
     config.generators do |g|
       g.assets false
