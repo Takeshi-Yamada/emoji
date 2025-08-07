@@ -1,28 +1,25 @@
-# frozen_string_literal: true
-
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  # You should configure your model like this:
-  # devise :omniauthable, omniauth_providers: [:twitter]
-  skip_before_action :verify_authenticity_token, only: :google_oauth2
+  skip_before_action :verify_authenticity_token, only: [:google_oauth2]
 
   def google_oauth2
-    callback_for(:google_oauth2)
-  end
+    Rails.logger.info "=== Google OAuth callback called ==="
+    Rails.logger.info "Auth data: #{request.env['omniauth.auth']&.info}"
 
-  def callback_for(provider)
     @user = User.from_omniauth(request.env['omniauth.auth'])
 
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication
-      set_flash_message(:notice, :success, kind: provider.to_s.capitalize) if is_navigational_format?
+      set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
     else
-      session["devise.#{provider}_data"] = request.env['omniauth.auth'].except(:extra)
-      redirect_to new_user_registration_url
+      session['devise.google_oauth2_data'] = request.env['omniauth.auth'].except(:extra)
+      redirect_to new_user_registration_url, alert: @user.errors.full_messages.join("\n")
     end
   end
 
   def failure
-    redirect_to root_path
+    Rails.logger.error "=== Google OAuth failure ==="
+    Rails.logger.error "Failure reason: #{params[:message]}"
+    redirect_to root_path, alert: 'Google認証に失敗しました。'
   end
   # You should also create an action method in this controller like this:
   # def twitter

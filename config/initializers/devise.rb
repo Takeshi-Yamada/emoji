@@ -271,15 +271,6 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  # config.omniauth :google_oauth2,
-  # ENV['GOOGLE_CLIENT_ID'],
-  # ENV['GOOGLE_CLIENT_SECRET'], {
-  # ログイン後に auth.info.email や auth.info.name が取得できない可能性があるため
-  # scope: 'email,profile',
-  # 毎回ログイン時に「Googleアカウント選択画面」を出す
-  # 複数アカウントを持つユーザーが「アカウントを選び直したい」ときに重要
-  # prompt: 'select_account'
-  # }
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
@@ -318,4 +309,12 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
+  config.omniauth :google_oauth2, 
+  ENV['GOOGLE_CLIENT_ID'], 
+  ENV['GOOGLE_CLIENT_SECRET'],
+  {
+    scope: 'email,profile',
+    prompt: 'select_account',
+    strategy_class: OmniAuth::Strategies::GoogleOauth2
+  }
 end
