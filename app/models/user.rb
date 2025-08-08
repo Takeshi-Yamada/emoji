@@ -21,6 +21,25 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
+    # ケース1：既にGoogle連携済みのユーザー（最も多いケース）
+    user = find_by(provider: auth.provider, uid: auth.uid)
+    return user if user
+
+    # ケース2：メールアドレスは登録済みだが、Google連携は初めてのユーザー
+    user = find_by(email: auth.info.email)
+    if user
+      # 安全装置：他のSNSで連携済みでないか確認してから、情報を紐づける
+      if user.provider.blank?
+        user.update(
+          provider: auth.provider,
+          uid: auth.uid,
+          name: auth.info.name.presence || user.name # 既存の名前を上書きしない配慮
+        )
+      end
+      return user
+    end
+
+    # ケース3：全くの新規ユーザー
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
@@ -28,9 +47,5 @@ class User < ApplicationRecord
       user.provider = auth.provider
       user.uid = auth.uid
     end
-  end
-
-  def self.create_unique_string
-    SecureRandom.uuid
   end
 end

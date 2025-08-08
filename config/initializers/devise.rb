@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-
+# OmniAuthがGETリクエストも受け付けるように設定
+OmniAuth.config.allowed_request_methods = [:post, :get]
+OmniAuth.config.silence_get_warning = true
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -309,12 +311,15 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-  config.omniauth :google_oauth2, 
-  ENV['GOOGLE_CLIENT_ID'], 
-  ENV['GOOGLE_CLIENT_SECRET'],
-  {
-    scope: 'email,profile',
-    prompt: 'select_account',
-    strategy_class: OmniAuth::Strategies::GoogleOauth2
-  }
+  config.omniauth :google_oauth2,
+    ENV['GOOGLE_CLIENT_ID'],
+    ENV['GOOGLE_CLIENT_SECRET'],
+    {
+      scope: 'email,profile',
+      prompt: 'select_account',
+      image_aspect_ratio: 'square',
+      image_size: 50,
+      # 以前のCSRFエラーを回避するための設定
+      provider_ignores_state: Rails.env.development?
+    }
 end
