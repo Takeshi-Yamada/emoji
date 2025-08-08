@@ -319,7 +319,7 @@ Devise.setup do |config|
       prompt: 'select_account',
       image_aspect_ratio: 'square',
       image_size: 50,
-      # 以前のCSRFエラーを回避するための設定
+      # 開発環境でCSRFエラーを回避するための設定
       provider_ignores_state: Rails.env.development?
     }
 end
