@@ -1,6 +1,6 @@
 <h2 class="text-2xl font-bold mb-6">プロフィールを編集</h2>
 
-<%= form_with(model: @user, local: true, data: { turbo: false }) do |f| %>
+<%= form_with(model: @user, url: profile_path(@user), local: true, data: { turbo: false }) do |f| %>
   <div class="form-group">
     <%= f.label :name, '名前' %><br>
     <%= f.text_field :name, class: "form-control" %>

@@ -10,10 +10,9 @@ class UsersController < ApplicationController
   def edit; end
 
   def update
-    @user = User.find(params[:id])
     p @user
     if @user.update(user_params)
-      redirect_to @user, notice: "プロフィールを更新しました"
+      redirect_to profile_path(@user), notice: "プロフィールを更新しました"
     else
       flash.now[:danger] = "更新に失敗しました"
       render :edit, status: :unprocessable_entity
@@ -38,10 +37,10 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password)
+    params.require(:user).permit(:name, :email)
   end
 
   def set_user
-    @user = User.find(current_user[:id])
+    @user = current_user
   end
 end

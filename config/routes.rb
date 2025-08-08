@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
-
-  resources :users, only: %i[show edit update], path: "profiles", as: "profiles"
+  devise_for :users, controllers: {
+    omniauth_callbacks: "users/omniauth_callbacks"
+    # registrations: 'users/registrations'
+  }
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -19,7 +20,7 @@ Rails.application.routes.draw do
     get :generate_hint, on: :collection
     get :give_up, on: :member
   end
-  resources :users, only: %i[show edit update]
+  resources :users, only: %i[show edit update], path: "profiles", as: "profiles"
   get "calendar", to: "users#calendar", as: "calendar"
 
   get "terms", to: "static#terms"

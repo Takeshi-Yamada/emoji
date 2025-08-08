@@ -24,7 +24,7 @@ RSpec.describe "Users", type: :system do
     expect(page).to have_field('メールアドレス', wait: 5)
     fill_in 'メールアドレス', with: user.email
     fill_in 'パスワード', with: user.password
-    click_button 'ログインする🚪'
+    click_button 'ログイン🚪'
     expect(page).to have_content('ログインしました。')
   end
 
@@ -33,7 +33,7 @@ RSpec.describe "Users", type: :system do
       visit new_user_session_path
       fill_in 'メールアドレス', with: user.email
       fill_in 'パスワード', with: user.password
-      click_button 'ログインする🚪'
+      click_button 'ログイン🚪'
     end
 
     it 'マイページ遷移' do
