@@ -33,7 +33,7 @@ class User < ApplicationRecord
         user.update(
           provider: auth.provider,
           uid: auth.uid,
-          name: auth.info.name.presence || user.name # 既存の名前を上書きしない配慮
+          name: user.name || auth.info.name.presence # 既存の名前を上書きしない配慮
         )
       end
       return user
