@@ -644,7 +644,7 @@ h1 {
   flex-wrap: nowrap;
 }
 
-.logout-mobile {
+.mobile-header {
   display: none;
 }
 
@@ -961,7 +961,7 @@ td.not-this-month {
     display: none;
   }
 
-  .logout-mobile {
+  .mobile-header {
     display: flex;
     align-items: center;
     justify-content: flex-end;

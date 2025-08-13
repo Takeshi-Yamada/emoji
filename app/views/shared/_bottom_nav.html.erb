@@ -12,11 +12,11 @@
     <% end %>
   <% else %>
 
+    <%= link_to new_question_path do %>
+      ✏️<br>クイズを作る
+    <% end %>
     <%= link_to new_user_session_path do %>
       🚪<br>ログイン
-    <% end %>
-    <%= link_to new_user_registration_path do %>
-      📝<br>ユーザー登録
     <% end %>
   <% end %>
 </nav>
