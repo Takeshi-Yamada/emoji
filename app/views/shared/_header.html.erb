@@ -8,13 +8,7 @@
       <%= link_to 'マイページ', profile_path(current_user), class: "header-btn" %>
       <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_confirm: "ログアウトしてもよろしいですか？" }, class: "header-btn logout" %>
     <% else %>
-      <div style="position: relative; display: inline-block;">
-        <button type="button" class="btn-create" title="ログイン促進" data-tooltip-toggle="login-tooltip">✏️ クイズを作る</button>
-        <div id="login-tooltip" class="emoji-tooltip hidden" role="tooltip" aria-hidden="true" data-tooltip-body>
-          <p>クイズを作るにはログインが必要です。</p>
-          <div class="emoji-tooltip-arrow"></div>
-        </div>
-      </div>
+      <a href="#" class="btn-create js-open-login-modal" title="クイズを作るにはログインが必要です">✏️ クイズを作る</a>
       <%= link_to 'ログイン', new_user_session_path, class: "header-btn" %>
       <%= link_to 'ユーザー登録', new_user_registration_path, class: "header-btn" %>
     <% end %>
@@ -43,7 +37,7 @@
         <li><%= link_to '📝ユーザー登録', new_user_registration_path %></li>
         <hr>
         <li>
-          <a href="#" id="open-login-modal-btn" title="クイズを作るにはログインが必要です">✏️クイズを作る</a>
+          <a href="#" class="js-open-login-modal" title="クイズを作るにはログインが必要です">✏️クイズを作る</a>
         </li>
       <% end %>
       <li><%= link_to '📘遊び方(作成中)'  %></li>
@@ -57,7 +51,7 @@
   <div class="modal-content">
     <button id="modal-close-btn" class="modal-close" aria-label="閉じる">×</button>
     <h4>ログインが必要です</h4>
-    <p>クイズを作成したり、他のクイズを評価するにはログインが必要です。</p>
+    <p>クイズを作成したり、回答を記録<br>するにはログインが必要です。</p>
     <div class="modal-actions">
       <a href="/users/sign_up" class="btn-create">新規登録</a>
       <a href="/users/sign_in" class="header-btn">ログイン</a>

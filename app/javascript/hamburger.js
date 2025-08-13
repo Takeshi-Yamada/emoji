@@ -3,24 +3,26 @@ document.addEventListener("turbo:load", () => {
   const overlay = document.getElementById("overlay");
 
   // --- ログインモーダルの処理 ---
-  const openLoginBtn = document.getElementById("open-login-modal-btn");
+  const openLoginBtns = document.querySelectorAll(".js-open-login-modal"); // classで全て取得
   const closeLoginBtn = document.getElementById("modal-close-btn");
   const loginModal = document.getElementById("login-modal");
 
-  // ▼▼▼ ここからが修正箇所 ▼▼▼
-  if (openLoginBtn) { // 変数名を openLoginBtn に修正
-    openLoginBtn.addEventListener("click", (event) => {
+  openLoginBtns.forEach(btn => {
+    btn.addEventListener("click", (event) => {
       event.preventDefault();
-      loginModal.classList.add("is-active"); // 変数名を loginModal に修正
+      loginModal.classList.add("is-active");
       overlay.classList.add("is-active");
     });
-  }
-  // ▲▲▲ ここまでが修正箇所 ▲▲▲
+  });
 
   if (closeLoginBtn) {
     closeLoginBtn.addEventListener("click", () => {
       loginModal.classList.remove("is-active");
-      overlay.classList.remove("is-active");
+
+      // もしハンバーガーメニューが開いていなければ、オーバーレイを閉じる
+      if (hamburgerBtn && !hamburgerBtn.classList.contains("is-active")) {
+        overlay.classList.remove("is-active");
+      }
     });
   }
 
