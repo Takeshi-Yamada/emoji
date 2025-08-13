@@ -2,6 +2,7 @@
 import "@hotwired/turbo-rails"
 import "./controllers"
 import "./tagify_setup"
+import "./hamburger"
 import { setupGenerateHint } from "./question_support";
 
 import emojiRegex from 'emoji-regex';
@@ -48,25 +49,40 @@ document.addEventListener("turbo:load", () => {
 
 //ツールチップ
 document.addEventListener("turbo:load", () => {
-  const toggleBtn = document.getElementById("toggle-emoji-tooltip");
-  const tooltip = document.getElementById("emoji-tooltip");
+  // 1. すべてのツールチップ切り替えボタンにイベントを設定
+  const toggleButtons = document.querySelectorAll("[data-tooltip-toggle]");
 
-  toggleBtn.addEventListener("click", () => {
-    if (tooltip.classList.contains("hidden")) {
-      tooltip.classList.remove("hidden");
-      tooltip.setAttribute("aria-hidden", "false");
-    } else {
-      tooltip.classList.add("hidden");
-      tooltip.setAttribute("aria-hidden", "true");
-    }
+  toggleButtons.forEach(button => {
+    button.addEventListener("click", (event) => {
+      // イベントが親要素へ伝わるのを防ぐ（重要）
+      event.stopPropagation();
+
+      const tooltipId = button.dataset.tooltipToggle;
+      const tooltip = document.getElementById(tooltipId);
+
+      if (!tooltip) return;
+
+      // 表示/非表示を切り替える
+      const isHidden = tooltip.classList.toggle("hidden");
+      tooltip.setAttribute("aria-hidden", String(isHidden));
+    });
   });
 
-  // 画面のどこかクリックで閉じる処理（任意）
-  document.addEventListener("click", (e) => {
-    if (!toggleBtn.contains(e.target) && !tooltip.contains(e.target)) {
+  // 2. ツールチップ本体がクリックされても閉じないようにする
+  const tooltips = document.querySelectorAll("[data-tooltip-body]");
+  tooltips.forEach(tooltip => {
+    tooltip.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
+  });
+
+
+  // 3. ドキュメントのどこかをクリックしたら、すべてのツールチップを閉じる
+  document.addEventListener("click", () => {
+    tooltips.forEach(tooltip => {
       tooltip.classList.add("hidden");
       tooltip.setAttribute("aria-hidden", "true");
-    }
+    });
   });
 });
 
@@ -111,3 +127,4 @@ document.addEventListener("turbo:load", () => {
     setTimeout(() => confetti.remove(), 4000);
   }
 });
+
