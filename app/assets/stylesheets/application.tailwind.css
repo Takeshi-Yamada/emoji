@@ -114,6 +114,164 @@ h1 {
   height: 18px;
 }
 
+/* --- ハンバーガーボタン --- */
+.hamburger-btn {
+  position: relative;
+  z-index: 1000; /* 他の要素より手前に表示 */
+  width: 42px;
+  height: 42px;
+  border: none;
+  background: #4caf50; /* ボタンの背景色 */
+  border-radius: 50%;
+  cursor: pointer;
+  display: none;
+}
+
+.hamburger-btn span {
+  display: block;
+  position: absolute;
+  left: 10px;
+  width: 22px;
+  height: 2px;
+  background-color: #fff; /* 線の色 */
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+.hamburger-btn span:nth-child(1) { top: 12px; }
+.hamburger-btn span:nth-child(2) { top: 20px; }
+.hamburger-btn span:nth-child(3) { bottom: 12px; }
+
+
+/* --- メニューが開いた時のボタン（×印）の形 --- */
+.hamburger-btn.is-active span:nth-child(1) {
+  top: 20px;
+  transform: rotate(45deg);
+}
+.hamburger-btn.is-active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-btn.is-active span:nth-child(3) {
+  top: 20px;
+  transform: rotate(-45deg);
+}
+
+
+/* --- ナビゲーションメニュー本体 --- */
+.hamburger-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 999;
+  width: 200px; /* メニューの幅 */
+  height: 100%;
+  background: #fff;
+  transform: translateX(100%); /* 初期状態は画面の外に隠す */
+  transition: 0.3s;
+  padding-top: 80px;
+}
+
+.hamburger-nav.is-active {
+  transform: translateX(0); /* 画面内に表示 */
+}
+
+.hamburger-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.hamburger-nav li a {
+  display: block;
+  padding: 15px 25px;
+  color: #333;
+  text-decoration: none;
+  font-size: 16px;
+}
+.hamburger-nav li a:hover {
+  background: #f5f5f5;
+}
+
+
+/* --- (オプション) 背景オーバーレイ --- */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden; /* クリックできないように */
+  transition: 0.3s;
+}
+
+.overlay.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ログイン推奨画面 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1001; /* ハンバーガーメニューより少し手前に */
+  display: none; /* 初期状態では非表示 */
+  justify-content: center;
+  align-items: center;
+}
+
+.modal.is-active {
+  display: flex; /* is-activeクラスが付いたら表示 */
+}
+
+.modal-content {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+
+.modal-content h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+}
+
+.modal-content p {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 24px;
+  cursor: pointer;
+  color: #aaa;
+}
+.modal-close:hover {
+  color: #333;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
 /* クイズ一覧グリッド */
 .quiz-list {
   display: grid;
@@ -644,7 +802,7 @@ h1 {
   flex-wrap: nowrap;
 }
 
-.logout-mobile {
+.mobile-header {
   display: none;
 }
 
@@ -787,6 +945,11 @@ h3.section-title {
   font-size: 1.8rem;
   margin-bottom: 1.5rem;
   color: #444;
+}
+
+.action-container {
+  display: flex;
+  justify-content: center;
 }
 
 .quiz-table {
@@ -961,7 +1124,11 @@ td.not-this-month {
     display: none;
   }
 
-  .logout-mobile {
+  .hamburger-btn {
+    display: block; /* ハンバーガーボタンを表示 */
+  }
+
+  .mobile-header {
     display: flex;
     align-items: center;
     justify-content: flex-end;

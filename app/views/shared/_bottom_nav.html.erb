@@ -1,6 +1,6 @@
 <nav class="bottom-nav">
   <%= link_to root_path do %>
-    🏠<br>クイズ一覧
+    ❓<br>クイズ一覧
   <% end %>
 
   <% if user_signed_in? %>
@@ -11,7 +11,6 @@
       👤<br>マイページ
     <% end %>
   <% else %>
-
     <%= link_to new_user_session_path do %>
       🚪<br>ログイン
     <% end %>
