@@ -25,4 +25,5 @@ Rails.application.routes.draw do
 
   get "terms", to: "static#terms"
   get "privacy", to: "static#privacy"
+  get "howtouse", to: "static#howtouse"
 end

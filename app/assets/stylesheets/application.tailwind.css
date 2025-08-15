@@ -857,6 +857,127 @@ h1 {
   font-weight: bold;
 }
 
+/* 遊び方 */
+/* 全体のコンテナ */
+.how-to-play-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  font-family: sans-serif;
+  color: #333;
+  background-color: #fff8e1; /* サイトの背景色に合わせる */
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* 各セクション */
+.how-to-play-container section {
+  padding: 2rem 0;
+}
+
+/* 見出し */
+.how-to-play-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+.how-to-play-container h3 {
+  font-size: 1.4rem;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+}
+.how-to-play-container h4 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* 段落 */
+.how-to-play-container p {
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+/* 区切り線 */
+.how-to-play-container hr {
+  border: none;
+  border-top: 2px solid #f0e6c8;
+  margin: 1rem 0;
+}
+
+/* 画像のプレースホルダー */
+.image-placeholder {
+  width: 100%;
+  background-color: #f0f0f0;
+  border-radius: 12px;
+  margin: 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #aaa;
+  min-height: 200px; /* 画像が入るまでの仮の高さ */
+}
+.image-placeholder.screenshot {
+  min-height: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* 注釈リスト */
+.annotations {
+  margin-top: 2rem;
+}
+.annotation-item {
+  margin-bottom: 1.5rem;
+}
+
+/* ログイン機能のカード */
+.features-grid {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.feature-card {
+  flex: 1;
+  min-width: 200px;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+.feature-card ul {
+  padding-left: 20px;
+  line-height: 1.8;
+}
+
+/* 登録案内のエリア */
+.cta-area {
+  text-align: center;
+  margin-top: 3rem;
+}
+.cta-message {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.cta-buttons {
+  margin-top: 1.5rem;
+}
+
+/* スマホ表示用の調整 */
+@media (max-width: 768px) {
+  .how-to-play-container {
+    padding: 1rem;
+    margin: 1rem;
+  }
+  .how-to-play-container h2 {
+    font-size: 1.6rem;
+  }
+  .features-grid {
+    flex-direction: column;
+  }
+}
+
 /* フッター */
 .footer {
   background-color: #f5f5f5;
