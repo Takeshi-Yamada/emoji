@@ -6,9 +6,6 @@
       「Emoji Link」は、<b>絵文字を見てお題を当てる</b>新感覚のクイズゲームです。<br>
       ひらめきを頼りに、たくさんのクイズに挑戦してみよう！
     </p>
-    <div class="image-placeholder">
-      
-    </div>
   </section>
 
   <hr>
@@ -17,30 +14,47 @@
     <h2>クイズ画面の見方</h2>
     <p>
       クイズ画面の各パーツには、正解にたどり着くためのヒントが隠されています。<br>
-      下の画像を参考に、それぞれの役割をチェックしてみましょう！
+      画像を参考に、それぞれの役割をチェックしてみましょう！
     </p>
-    <div class="image-placeholder screenshot">
-
-    </div>
 
     <div class="annotations">
       <div class="annotation-item">
-        <h4>① タグ 🏷️</h4>
-        <p>「漫画」「ゲーム」「有名人」など、お題がどの<b>カテゴリー</b>に属するかを示しています。一番大きなヒントです！</p>
+        <h4>① 絵文字とタグ🏷️</h4>
+        <p>
+          絵文字はお題を表現しています。これだけで閃けると気持ちいいです！<br>
+          タグは「漫画」「ゲーム」「有名人」など、お題がどの<b>カテゴリー</b>に属するかを示しています。一番大きなヒントです！
+        </p>
       </div>
+      <div class="image-placeholder screenshot">
+        <%= image_tag 'howtoplay-1.png' %>
+      </div>
+<br>
       <div class="annotation-item">
-        <h4>② 解答形式</h4>
+        <h4>② 解答形式🔤</h4>
         <p>「ひらがな」「カタカナ」「漢字」「英語」など、<b>答えに使われている言語や文字の種類</b>が分かります。</p>
       </div>
-      <div class="annotation-item">
-        <h4>③ ヒントボタン</h4>
-        <p>どうしても分からない時の救世主！タップすると、正解に近づくためのヒントが表示されます。</p>
+      <div class="image-placeholder screenshot">
+        <%= image_tag 'howtoplay-2.png' %>
       </div>
+<br>
       <div class="annotation-item">
-        <h4>④ 解答欄</h4>
-        <p>答えがひらめいたら、ここにどんどん入力してみよう！<b>何度でもチャレンジ可能</b>です。</p>
+        <h4>③ ヒントボタン🧭</h4>
+        <p>クイズが難しいと思った時の救世主！タップすると、正解に近づくためのヒントが表示されます。</p>
       </div>
-    </div>
+      <div class="image-placeholder screenshot">
+        <%= image_tag 'howtoplay-3.png' %>
+      </div>
+<br>
+      <div class="annotation-item">
+        <h4>④ 解答欄🎯</h4>
+        <p>
+          答えがひらめいたら、ここにどんどん入力してみよう！<b>何度でもチャレンジ可能</b>です。<br>
+          どうしても分からない時は、<b>ギブアップボタン🏳️で答えを確認</b>できます。
+        </p>
+      </div>
+      <div class="image-placeholder screenshot">
+        <%= image_tag 'howtoplay-4.png' %>
+      </div>
   </section>
 
   <hr>
@@ -73,9 +87,9 @@
 
     <div class="cta-area">
       <p class="cta-message">さっそく登録して、Emoji Linkを遊びつくそう！</p>
-      <div class="cta-buttons">
-        <%= link_to 'ログイン', new_user_session_path, class: 'header-btn' %>
-        <%= link_to '新規登録', new_user_registration_path, class: 'btn-create' %>
+      <div class="modal-actions">
+        <%= link_to 'ログイン', new_user_session_path, class: 'btn-login' %>
+        <%= link_to '新規登録', new_user_registration_path, class: 'btn-sign-up' %>
       </div>
     </div>
   </section>
