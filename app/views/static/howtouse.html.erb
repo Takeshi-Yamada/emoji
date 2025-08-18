@@ -1,0 +1,97 @@
+<div class="how-to-play-container">
+
+  <section class="welcome-section">
+    <h2>ようこそEmoji Linkへ！ 🎮</h2>
+    <p>
+      「Emoji Link」は、<b>絵文字を見てお題を当てる</b>新感覚のクイズゲームです。<br>
+      ひらめきを頼りに、たくさんのクイズに挑戦してみよう！
+    </p>
+  </section>
+
+  <hr>
+
+  <section class="guide-section">
+    <h2>クイズ画面の見方</h2>
+    <p>
+      クイズ画面の各パーツには、正解にたどり着くためのヒントが隠されています。<br>
+      画像を参考に、それぞれの役割をチェックしてみましょう！
+    </p>
+
+    <div class="annotations">
+      <div class="annotation-item">
+        <h4>① 絵文字とタグ🏷️</h4>
+        <p>
+          絵文字はお題を表現しています。これだけで閃けると気持ちいいです！<br>
+          タグは「漫画」「ゲーム」「有名人」など、お題がどの<b>カテゴリー</b>に属するかを示しています。一番大きなヒントです！
+        </p>
+      </div>
+      <div class="image-placeholder screenshot">
+        <%= image_tag 'howtoplay-1.png' %>
+      </div>
+<br>
+      <div class="annotation-item">
+        <h4>② 解答形式🔤</h4>
+        <p>「ひらがな」「カタカナ」「漢字」「英語」など、<b>答えに使われている言語や文字の種類</b>が分かります。</p>
+      </div>
+      <div class="image-placeholder screenshot">
+        <%= image_tag 'howtoplay-2.png' %>
+      </div>
+<br>
+      <div class="annotation-item">
+        <h4>③ ヒントボタン🧭</h4>
+        <p>クイズが難しいと思った時の救世主！タップすると、正解に近づくためのヒントが表示されます。</p>
+      </div>
+      <div class="image-placeholder screenshot">
+        <%= image_tag 'howtoplay-3.png' %>
+      </div>
+<br>
+      <div class="annotation-item">
+        <h4>④ 解答欄🎯</h4>
+        <p>
+          答えがひらめいたら、ここにどんどん入力してみよう！<b>何度でもチャレンジ可能</b>です。<br>
+          どうしても分からない時は、<b>ギブアップボタン🏳️で答えを確認</b>できます。
+        </p>
+      </div>
+      <div class="image-placeholder screenshot">
+        <%= image_tag 'howtoplay-4.png' %>
+      </div>
+  </section>
+
+  <hr>
+
+  <section class="features-section">
+    <h2>もっと楽しむには？ログインしてみよう！</h2>
+    <p>
+      ユーザー登録（無料）をすると、クイズを解くだけでなく、<b>自分でクイズを作って出題者になる</b>こともできます。楽しい機能が盛りだくさん！
+    </p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <h3>✏️ クイズを作る</h3>
+        <p>好きな漫画や映画、推しの有名人など、あなただけのオリジナルクイズを作成して、みんなに出題できます。</p>
+      </div>
+      <div class="feature-card">
+        <h3>📊 回答・正解履歴</h3>
+        <p>自分がこれまでに答えたクイズや、正解したクイズの一覧をいつでも見返すことができます。</p>
+      </div>
+      <div class="feature-card">
+        <h3>👤 マイページ</h3>
+        <p>以下の情報をまとめて確認できる、あなた専用のページです。</p>
+        <ul>
+          <li>自作クイズの一覧</li>
+          <li>回答履歴の一覧</li>
+          <li>ログインカレンダー</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cta-area">
+      <p class="cta-message">さっそく登録して、Emoji Linkを遊びつくそう！</p>
+      <div class="modal-actions">
+        <%= link_to 'ログイン', new_user_session_path, class: 'btn-login' %>
+        <%= link_to '新規登録', new_user_registration_path, class: 'btn-sign-up' %>
+      </div>
+    </div>
+  </section>
+
+</div>

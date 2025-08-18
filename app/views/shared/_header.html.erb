@@ -1,21 +1,6 @@
 <div class="site-header header-inner">
   <a href="/" class="header-logo">🧩Emoji Link</a>
 
-  <!-- PC用ナビメニュー -->
-  <nav class="header-nav">
-    <% if user_signed_in? %>
-      <%= link_to '✏️ クイズを作る', new_question_path, class: 'btn-create' %>
-      <%= link_to 'マイページ', profile_path(current_user), class: "header-btn" %>
-      <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: { turbo_confirm: "ログアウトしてもよろしいですか？" }, class: "header-btn logout" %>
-    <% else %>
-      <a href="#" class="btn-create js-open-login-modal" title="クイズを作るにはログインが必要です">✏️ クイズを作る</a>
-      <%= link_to 'ログイン', new_user_session_path, class: "header-btn" %>
-      <%= link_to 'ユーザー登録', new_user_registration_path, class: "header-btn" %>
-    <% end %>
-  </nav>
-
-
-  <!-- モバイル用ナビメニュー -->
   <button id="hamburger-btn" class="hamburger-btn" aria-label="メニューを開く" aria-controls="hamburger-nav" aria-expanded="false">
     <span></span>
     <span></span>
@@ -40,7 +25,7 @@
           <a href="#" class="js-open-login-modal" title="クイズを作るにはログインが必要です">✏️クイズを作る</a>
         </li>
       <% end %>
-      <li><%= link_to '📘遊び方(作成中)'  %></li>
+      <li><%= link_to '📘遊び方', howtouse_path %></li>
     </ul>
   </nav>
 
@@ -53,8 +38,8 @@
     <h4>ログインが必要です</h4>
     <p>クイズを作成したり、回答を記録<br>するにはログインが必要です。</p>
     <div class="modal-actions">
-      <a href="/users/sign_up" class="btn-create">新規登録</a>
-      <a href="/users/sign_in" class="header-btn">ログイン</a>
+      <%= link_to 'ログイン', new_user_session_path, class: 'btn-login' %>
+      <%= link_to '新規登録', new_user_registration_path, class: 'btn-sign-up' %>
     </div>
   </div>
 </div>

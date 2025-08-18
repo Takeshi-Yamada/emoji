@@ -40,7 +40,7 @@
     <%= f.submit "お題を当てる🎯", class: "btn-create" %>
     <%= link_to "ギブアップ🏳️", give_up_question_path(@question),
       data: { turbo: false, confirm: "本当にギブアップしますか？" },
-      class: "btn logout",
+      class: "btn-give-up",
       style: "margin-left: 3px;" %>
   </div>
 <% end %>

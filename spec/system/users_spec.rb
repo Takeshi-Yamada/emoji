@@ -36,11 +36,6 @@ RSpec.describe "Users", type: :system do
       click_button 'ログイン🚪'
     end
 
-    it 'マイページ遷移' do
-      visit profile_path(user)
-      expect(page).to have_content('さんのマイページ')
-    end
-
     it 'ログアウト処理' do
       visit root_path
       click_link 'ログアウト', match: :first

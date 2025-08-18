@@ -1,55 +1,57 @@
-<%= form_with(model: question, local: true, data: { turbo: false }) do |f| %>
-  <% if question&.errors&.any? %>
-    <div class="alert alert-danger">
-      <ul>
-        <% question.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :correct, "答え" %>
-    <button type="button" id="generate-btn" class="btn-ai" style="margin-bottom: 2px;">AI作問</button><br>
-    <%= f.text_field :correct, class: "form-control", placeholder: "例: デスノート", id: "answer-input" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :content, "クイズ" %> <span>：絵文字のみ/6個まで</span>
-    <div style="position: relative; display: inline-block;">
-      <button type="button" class="emoji-hint-toggle" title="絵文字入力ヒント" style="font-size: 15px;" data-tooltip-toggle="hint-tooltip">ℹ️</button>
-
-      <div id="hint-tooltip" class="emoji-tooltip hidden" role="tooltip" aria-hidden="true" data-tooltip-body>
-        絵文字ショートカットキー：<br>
-        　「⌃」+「⌘」+「スペース」（Mac）<br>
-        　「Windowsキー」+「.」（Windows）
-        <div class="emoji-tooltip-arrow"></div>
+<div class="quiz-show">
+  <%= form_with(model: question, local: true, data: { turbo: false }) do |f| %>
+    <% if question&.errors&.any? %>
+      <div class="alert alert-danger">
+        <ul>
+          <% question.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
       </div>
-    </div><br>
+    <% end %>
 
-    <%= f.text_field :content, class: "form-control", placeholder: "例: 📓🍎👿", id: "emoji-hint-input" %>
-  </div>
+    <div class="form-group">
+      <%= f.label :correct, "答え" %>
+      <button type="button" id="generate-btn" class="btn-ai" style="margin-bottom: 2px;">AI作問</button><br>
+      <%= f.text_field :correct, class: "form-control", placeholder: "例: デスノート", id: "answer-input" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :tag_list, "タグ" %><br>
-    <%= f.text_field :tag_list, id: "tag-input", class: "form-control", value: @question.tag_list.join(",") %>
-  </div>
+    <div class="form-group">
+      <%= f.label :content, "クイズ" %> <span>：絵文字のみ/6個まで</span>
+      <div style="position: relative; display: inline-block;">
+        <button type="button" class="emoji-hint-toggle" title="絵文字入力ヒント" style="font-size: 15px;" data-tooltip-toggle="hint-tooltip">ℹ️</button>
 
-  <div class="form-group">
-    <%= f.label :hint_1, "第1ヒント(任意)" %><br>
-    <%= f.text_field :hint_1, id: "hint_1_input", class: "form-control", placeholder: "例: ジャンプ作品です/頭脳戦で有名な漫画です" %>
-  </div>
+        <div id="hint-tooltip" class="emoji-tooltip hidden" role="tooltip" aria-hidden="true" data-tooltip-body>
+          絵文字ショートカットキー：<br>
+          　「⌃」+「⌘」+「スペース」（Mac）<br>
+          　「Windowsキー」+「.」（Windows）
+          <div class="emoji-tooltip-arrow"></div>
+        </div>
+      </div><br>
 
-  <div class="form-group">
-    <%= f.label :hint_2, "第2ヒント(任意)" %><br>
-    <%= f.text_field :hint_2, id: "hint_2_input", class: "form-control", placeholder: "例: ノートに名前を書くと◯ぬ…/リンゴが好きな「彼」が…" %>
-  </div>
+      <%= f.text_field :content, class: "form-control", placeholder: "例: 📓🍎👿", id: "emoji-hint-input" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :hint_3, "第3ヒント(任意)" %><br>
-    <%= f.text_field :hint_3, id: "hint_3_input", class: "form-control", placeholder: "例: 「計画通り」/「新世界の神になる」" %>
-  </div>
+    <div class="form-group">
+      <%= f.label :tag_list, "タグ" %><br>
+      <%= f.text_field :tag_list, id: "tag-input", class: "form-control", value: @question.tag_list.join(",") %>
+    </div>
 
-  <%= f.submit question.new_record? ? "クイズを作成する🚀" : "保存する💾", class: "btn-create" %><br><br>
-<% end %>
+    <div class="form-group">
+      <%= f.label :hint_1, "第1ヒント(任意)" %><br>
+      <%= f.text_field :hint_1, id: "hint_1_input", class: "form-control", placeholder: "例: ジャンプ作品です/頭脳戦で有名な漫画です" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :hint_2, "第2ヒント(任意)" %><br>
+      <%= f.text_field :hint_2, id: "hint_2_input", class: "form-control", placeholder: "例: ノートに名前を書くと◯ぬ…/リンゴが好きな「彼」が…" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :hint_3, "第3ヒント(任意)" %><br>
+      <%= f.text_field :hint_3, id: "hint_3_input", class: "form-control", placeholder: "例: 「計画通り」/「新世界の神になる」" %>
+    </div>
+
+    <%= f.submit question.new_record? ? "クイズを作成する🚀" : "保存する💾", class: "btn-create" %><br><br>
+  <% end %>
+</div>
