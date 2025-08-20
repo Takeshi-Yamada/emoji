@@ -15,7 +15,7 @@
         <li><%= link_to '👤マイページ', profile_path(current_user) %></li>
         <hr>
         <li>
-          <%= link_to '🎈ログアウト', destroy_user_session_path, method: :delete, data: { turbo_confirm: "ログアウトしてもよろしいですか？" } %>
+          <%= link_to '🎈ログアウト', destroy_user_session_path, data: { "turbo-method": :delete, turbo_confirm: "ログアウトしてもよろしいですか？" } %>
         </li>
       <% else %>
         <li><%= link_to '🚪ログイン', new_user_session_path %></li>

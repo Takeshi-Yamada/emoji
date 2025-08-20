@@ -3,7 +3,7 @@ require 'selenium-webdriver'
 
 RSpec.describe "Users", type: :system do
   before do
-    driven_by(:selenium_chrome_headless)
+    driven_by(:rack_test)
   end
 
   it 'ユーザー登録' do
@@ -28,7 +28,7 @@ RSpec.describe "Users", type: :system do
     expect(page).to have_content('ログインしました。')
   end
 
-  describe 'ログイン済み', js: true do
+  describe 'ログイン済み' do
     before do
       visit new_user_session_path
       fill_in 'メールアドレス', with: user.email
@@ -36,9 +36,15 @@ RSpec.describe "Users", type: :system do
       click_button 'ログイン🚪'
     end
 
+    it 'マイページ遷移' do
+      visit root_path
+      click_link '👤マイページ', match: :first
+      expect(page).to have_content('マイページアクション')
+    end
+
     it 'ログアウト処理' do
       visit root_path
-      click_link 'ログアウト', match: :first
+      click_link '🎈ログアウト', match: :first
       expect(page).to have_content('ログアウトしました。')
     end
   end
