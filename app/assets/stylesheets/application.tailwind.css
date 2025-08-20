@@ -117,11 +117,11 @@ h1 {
 /* --- ハンバーガーボタン --- */
 .hamburger-btn {
   position: relative;
-  z-index: 1000; /* 他の要素より手前に表示 */
+  z-index: 1000;
   width: 42px;
   height: 42px;
   border: none;
-  background: #4caf50; /* ボタンの背景色 */
+  background: #4caf50;
   border-radius: 50%;
   cursor: pointer;
   display: block;
@@ -133,7 +133,7 @@ h1 {
   left: 10px;
   width: 22px;
   height: 2px;
-  background-color: #fff; /* 線の色 */
+  background-color: #fff;
   transition: 0.3s;
   border-radius: 2px;
 }
@@ -163,7 +163,7 @@ h1 {
   top: 0;
   right: 0;
   z-index: 999;
-  width: 200px; /* メニューの幅 */
+  width: 200px;
   height: 100%;
   background: #fff;
   transform: translateX(100%); /* 初期状態は画面の外に隠す */
@@ -233,7 +233,7 @@ h1 {
   background: #fff;
   padding: 25px 30px;
   border-radius: 8px;
-  max-width: 400px;
+  max-width: 450px;
   width: 90%;
   text-align: center;
   position: relative;
