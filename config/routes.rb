@@ -15,10 +15,12 @@ Rails.application.routes.draw do
   get "tags/autocomplete", to: "tags#autocomplete"
   # Defines the root path route ("/")
   root "questions#index"
-  resources :questions, only: %i[index new create show edit update] do
+  resources :questions, only: %i[index new create show edit update destroy] do
     resources :answers, only: %i[index create]
     get :generate_hint, on: :collection
+    #idが必要なのでmember
     get :give_up, on: :member
+    get :author, on: :member
   end
   resources :users, only: %i[show edit update], path: "profiles", as: "profiles"
   get "calendar", to: "users#calendar", as: "calendar"

@@ -1,26 +1,19 @@
 class QuestionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  before_action :authenticate_user!, only: [ :new, :edit, :update ]
+  before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy ]
 
   def index
     @q = Question.ransack(params[:q])
+    # タグ検索があれば優先
     if params[:tag_name].present?
       @questions = Question.tagged_with(params[:tag_name]).page(params[:page])
     else
       @questions = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
     end
-
-    @question_ranking = Question.q_ranking
-    @user_ranking = User.u_ranking
-    @today_question = DailyQuestion.today_question
-
-    if user_signed_in?
-      @correct_question_ids = current_user.answers.where(is_result: true).pluck(:question_id).uniq
-      @gave_up_question_ids = current_user.give_ups.pluck(:question_id).uniq
-    else
-      @correct_question_ids = session[:correct]&.keys&.uniq&.map(&:to_i) || []
-      @gave_up_question_ids = session[:gave_up]&.keys&.uniq&.map(&:to_i) || []
-    end
+    # ランキング用データ
+    set_ranking
+    # ログインしている場合はレコードから、していない場合はセッションから正解・ギブアップ済みの問題IDを取得
+    result_index
   end
 
   def new
@@ -65,6 +58,12 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def destroy
+    question = current_user.questions.find(params[:id])
+    question.destroy!
+    redirect_to questions_path, success: "削除が成功しました"
+  end
+
   def give_up
     @question = Question.find(params[:id])
     if user_signed_in?
@@ -83,6 +82,13 @@ class QuestionsController < ApplicationController
     render json: result
   end
 
+  def author
+    @question = Question.find(params[:id])
+    @questions = Question.where(user_id: @question.user_id).order(created_at: :desc).page(params[:page])
+    # ログインしている場合はレコードから、していない場合はセッションから正解・ギブアップ済みの問題IDを取得
+    result_index
+  end
+
   private
 
   def question_params
@@ -91,5 +97,21 @@ class QuestionsController < ApplicationController
 
   def not_found
     redirect_back(fallback_location: root_path, alert: "対象のクイズが見つからないか、編集権限がありません。")
+  end
+
+  def set_ranking
+    @question_ranking = Question.q_ranking
+    @user_ranking = User.u_ranking
+    @today_question = DailyQuestion.today_question
+  end
+
+  def result_index
+    if user_signed_in?
+      @correct_question_ids = current_user.answers.where(is_result: true).pluck(:question_id).uniq
+      @gave_up_question_ids = current_user.give_ups.pluck(:question_id).uniq
+    else
+      @correct_question_ids = session[:correct]&.keys&.uniq&.map(&:to_i) || []
+      @gave_up_question_ids = session[:gave_up]&.keys&.uniq&.map(&:to_i) || []
+    end
   end
 end
