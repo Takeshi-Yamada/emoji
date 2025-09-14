@@ -4,6 +4,11 @@
     <h1><%= @question.content %></h1>
     <%= render 'questions/tag', question: @question %>
   </div>
+  <div class="author-box">
+    <p class="author-line">✍️ 作者：
+      <%= link_to @question.user.name, author_question_path(@question), class: "author-link" %>
+    </p>
+  </div>
 
   <% if current_user == @question.user %>
     <!-- 作問者画面　-->
@@ -16,8 +21,10 @@
       <%= link_to "編集する✏️", edit_question_path(@question), class: "btn-create" %>
       <% toukou = "「#{@question.content}」絵文字クイズを作ったよ！これが解けるかな？🧩" %>
       <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
-      <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br>
+      <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %>
+      <%= link_to "削除する🪦", question_path(@question), data: { "turbo-method": :delete, turbo_confirm: "削除しますか？"}, class: "btn-give-up" %>
     </div>
+
   <% else %>
       <% if @first_correct %>
         <div id="first-correct-modal" class="modal-overlay">

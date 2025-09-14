@@ -1,0 +1,34 @@
+<h1>❓<%= @question.user.name %>さんのクイズ一覧</h1>
+<div class="fade-in-container">
+  <% if @questions.any? %>
+    <div class="quiz-list">
+      <% @questions.each do |question| %>
+        <div class="quiz-card-wrapper">
+          <%= link_to question_path(question), class: "quiz-card-link" do %>
+            <div class="quiz-card">
+              <h2><%= question.content %></h2>
+              <p>
+                <% if @correct_question_ids.include?(question.id) %>
+                  <span class="badge badge-success">✅ 正解済み</span>
+                <% elsif @gave_up_question_ids.include?(question.id) %>
+                  <span class="badge badge-warning">🏳️ ギブアップ</span>
+                <% end %>
+                作者：<%= question.user.name %>
+              </p>
+            </div>
+          <% end %>
+          <div class="tag-area">
+            <%= render 'tag', question: question %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="pagination-container">
+        <%= paginate @questions %>
+    </div>
+  <% else %>
+    <%= render 'search', q: @q, url: questions_path %>
+    <p>該当のクイズはありません！</p>
+  <% end %>
+</div>
