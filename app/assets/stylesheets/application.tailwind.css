@@ -1091,6 +1091,16 @@ h3.section-title {
   transition: background-color 0.2s ease;
 }
 
+.deleted-row {
+  background-color: #c4c4c498; /* 背景を少し暗くする */
+  color: #a0a0a0; /* 文字色を薄くする */
+}
+
+.deleted-row:hover {
+  background-color: #f0f0f0e4; /* 背景を少し暗くする */
+  color: #a0a0a0; /* 文字色を薄くする */
+}
+
 .question-link {
   text-decoration: none;
   color: #1d4ed8;
