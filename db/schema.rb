@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_06_134839) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_15_021615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -54,6 +54,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_06_134839) do
     t.integer "answer_category", default: 0
     t.string "hint_2"
     t.string "hint_3"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_questions_on_deleted_at"
     t.index ["user_id"], name: "index_questions_on_user_id"
   end
 

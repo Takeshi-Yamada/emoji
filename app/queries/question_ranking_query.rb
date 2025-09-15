@@ -1,6 +1,7 @@
 class QuestionRankingQuery
   def call
     Question
+      .active
       .left_joins(:answers)
       .where(answers: { is_result: true })
       .group(:id)

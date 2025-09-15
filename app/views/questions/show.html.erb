@@ -5,89 +5,100 @@
     <%= render 'questions/tag', question: @question %>
   </div>
   <div class="author-box">
-    <p class="author-line">✍️ 作者：
+    <p class="author-line">
+      ✍️ 作者 ： 
       <%= link_to @question.user.name, author_question_path(@question), class: "author-link" %>
     </p>
   </div>
 
-  <% if current_user == @question.user %>
-    <!-- 作問者画面　-->
-    <div class="form-group">
-      <p>答え：<%= @question.correct %></p>
-      <p>解答形式 ：<%= I18n.t("activerecord.attributes.question.answer_category.#{@question.answer_category}") %></p>
-      <p> ヒント1 ：<%= @question.hint_1 %></p>
-      <p> ヒント2 ：<%= @question.hint_2 %></p>
-      <p> ヒント3 ：<%= @question.hint_3 %></p>
-      <%= link_to "編集する✏️", edit_question_path(@question), class: "btn-create" %>
-      <% toukou = "「#{@question.content}」絵文字クイズを作ったよ！これが解けるかな？🧩" %>
-      <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
-      <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %>
-      <%= link_to "削除する🪦", question_path(@question), data: { "turbo-method": :delete, turbo_confirm: "削除しますか？"}, class: "btn-give-up" %>
-    </div>
-
+  <% if @question.deleted? %>
+    <h2>このクイズは削除済みです</h2>
+    <% if current_user == @question.user %>
+      <%= link_to "復元する🔙", restore_question_path(@question), class: "btn-create" %>
+      <br><br>
+    <% end %>
   <% else %>
-      <% if @first_correct %>
-        <div id="first-correct-modal" class="modal-overlay">
-          <div class="modal-content">
-            🎉 正解 🎉<br>
-            おめでとう！
-            <% unless current_user %>
-              <br>次はユーザー登録してクイズを作ってみよう！
-            <% end %>
-          </div>
-        </div>
-        <div id="emoji-confetti"></div>
-      <% end %>
-      <% if @incorrect %>
-        <div class="incorrect-alert">
-          😢 不正解でした！もう一度チャレンジしてみよう！
-        </div>
-      <% end %>
-      <% if @just_give_up %>
-        <div class="give-up-alert">
-          🏳️ ギブアップしました！答えを確認しましょう。
-        </div>
-      <% end %>
 
-    <!-- ログイン者用回答画面　-->
-    <% if current_user %>
-      <% if @already_correct&.is_result? %>
-        <!-- 既に正解　-->
-        <p>あなたの答え：<%= @already_correct.body %><br>
-          正   解  ：<%= @question.correct %><br>
-          結   果  ： <span class="correct">正　解　🎉</span> </p>
-        <p>ヒント1  ：<%= @question.hint_1 %><br>
-          ヒント2  ：<%= @question.hint_2 %><br>
-          ヒント3  ：<%= @question.hint_3 %></p>
-        <% toukou = "「#{@question.content}」に正解したよ！🎉皆は解けるかな？🧩" %>
+    <!-- 作問者と回答者で表示を分ける -->
+    <% if current_user == @question.user %>
+      <!-- 作問者画面　-->
+      <div class="form-group">
+        <p>答え：<%= @question.correct %></p>
+        <p>解答形式 ：<%= I18n.t("activerecord.attributes.question.answer_category.#{@question.answer_category}") %></p>
+        <p> ヒント1 ：<%= @question.hint_1 %></p>
+        <p> ヒント2 ：<%= @question.hint_2 %></p>
+        <p> ヒント3 ：<%= @question.hint_3 %></p>
+        <%= link_to "編集する✏️", edit_question_path(@question), class: "btn-create" %>
+        <% toukou = "「#{@question.content}」絵文字クイズを作ったよ！これが解けるかな？🧩" %>
         <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
-        <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
-      <% elsif current_user.given_up_questions.include?(@question) %>
-      <!-- ギブアップ済み -->
-          <%= render "questions/give_up", question: @question %>
-      <% else %>
-        <!-- ギブアップしていない場合は回答フォーム -->
-          <%= render "questions/answer_form", question: @question %>
-      <% end %>
+        <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %>
+        <%= link_to "削除する🪦", question_path(@question), data: { "turbo-method": :delete, turbo_confirm: "削除しますか？"}, class: "btn-give-up" %>
+      </div>
+
     <% else %>
-    <!-- 非ログイン者用 -->
-      <% if session[:correct]&.dig(@question.id.to_s) %>
-        <!-- 既に正解　-->
-        <p>
-          正   解  ：<%= @question.correct %><br>
-          結   果  ： <span class="correct">正　解　🎉</span> </p>
-        <p>ヒント1  ：<%= @question.hint_1 %><br>
-          ヒント2  ：<%= @question.hint_2 %><br>
-          ヒント3  ：<%= @question.hint_3 %></p>
-        <% toukou = "「#{@question.content}」に正解したよ！🎉皆は解けるかな？🧩" %>
-        <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
-        <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
-      <% elsif session[:gave_up]&.dig(@question.id.to_s) %>
+        <% if @first_correct %>
+          <div id="first-correct-modal" class="modal-overlay">
+            <div class="modal-content">
+              🎉 正解 🎉<br>
+              おめでとう！
+              <% unless current_user %>
+                <br>次はユーザー登録してクイズを作ってみよう！
+              <% end %>
+            </div>
+          </div>
+          <div id="emoji-confetti"></div>
+        <% end %>
+        <% if @incorrect %>
+          <div class="incorrect-alert">
+            😢 不正解でした！もう一度チャレンジしてみよう！
+          </div>
+        <% end %>
+        <% if @just_give_up %>
+          <div class="give-up-alert">
+            🏳️ ギブアップしました！答えを確認しましょう。
+          </div>
+        <% end %>
+
+      <!-- ログイン者用回答画面　-->
+      <% if current_user %>
+        <% if @already_correct&.is_result? %>
+          <!-- 既に正解　-->
+          <p>あなたの答え：<%= @already_correct.body %><br>
+            正   解  ：<%= @question.correct %><br>
+            結   果  ： <span class="correct">正　解　🎉</span> </p>
+          <p>ヒント1  ：<%= @question.hint_1 %><br>
+            ヒント2  ：<%= @question.hint_2 %><br>
+            ヒント3  ：<%= @question.hint_3 %></p>
+          <% toukou = "「#{@question.content}」に正解したよ！🎉皆は解けるかな？🧩" %>
+          <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
+          <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
+        <% elsif current_user.given_up_questions.include?(@question) %>
         <!-- ギブアップ済み -->
-          <%= render "questions/give_up", question: @question %>
+            <%= render "questions/give_up", question: @question %>
+        <% else %>
+          <!-- ギブアップしていない場合は回答フォーム -->
+            <%= render "questions/answer_form", question: @question %>
+        <% end %>
       <% else %>
-        <!-- 回答フォーム　-->
-        <%= render "questions/answer_form", question: @question %>
+      <!-- 非ログイン者用 -->
+        <% if session[:correct]&.dig(@question.id.to_s) %>
+          <!-- 既に正解　-->
+          <p>
+            正   解  ：<%= @question.correct %><br>
+            結   果  ： <span class="correct">正　解　🎉</span> </p>
+          <p>ヒント1  ：<%= @question.hint_1 %><br>
+            ヒント2  ：<%= @question.hint_2 %><br>
+            ヒント3  ：<%= @question.hint_3 %></p>
+          <% toukou = "「#{@question.content}」に正解したよ！🎉皆は解けるかな？🧩" %>
+          <% share_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(request.original_url)}&text=#{CGI.escape(toukou)}&hashtags=EmojiLink" %>
+          <%= link_to "Xへ投稿する📢", share_url, class: "btn-share", target: "_blank", rel: "noopener" %><br><br>
+        <% elsif session[:gave_up]&.dig(@question.id.to_s) %>
+          <!-- ギブアップ済み -->
+            <%= render "questions/give_up", question: @question %>
+        <% else %>
+          <!-- 回答フォーム　-->
+          <%= render "questions/answer_form", question: @question %>
+        <% end %>
       <% end %>
     <% end %>
   <% end %>
