@@ -20,8 +20,13 @@ class UsersController < ApplicationController
   end
 
   def calendar
-    first_day = Date.current.beginning_of_month
-    last_day = Date.current.end_of_month
+    # パラメータから年月を取得、なければ今月
+    year  = params[:year].to_i.nonzero? || Date.current.year
+    month = params[:month].to_i.nonzero? || Date.current.month
+    @date = Date.new(year, month, 1)
+
+    first_day = @date.beginning_of_month
+    last_day  = @date.end_of_month
 
     # 日曜日始まり（wday: 0）で整列させている
     beginning_of_calendar = first_day.beginning_of_week(:sunday)

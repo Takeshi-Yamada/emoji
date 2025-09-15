@@ -1,9 +1,25 @@
-<h1 class="page-header">
+<h1>
   📆ログインカレンダー
 </h1>
+
 <div class="fade-in-container">
   <table class="calendar">
-    <caption><%= Date.today.year %>年 <%= Date.today.month %>月</caption>
+    <div class="calendar-nav">
+      <div class="nav-center">
+        <%= link_to "《 前年", calendar_path(year: @date.prev_year.year, month: @date.month), class: "nav-link" %>
+        <%= link_to "◀ 前月", calendar_path(year: @date.prev_month.year, month: @date.prev_month.month), class: "nav-link" %>
+
+        <span class="current-month"><%= @date.year %>年 <%= @date.month %>月</span>
+
+        <%= link_to "次月 ▶", calendar_path(year: @date.next_month.year, month: @date.next_month.month), class: "nav-link" %>
+        <%= link_to "翌年 》", calendar_path(year: @date.next_year.year, month: @date.month), class: "nav-link" %>
+      </div>
+
+      <div class="nav-right">
+        <%= link_to "今月へ", calendar_path(year: Date.current.year, month: Date.current.month), class: "nav-link today-link" %>
+      </div>
+    </div>
+
     <thead>
       <tr>
         <% %w[日 月 火 水 木 金 土].each do |day| %>
@@ -16,7 +32,7 @@
         <tr>
           <% week.each do |day| %>
             <% logged_in = @login_days.include?(day) %>
-            <td class="<%= 'today' if day == Date.current %> <%= 'not-this-month' if day.month != Date.current.month %>">
+            <td class="<%= 'today' if day == Date.current %> <%= 'not-this-month' if day.month != @date.month %>">
               <div class="date"><%= day.day %></div>
               <% if logged_in %>
                 <div class="emoji"><%= login_emoji_by_wday(day.wday) %></div>
