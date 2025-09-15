@@ -800,7 +800,6 @@ h1 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: nowrap;
 }
 
 .header-logo {
@@ -809,9 +808,24 @@ h1 {
   color: #333;
   text-decoration: none;
 }
+
 .header-logo:hover {
   background-color: #c9c9c9;
   border-radius: 4px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-name {
+  margin-right: 1rem;
+}
+.user-name a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .terms-container {
@@ -1091,6 +1105,11 @@ h3.section-title {
   transition: background-color 0.2s ease;
 }
 
+.deleted-row {
+  background-color: #c4c4c498; /* 背景を少し暗くする */
+  color: #a0a0a0; /* 文字色を薄くする */
+}
+
 .question-link {
   text-decoration: none;
   color: #1d4ed8;
@@ -1229,8 +1248,6 @@ td.not-this-month {
     flex-direction: row;
     align-items: stretch;
   }
-
-
 
   .mobile-header {
     display: flex;
