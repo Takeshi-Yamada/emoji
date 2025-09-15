@@ -1,7 +1,7 @@
 class DailyQuestion
   def self.today_question
     # 当日0時までの問題だけを抽出
-    target_scope = Question.where("created_at < ?", Date.today.beginning_of_day)
+    target_scope = Question.active.where("created_at < ?", Date.today.beginning_of_day)
     total_questions = target_scope.count
     return nil if total_questions == 0     # ← クイズが1問もないときはnilで返すようガード
 

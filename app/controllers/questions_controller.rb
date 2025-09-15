@@ -1,19 +1,25 @@
 class QuestionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
   before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy ]
+  before_action :set_question, only: [ :destroy, :restore ]
+  before_action :result_index, only: [ :index, :author ]
 
   def index
-    @q = Question.ransack(params[:q])
+    @q = Question.active.ransack(params[:q])
     # タグ検索があれば優先
     if params[:tag_name].present?
-      @questions = Question.tagged_with(params[:tag_name]).page(params[:page])
+      @questions = Question.active.tagged_with(params[:tag_name])
+                            .includes(:user)
+                            .order(created_at: :desc)
+                            .page(params[:page])
     else
-      @questions = @q.result(distinct: true).includes(:user).order(created_at: :desc).page(params[:page])
+      @questions = @q.result(distinct: true)
+                      .includes(:user)
+                      .order(created_at: :desc)
+                      .page(params[:page])
     end
     # ランキング用データ
     set_ranking
-    # ログインしている場合はレコードから、していない場合はセッションから正解・ギブアップ済みの問題IDを取得
-    result_index
   end
 
   def new
@@ -59,9 +65,20 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    question = current_user.questions.find(params[:id])
-    question.destroy!
-    redirect_to questions_path, success: "削除が成功しました"
+    # レコード自体は削除せず、論理削除
+    if @question.soft_delete
+      redirect_to questions_path, success: "削除が成功しました"
+    else
+      redirect_to questions_path, alert: "削除に失敗しました"
+    end
+  end
+
+  def restore
+    if @question.restore
+      redirect_to question_path(@question), notice: "復元しました"
+    else
+      redirect_to questions_path, alert: "復元に失敗しました"
+    end
   end
 
   def give_up
@@ -84,7 +101,7 @@ class QuestionsController < ApplicationController
 
   def author
     @question = Question.find(params[:id])
-    @questions = Question.where(user_id: @question.user_id).order(created_at: :desc).page(params[:page])
+    @questions = Question.active.where(user_id: @question.user_id).order(created_at: :desc).page(params[:page])
     # ログインしている場合はレコードから、していない場合はセッションから正解・ギブアップ済みの問題IDを取得
     result_index
   end
@@ -99,19 +116,25 @@ class QuestionsController < ApplicationController
     redirect_back(fallback_location: root_path, alert: "対象のクイズが見つからないか、編集権限がありません。")
   end
 
+  def set_question
+    @question = current_user.questions.find(params[:id])
+  end
+
   def set_ranking
-    @question_ranking = Question.q_ranking
+    @question_ranking = Question.active.q_ranking
     @user_ranking = User.u_ranking
     @today_question = DailyQuestion.today_question
   end
 
+  # 回答結果/ギブアップしている問題の取得
   def result_index
+    # ログインしている場合はレコードから、していない場合はセッションから取得
     if user_signed_in?
-      @correct_question_ids = current_user.answers.where(is_result: true).pluck(:question_id).uniq
-      @gave_up_question_ids = current_user.give_ups.pluck(:question_id).uniq
+        @correct_question_ids = current_user.answers.where(is_result: true).pluck(:question_id).uniq
+        @gave_up_question_ids = current_user.give_ups.pluck(:question_id).uniq
     else
-      @correct_question_ids = session[:correct]&.keys&.uniq&.map(&:to_i) || []
-      @gave_up_question_ids = session[:gave_up]&.keys&.uniq&.map(&:to_i) || []
+        @correct_question_ids = session[:correct]&.keys&.uniq&.map(&:to_i) || []
+        @gave_up_question_ids = session[:gave_up]&.keys&.uniq&.map(&:to_i) || []
     end
   end
 end

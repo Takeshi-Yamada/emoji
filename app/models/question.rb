@@ -18,6 +18,21 @@ class Question < ApplicationRecord
   has_many :give_ups
   has_many :users_gave_up, through: :give_ups, source: :user
 
+  scope :active, -> { where(deleted_at: nil) }
+
+  # 論理削除
+  def soft_delete
+    update!(deleted_at: Time.current)
+  end
+  # 論理削除の復元
+  def restore
+    update!(deleted_at: nil)
+  end
+  # 論理削除されているか
+  def deleted?
+    deleted_at.present?
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     %w[
       content
