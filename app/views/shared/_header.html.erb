@@ -1,35 +1,39 @@
 <div class="site-header header-inner">
   <a href="/" class="header-logo">🧩Emoji Link</a>
 
-  <button id="hamburger-btn" class="hamburger-btn" aria-label="メニューを開く" aria-controls="hamburger-nav" aria-expanded="false">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
+  <div class="header-right">
+    <span class="user-name">ようこそ！<%= user_signed_in? ? current_user.name : "ゲスト" %>さん</span>
 
-  <nav id="hamburger-nav" class="hamburger-nav" aria-hidden="true">
-    <ul>
-      <li><%= link_to '❓クイズ一覧', questions_path %></li>
-      <% if user_signed_in? %>
-        <li><%= link_to '✏️クイズを作る', new_question_path %></li>
-        <li><%= link_to '👤マイページ', profile_path(current_user) %></li>
-        <hr>
-        <li>
-          <%= link_to '🎈ログアウト', destroy_user_session_path, data: { "turbo-method": :delete, turbo_confirm: "ログアウトしてもよろしいですか？" } %>
-        </li>
-      <% else %>
-        <li><%= link_to '🚪ログイン', new_user_session_path %></li>
-        <li><%= link_to '📝ユーザー登録', new_user_registration_path %></li>
-        <hr>
-        <li>
-          <a href="#" class="js-open-login-modal" title="クイズを作るにはログインが必要です">✏️クイズを作る</a>
-        </li>
-      <% end %>
-      <li><%= link_to '📘遊び方', howtouse_path %></li>
-    </ul>
-  </nav>
+    <button id="hamburger-btn" class="hamburger-btn" aria-label="メニューを開く" aria-controls="hamburger-nav" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-  <div id="overlay" class="overlay"></div>
+    <nav id="hamburger-nav" class="hamburger-nav" aria-hidden="true">
+      <ul>
+        <li><%= link_to '❓クイズ一覧', questions_path %></li>
+        <% if user_signed_in? %>
+          <li><%= link_to '✏️クイズを作る', new_question_path %></li>
+          <li><%= link_to '👤マイページ', profile_path(current_user) %></li>
+          <hr>
+          <li>
+            <%= link_to '🎈ログアウト', destroy_user_session_path, data: { "turbo-method": :delete, turbo_confirm: "ログアウトしてもよろしいですか？" } %>
+          </li>
+        <% else %>
+          <li><%= link_to '🚪ログイン', new_user_session_path %></li>
+          <li><%= link_to '📝ユーザー登録', new_user_registration_path %></li>
+          <hr>
+          <li>
+            <a href="#" class="js-open-login-modal" title="クイズを作るにはログインが必要です">✏️クイズを作る</a>
+          </li>
+        <% end %>
+        <li><%= link_to '📘遊び方', howtouse_path %></li>
+      </ul>
+    </nav>
+
+    <div id="overlay" class="overlay"></div>
+  </div>
 </div>
 
 <div id="login-modal" class="modal">
