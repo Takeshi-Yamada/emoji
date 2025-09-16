@@ -2,7 +2,7 @@
   <a href="/" class="header-logo">🧩Emoji Link</a>
 
   <div class="header-right">
-    <span class="user-name">ようこそ！<%= user_signed_in? ? current_user.name : "ゲスト" %>さん</span>
+    <span class="login-mode"><%= user_signed_in? ? "ログイン中" : "ゲストモード" %></span>
 
     <button id="hamburger-btn" class="hamburger-btn" aria-label="メニューを開く" aria-controls="hamburger-nav" aria-expanded="false">
       <span></span>

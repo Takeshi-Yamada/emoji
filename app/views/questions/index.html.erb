@@ -15,6 +15,13 @@
       </div>
     </div>
 
+    <% if @searched_tag %>
+      <div class="search-info">
+        <span class="tag-badge"> <%= @searched_tag %> </span>で検索中
+        <%= link_to "検索クリア", questions_path, class: "clear-search-link" %>
+      </div>
+    <% end %>
+
     <div class="quiz-list">
       <% @questions.each do |question| %>
         <div class="quiz-card-wrapper">

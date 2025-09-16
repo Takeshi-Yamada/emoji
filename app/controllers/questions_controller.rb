@@ -12,6 +12,7 @@ class QuestionsController < ApplicationController
                             .includes(:user)
                             .order(created_at: :desc)
                             .page(params[:page])
+      @searched_tag = params[:tag_name]
     else
       @questions = @q.result(distinct: true)
                       .includes(:user)
