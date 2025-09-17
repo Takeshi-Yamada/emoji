@@ -47,6 +47,21 @@ document.addEventListener("turbo:load", () => {
   });
 });
 
+//二重登録防止
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.querySelector("form");
+  const submitBtn = document.getElementById("submit-btn");
+
+  if (!form || !submitBtn) return;
+
+  form.addEventListener("submit", () => {
+    submitBtn.disabled = true;
+    submitBtn.value = '送信中...';
+    submitBtn.classList.add("btn-disabled");
+  });
+});
+
+
 //ツールチップ
 document.addEventListener("turbo:load", () => {
   // 1. すべてのツールチップ切り替えボタンにイベントを設定
