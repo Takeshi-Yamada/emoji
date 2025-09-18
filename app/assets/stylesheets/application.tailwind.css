@@ -47,6 +47,10 @@
   border: 2px solid red;
   background-color: #ffecec;
 }
+.field_with_errors label {
+  color: red;
+}
+
 
 .fade-out {
   opacity: 0;
