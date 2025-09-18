@@ -47,20 +47,42 @@ document.addEventListener("turbo:load", () => {
   });
 });
 
-//二重登録防止
-document.addEventListener("DOMContentLoaded", () => {
+//クイズ入力フォームでの操作性向上
+document.addEventListener("turbo:load", () => {
   const form = document.querySelector("form");
+  if (!form) return;
+
   const submitBtn = document.getElementById("submit-btn");
 
-  if (!form || !submitBtn) return;
+  // Enterで次の入力欄に移動
+  form.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      // ★ ここで毎回最新の inputs を取得する
+      const inputs = Array.from(form.querySelectorAll("input:not([type=submit]), textarea, select"));
+      const currentIndex = inputs.indexOf(e.target);
 
+      if (currentIndex === -1) return;
+
+      // 最後の入力欄なら送信（submitさせる）
+      if (currentIndex === inputs.length - 1) {
+        return;
+      }
+
+      // それ以外は次の入力欄へ
+      e.preventDefault();
+      inputs[currentIndex + 1].focus();
+    }
+  });
+
+  // フォーム送信時にボタン無効化（2重送信防止）
   form.addEventListener("submit", () => {
+    if (!submitBtn) return;
+
     submitBtn.disabled = true;
     submitBtn.value = '送信中...';
     submitBtn.classList.add("btn-disabled");
   });
 });
-
 
 //ツールチップ
 document.addEventListener("turbo:load", () => {

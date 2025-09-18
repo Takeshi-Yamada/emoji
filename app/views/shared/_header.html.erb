@@ -4,9 +4,13 @@
   <div class="header-right">
     <div class="login-mode">
       <% if user_signed_in? %>
-        <span class="status-badge logged-in">ログイン中✅</span>
+        <span class="status-badge logged-in">
+          <span class="pc-only">ログイン中</span>✅
+        </span>
       <% else %>
-        <span class="status-badge logged-out">ゲストモード🔰</span>
+        <span class="status-badge logged-out">
+          <span class="pc-only">ゲストモード</span>🔰
+        </span>
       <% end %>
     </div>
 

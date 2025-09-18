@@ -37,6 +37,17 @@
   color: #065f46;             /* text-green-800 */
 }
 
+/* エラー対象を目立たせる */
+.field_with_errors {
+  display: inline; /* 改行防止 */
+}
+.field_with_errors input,
+.field_with_errors textarea,
+.field_with_errors select {
+  border: 2px solid red;
+  background-color: #ffecec;
+}
+
 .fade-out {
   opacity: 0;
   transition: opacity 0.5s ease-out;
@@ -854,9 +865,10 @@ h1 {
 
 .status-badge {
   font-size: 1rem;
-  font-weight: bold;
-  padding: 4px 10px;
-  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 8px;
   color: #fff;
 }
 
@@ -1316,6 +1328,10 @@ td.not-this-month {
   display: none; /* デフォルトは非表示（PCなど） */
 }
 
+.pc-only {
+  display: block; /* デフォルトは表示（PCなど） */
+}
+
 /* ---------- スマホ対応 ---------- */
 @media (max-width: 750px) {
   h1 {
@@ -1432,5 +1448,9 @@ td.not-this-month {
   }
   .features-grid {
     flex-direction: column;
+  }
+
+  .pc-only {
+    display: none; /* スマホは非表示 */
   }
 }
