@@ -1,5 +1,14 @@
-<h1>この絵文字から何を連想する？</h1>
 <div class="quiz-show">
+  <div class="navigation-buttons">
+    <% if @prev_id %>
+      <%= link_to "←前のクイズ", question_path(@prev_id), class: "btn left" %>
+    <% end %>
+    <% if @next_id %>
+      <%= link_to "次のクイズ→", question_path(@next_id), class: "btn right" %>
+    <% end %>
+  </div>
+
+  <h1>この絵文字から何を連想する？</h1>
   <div class="quiz-detail-card">
     <h1><%= @question.content %></h1>
     <%= render 'questions/tag', question: @question %>
@@ -131,5 +140,6 @@
     </table><br>
   <% end %>
 
-  <%= link_to "← 他のクイズを見る", questions_path, class: "btn" %>
+
+  <%= link_to "戻る", (request.referer || questions_path), class: "btn" %>
 </div>

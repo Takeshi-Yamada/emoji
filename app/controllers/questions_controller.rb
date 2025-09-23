@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
-  before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy ]
-  before_action :set_question, only: [ :destroy, :restore ]
+  before_action :authenticate_user!, only: [ :new, :edit, :update, :destroy, :restore ]
+  before_action :set_question, only: [ :edit, :update, :destroy, :restore ]
   before_action :result_index, only: [ :index, :author ]
 
   def index
@@ -19,6 +19,10 @@ class QuestionsController < ApplicationController
                       .order(created_at: :desc)
                       .page(params[:page])
     end
+
+    # クイズの順番をidのみ保存(DISTINCTのORDER_BY問題を回避)
+    session[:question_ids] = @questions.pluck(:id, :created_at).map(&:first)
+
     # ランキング用データ
     set_ranking
   end
@@ -40,6 +44,15 @@ class QuestionsController < ApplicationController
 
   def show
     @question = Question.find(params[:id])
+
+    # クイズ一覧から来た場合はその順番を保持
+    ids = session[:question_ids] || []
+    current_index = ids.index(@question.id)
+    if current_index
+      @prev_id = ids[current_index - 1] if current_index > 0
+      @next_id = ids[current_index + 1] if current_index < ids.size - 1
+    end
+
     if user_signed_in?
       @answers = current_user.answers.where(question_id: params[:id])
       @already_correct = @answers.find { |a| a.is_result? }
@@ -50,12 +63,9 @@ class QuestionsController < ApplicationController
     @just_give_up = session.delete(:just_give_up)
   end
 
-  def edit
-    @question = current_user.questions.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @question = current_user.questions.find(params[:id])
     if @question.update(question_params)
       OgpCreator.generate(@question)
       redirect_to question_path(@question), success: "編集が成功しました"

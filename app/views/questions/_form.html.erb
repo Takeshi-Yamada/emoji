@@ -53,7 +53,7 @@
     </div>
 
     <%= f.submit question.new_record? ? "クイズを作成する🚀" : "保存する💾", id: "submit-btn", class: "btn-create" %><br><br>
-    <%= link_to "戻る", (request.referer || questions_path), class: "btn mt-3" %>
+    <%= link_to "戻る", (request.referer || questions_path), class: "btn" %>
 
   <% end %>
 </div>
