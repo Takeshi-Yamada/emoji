@@ -1,6 +1,6 @@
 ### 🧩|Emoji Link
 サービスURL：https://emoji-link.com/
-<img width="948" height="732" alt="Image" src="app\assets\images\emojilink.jpg" />
+<img width="1262" height="706" alt="image" src="https://github.com/user-attachments/assets/6828f1ad-ed12-4ac0-be3b-a2aa1d367937" />
 
 ### ❓サービス概要
 ～絵文字を繋げてお題を表現しよう！～
