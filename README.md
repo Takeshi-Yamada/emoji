@@ -3,11 +3,11 @@
 ![Image](app/assets/images/emojilink.jpg)
 
 ## 目次
-[サービス概要](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E6%A6%82%E8%A6%81)
-[開発背景](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E9%96%8B%E7%99%BA%E3%81%AE%E8%83%8C%E6%99%AF)
-[利用イメージ](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%81%AE%E5%88%A9%E7%94%A8%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8)
-[使用技術](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#%EF%B8%8F%E4%BD%BF%E7%94%A8%E6%8A%80%E8%A1%93)
-[ER図](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#er%E5%9B%B3)
+* [サービス概要](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E6%A6%82%E8%A6%81)
+* [開発背景](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#%EF%B8%8F-%E9%96%8B%E7%99%BA%E8%83%8C%E6%99%AF)
+* [利用イメージ](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#-%E5%88%A9%E7%94%A8%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8)
+* [使用技術](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#%EF%B8%8F-%E4%BD%BF%E7%94%A8%E6%8A%80%E8%A1%93)
+* [ER図](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#-er%E5%9B%B3)
 
 
 ## ❓ サービス概要
@@ -18,24 +18,27 @@
 
 ## ⛏️ 開発背景
 ゲームを作った背景：
+
 私はボードゲームが好きで、初心者🔰の方に何を遊んでもらうのがいいのかと考えていました。
 世の中に素敵なボドゲはたくさんあり、何を進めればいいのか…？と悩むことが多かったですが、なら自分が作ってしまおう！となったのがきっかけです。
 
+
 絵文字をテーマにした背景：
+
 自分が入学したエンジニアスクール🏫では同期や先輩、とのテキストコミュニケーションも多く、文字だけだと淡白で絵文字を使うことが増えました。
 絵文字をテーマにしたアプリを開発することで絵文字に詳しくなり、柔らかいコミュニケーションができるようになるのではないかと考えたためです。
 
 ## 🎮 利用イメージ
-* 🔒 **ログイン機能**
+* 🔒 **ログイン機能**：
   問題の作成・編集はログインしたユーザーのみ可能です。
 
-* 📝 **クイズを作る**
+* 📝 **クイズを作る**：
   「📓🍎👿」のように、絵文字だけで問題を作成できます（例: デスノート）。
 
-* 🎮 **クイズに答える**
+* 🎮 **クイズに答える**：
   他のユーザーが作った絵文字クイズに挑戦できます。
 
-* 👁 **マイページ**
+* 👁 **マイページ**：
   自分が作成したクイズと過去の回答やログイン履歴が確認できます。
 
 ## ⚙️ 使用技術
