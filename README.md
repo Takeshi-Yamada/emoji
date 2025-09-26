@@ -43,7 +43,7 @@
 
   他のユーザーが作った絵文字クイズに挑戦できます。
 
-* 👁 **マイページ**：
+* 👤 **マイページ**：
 
   自分が作成したクイズと過去の回答やログインカレンダーが確認できます。
 
@@ -65,5 +65,6 @@
 https://miro.com/app/board/uXjVIu0I3gM=/
 
 <img width="948" height="732" alt="Image" src="https://github.com/user-attachments/assets/33ee3f46-6127-4caa-be11-4224b49c06a7" />
+
 
 
