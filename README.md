@@ -3,11 +3,11 @@
 ![Image](app/assets/images/emojilink.jpg)
 
 ## 目次
-* [サービス概要](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E6%A6%82%E8%A6%81)
-* [開発背景](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#%EF%B8%8F-%E9%96%8B%E7%99%BA%E8%83%8C%E6%99%AF)
-* [利用イメージ](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#-%E5%88%A9%E7%94%A8%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8)
-* [使用技術](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#%EF%B8%8F-%E4%BD%BF%E7%94%A8%E6%8A%80%E8%A1%93)
-* [ER図](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#-er%E5%9B%B3)
+* [❓サービス概要](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#-%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E6%A6%82%E8%A6%81)
+* [⛏開発背景](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#%EF%B8%8F-%E9%96%8B%E7%99%BA%E8%83%8C%E6%99%AF)
+* [🎮利用イメージ](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#-%E5%88%A9%E7%94%A8%E3%82%A4%E3%83%A1%E3%83%BC%E3%82%B8)
+* [⚙️使用技術](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#%EF%B8%8F-%E4%BD%BF%E7%94%A8%E6%8A%80%E8%A1%93)
+* [🎨ER図](https://github.com/Takeshi-Yamada/emoji?tab=readme-ov-file#-er%E5%9B%B3)
 
 
 ## ❓ サービス概要
@@ -58,4 +58,5 @@
 
 ## 🎨 ER図
 https://miro.com/app/board/uXjVIu0I3gM=/
+
 <img width="948" height="732" alt="Image" src="https://github.com/user-attachments/assets/33ee3f46-6127-4caa-be11-4224b49c06a7" />
