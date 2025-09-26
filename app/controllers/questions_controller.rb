@@ -20,6 +20,13 @@ class QuestionsController < ApplicationController
                       .page(params[:page])
     end
 
+    # 検索条件があるときだけ記憶/ない場合は削除
+    if params[:q].present? || params[:tag_name].present?
+      session[:last_search] = request.query_parameters
+    else
+      session.delete(:last_search)
+    end
+
     # クイズの順番をidのみ保存(DISTINCTのORDER_BY問題を回避)
     session[:question_ids] = @questions.pluck(:id, :created_at).map(&:first)
 

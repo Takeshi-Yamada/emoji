@@ -140,6 +140,9 @@
     </table><br>
   <% end %>
 
-
-  <%= link_to "戻る", (request.referer || questions_path), class: "btn" %>
+  <% if session[:last_search].present? %>
+    <%= link_to "検索結果に戻る", questions_path(session[:last_search]), class: "btn" %>
+  <% else %>
+    <%= link_to "一覧に戻る", questions_path, class: "btn" %>
+  <% end %>
 </div>
