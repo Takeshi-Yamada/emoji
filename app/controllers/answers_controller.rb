@@ -29,7 +29,7 @@ class AnswersController < ApplicationController
         session[:incorrect] = true
       end
     end
-    redirect_to @question
+    redirect_to question_path(@question)
   end
 
   private
