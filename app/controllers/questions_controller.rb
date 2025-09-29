@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
 
     # 検索条件があるときだけ記憶/ない場合は削除
     if params[:q].present? || params[:tag_name].present?
-      session[:last_search] = scope.pluck(:id, :created_at).map(&:first)
+      session[:last_search] = scope.query_parameters
     else
       session.delete(:last_search)
     end
