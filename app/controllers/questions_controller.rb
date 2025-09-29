@@ -8,30 +8,30 @@ class QuestionsController < ApplicationController
     @q = Question.active.ransack(params[:q])
     # タグ検索があれば優先
     if params[:tag_name].present?
-      @questions = Question.active.tagged_with(params[:tag_name])
-                            .includes(:user)
-                            .order(created_at: :desc)
-                            .page(params[:page])
-      @searched_tag = params[:tag_name]
-    else
-      @questions = @q.result(distinct: true)
+      scope = Question.active.tagged_with(params[:tag_name])
                       .includes(:user)
                       .order(created_at: :desc)
-                      .page(params[:page])
+      @searched_tag = params[:tag_name]
+    else
+      scope = @q.result(distinct: true)
+                .includes(:user)
+                .order(created_at: :desc)
     end
 
     # 検索条件があるときだけ記憶/ない場合は削除
     if params[:q].present? || params[:tag_name].present?
-      session[:last_search] = request.query_parameters
+      session[:last_search] = scope.pluck(:id, :created_at).map(&:first)
     else
       session.delete(:last_search)
     end
 
     # クイズの順番をidのみ保存(DISTINCTのORDER_BY問題を回避)
-    session[:question_ids] = @questions.pluck(:id, :created_at).map(&:first)
-
+    session[:question_ids] = scope.pluck(:id, :created_at).map(&:first)
     # ランキング用データ
     set_ranking
+    # ページネーション
+    @questions = scope.page(params[:page])
+
   end
 
   def new
@@ -120,8 +120,6 @@ class QuestionsController < ApplicationController
   def author
     @question = Question.find(params[:id])
     @questions = Question.active.where(user_id: @question.user_id).order(created_at: :desc).page(params[:page])
-    # ログインしている場合はレコードから、していない場合はセッションから正解・ギブアップ済みの問題IDを取得
-    result_index
   end
 
   private
