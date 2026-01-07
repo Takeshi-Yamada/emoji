@@ -20,7 +20,7 @@ class QuestionsController < ApplicationController
 
     # 検索条件があるときだけ記憶/ない場合は削除
     if params[:q].present? || params[:tag_name].present?
-      session[:last_search] =  { q: params[:q], tag_name: params[:tag_name] }
+      session[:last_search] = { q: params[:q], tag_name: params[:tag_name] }
     else
       session.delete(:last_search)
     end
