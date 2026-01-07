@@ -21,6 +21,8 @@
 /tmp
 tmp/*
 tmp/**/*
+# tmp 配下の隠しファイル対策（Chrome等）
+tmp/.*
 
 !/log/.keep
 !/tmp/.keep
